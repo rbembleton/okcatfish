@@ -3,11 +3,11 @@
 ## Log In / Register
 ![sign-in-register]
 
-## Register
+## Register (For sure)
 ![register-1]
 ![register-2]
-(^^ For sure)
-(vv Maybe)
+
+## Register (Maybe)
 ![register-3]
 ![register-4]
 
