@@ -124,3 +124,18 @@ id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key, indexed
 response_id | integer   | not null, foreign key, indexed (holds ref to question)
 strength    | integer   | not null, default to 1 (options 0-3) (BONUS)
+
+## threads
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+user_id_1   | integer   | not null, foreign key, indexed
+user_id_2   | integer   | not null, foreign key, indexed
+
+## messages
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+thread_id   | integer   | not null, foreign key, indexed
+author_id   | integer   | not null, foreign key, references user, indexed
+body        | text      | not null
