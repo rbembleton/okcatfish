@@ -5,8 +5,10 @@
 
 ## Register
 ![register-1]
-![register-2] (^^ For sure)
-![register-3] (vv Maybe)
+![register-2]
+(^^ For sure)
+(vv Maybe)
+![register-3]
 ![register-4]
 
 ## Profile Show
