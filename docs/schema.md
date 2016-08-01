@@ -13,11 +13,17 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 user_id         | integer   | not null, foreign key
-location        | string    | not null, indexed, unique
+country_id      | integer   | not null, foreign key, indexed
+location        | integer   | not null, indexed
 birthdate       | datetime  | not null
-location        | string    | not null
-orientation id  | integer   | not null, foreign key
-gender id       | integer   | not null, foreign key
+orientation id  | integer   | not null, foreign key, indexed
+gender id       | integer   | not null, foreign key, indexed
+
+## countries
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+name            | string    | not null
 
 ## orientations
 column name     | data type | details
