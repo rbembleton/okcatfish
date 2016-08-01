@@ -7,16 +7,18 @@ associated routes, so the nesting of your bolded components must
 _**exactly**_ match the nesting of your routes.)
 
 * **App**
+  * HomePage
+  * **LoginForm**
+  * **RegisterForm**
   * Navbar
-  * ProfileShow (user)
+  * ProfileShow (currentuser)
     * Profile Text
     * Profile Looking For
     * Profile Photo Album
     * Profile Questions
-    * Edit Profile
-  * **LoginForm**
-  * **RegisterForm**
+    * Edit Profile icons
   * **BrowseMatches**
+    * Like form (Star)
     * ProfileShow
       * Profile Text
       * Profile Looking For
@@ -24,6 +26,7 @@ _**exactly**_ match the nesting of your routes.)
       * Profile Questions
       * Send Message
   * **MessageInbox**
+    * View threads (inbox)
     * Read messages
     * See sent messages
 

@@ -11,22 +11,23 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
 - [ ] Hosting on Heroku
 - [ ] New user creation, login, and demo login
 - [ ] A production README, replacing this README
-- [ ] Profiles, Match Search by location and "looking for"
+- [ ] Profile CRUD, Match Search by location and "looking for"
   - [ ] Smooth, bug-free navigation
+  - [ ] "Celebrity" photo repositories
   - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
+  - [ ] Elegant, Simple, and Clear CSS styling
 - [ ] Messaging and Likes
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
+  - [ ] Elegant, Simple, and Clear CSS styling
 - [ ] Personality Questions
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
+  - [ ] Elegant, Simple, and Clear CSS styling
 - [ ] Match Percentages based on Questions
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Adequate CSS styling
+  - [ ] Elegant, Simple, and Clear CSS styling
 
 ## Design Docs
 * [View Wireframes][views]
@@ -87,12 +88,13 @@ User can view and search for others profiles. Profiles have text, details, looki
 
 **Objective:** Users can message each other, Users can "like" each other.
 
-- [ ] create `Message` model
+- [ ] create `Thread` and `Message` model
 - [ ] create `Like` model
 - build out API, Flux loop, and components for:
   - [ ] Message CRUD
   - [ ] writing messages
   - [ ] reading messages
+  - [ ] viewing thread
   - [ ] liking Users
   - [ ] unliking Users
 - [ ] Use CSS to style new components
@@ -116,7 +118,8 @@ User can view and search for others profiles. Profiles have text, details, looki
 
 **objective:** Calculate and display match percentages based on Questions, add weight to questions.
 
-- [ ] figure out logic to optimize match percentage storage, add weight to `user responses`
+- [ ] calculate match percentages, add weight to `user responses`
+- [ ] add `MatchPercentage` store, updating whenever new questions are answered
 - [ ] add match percentages to profile search
 - [ ] update CSS
 

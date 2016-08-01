@@ -95,15 +95,15 @@ what you'll need to do.
 * `ProfilePhotoAlbum` component listens to `Profile` store.
 
 
-## Message Cycles
+## Message and Thread Cycles
 
 ### Message API Request Actions
 
-* `fetchMessages`
+* `fetchThreads`
   0. invoked from `MessagesInbox` `didMount`/`willReceiveProps`
   0. sent user id
   0. `GET /api/messages` is called.
-  0. `receiveMessages` is set as the success callback.
+  0. `receiveThreads` is set as the success callback.
 
 * `createMessage`
   0. invoked from new message button `onClick` in profile OR in inbox
@@ -115,25 +115,33 @@ what you'll need to do.
   0. `GET /api/messages/:id` is called.
   0. `receiveSingleMessage` is set as the success callback.
 
+* `fetchSingleThread `
+  0. invoked from `ThreadDetail` `didMount`/`willReceiveProps`
+  0. `GET /api/thread/:id` is called.
+  0. `receiveSingleThread` is set as the success callback.
 
-* `destroyMessage`
+* `destroyThread`
   0. invoked from delete message button `onClick`
   0. `DELETE /api/messages/:id` is called.
-  0. `removeMessage` is set as the success callback.
+  0. `removeThread` is set as the success callback.
 
 ### Messages API Response Actions
 
 * `receiveAllMessages`
   0. invoked from an API callback.
-  0. `Message` store updates `_messages` and emits change.
+  0. `Messages` store updates `_messages` and emits change.
+
+* `receiveAllThreads`
+  0. invoked from an API callback.
+  0. `Messages` store updates `_messages` and emits change.
 
 * `receiveSingleMessage`
   0. invoked from an API callback.
-  0. `Message` store updates `_messages[id]` and emits change.
+  0. `Messages` store updates `_messages[id]` and emits change.
 
 * `removeMessage`
   0. invoked from an API callback.
-  0. `Message` store removes `_messages[id]` and emits change.
+  0. `Messages` store removes `_messages[id]` and emits change.
 
 ### Store Listeners
 
