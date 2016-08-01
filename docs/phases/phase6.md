@@ -1,4 +1,4 @@
-# Phase 5: Allow Complex Styling in Notes (1 days, W2 Th 6pm)
+# Phase 6: Infinite Scroll on Match Search (1 days, W2 Th 6pm)
 
 ## Rails
 ### Models
@@ -9,10 +9,9 @@
 
 ## Flux
 ### Views (React Components)
-* Match Percentage
+- Adjust Search index
 
 ### Stores
-* MatchPercentage - Calculate/Store Match Percentages
 
 ### Actions
 

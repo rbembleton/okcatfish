@@ -51,118 +51,144 @@ what you'll need to do.
   0. invoked from API callbacks on success for actions that generate POST requests
   0. removes `_errors` for a given `form` in the `ErrorStore`
 
-## Note Cycles
+## Profile Cycles
 
-### Notes API Request Actions
+### Profiles API Request Actions
 
-* `fetchAllNotes`
-  0. invoked from `NotesIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notes` is called.
-  0. `receiveAllNotes` is set as the success callback.
+* `fetchProfiles`
+  0. invoked from `ProfilesIndex` `didMount`/`willReceiveProps`
+  0. `GET /api/profiles` is called.
+  0. sent search criteria
+  0. `receiveProfiles` is set as the success callback.
 
-* `createNote`
-  0. invoked from new note button `onClick`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the success callback.
+* `createProfile`
+  0. automatically invoked on User creation
+  0. `POST /api/profiles` is called.
+  0. `receiveSingleProfile` is set as the success callback.
 
-* `fetchSingleNote`
-  0. invoked from `NoteDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notes/:id` is called.
-  0. `receiveSingleNote` is set as the success callback.
+* `fetchSingleProfile`
+  0. invoked from `ProfileDetail` `didMount`/`willReceiveProps`
+  0. `GET /api/profiles/:id` is called.
+  0. `receiveSingleProfile` is set as the success callback.
 
-* `updateNote`
-  0. invoked from `NoteForm` `onSubmit`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the success callback.
+* `updateProfile`
+  0. invoked from `ProfileForm` `onSubmit`
+  0. `PATCH /api/profiles` is called.
+  0. `receiveSingleProfile` is set as the success callback.
 
-* `destroyNote`
-  0. invoked from delete note button `onClick`
-  0. `DELETE /api/notes/:id` is called.
-  0. `removeNote` is set as the success callback.
+### Profiles API Response Actions
 
-### Notes API Response Actions
-
-* `receiveAllNotes`
+* `receiveProfiles` (Matches)
   0. invoked from an API callback.
-  0. `Note` store updates `_notes` and emits change.
+  0. `Profile` store updates `_profiles` and emits change.
 
-* `receiveSingleNote`
+* `receiveSingleProfile`
   0. invoked from an API callback.
-  0. `Note` store updates `_notes[id]` and emits change.
+  0. `Profile` store updates `_profiles[id]` and emits change.
 
-* `removeNote`
-  0. invoked from an API callback.
-  0. `Note` store removes `_notes[id]` and emits change.
 
 ### Store Listeners
 
-* `NotesIndex` component listens to `Note` store.
-* `NoteDetail` component listens to `Note` store.
+* `ProfilesIndex` component listens to `Profile` store.
+* `ProfileDetails` component listens to `Profile` store.
+* `ProfileLookingFor` component listens to `Profile` store.
+* `ProfilePhotoAlbum` component listens to `Profile` store.
 
 
-## Notebook Cycles
+## Message Cycles
 
-### Notebooks API Request Actions
+### Message API Request Actions
 
-* `fetchAllNotebooks`
-  0. invoked from `NotebooksIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks` is called.
-  0. `receiveAllNotebooks` is set as the success callback.
+* `fetchMessages`
+  0. invoked from `MessagesInbox` `didMount`/`willReceiveProps`
+  0. sent user id
+  0. `GET /api/messages` is called.
+  0. `receiveMessages` is set as the success callback.
 
-* `createNotebook`
-  0. invoked from new notebook button `onClick`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the callback.
+* `createMessage`
+  0. invoked from new message button `onClick` in profile OR in inbox
+  0. `POST /api/messages` is called.
+  0. `receiveSingleMessage` is set as the callback.
 
-* `fetchSingleNotebook`
-  0. invoked from `NotebookDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks/:id` is called.
-  0. `receiveSingleNotebook` is set as the success callback.
+* `fetchSingleMessage `
+  0. invoked from `MessageDetail` `didMount`/`willReceiveProps`
+  0. `GET /api/messages/:id` is called.
+  0. `receiveSingleMessage` is set as the success callback.
 
-* `updateNotebook`
-  0. invoked from `NotebookForm` `onSubmit`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the success callback.
 
-* `destroyNotebook`
-  0. invoked from delete notebook button `onClick`
-  0. `DELETE /api/notebooks/:id` is called.
-  0. `removeNotebook` is set as the success callback.
+* `destroyMessage`
+  0. invoked from delete message button `onClick`
+  0. `DELETE /api/messages/:id` is called.
+  0. `removeMessage` is set as the success callback.
 
-### Notebooks API Response Actions
+### Messages API Response Actions
 
-* `receiveAllNotebooks`
+* `receiveAllMessages`
   0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks` and emits change.
+  0. `Message` store updates `_messages` and emits change.
 
-* `receiveSingleNotebook`
+* `receiveSingleMessage`
   0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks[id]` and emits change.
+  0. `Message` store updates `_messages[id]` and emits change.
 
-* `removeNotebook`
+* `removeMessage`
   0. invoked from an API callback.
-  0. `Notebook` store removes `_notebooks[id]` and emits change.
+  0. `Message` store removes `_messages[id]` and emits change.
 
 ### Store Listeners
 
-* `NotebooksIndex` component listens to `Notebook` store.
+* `Inbox` component listens to `Messages` store.
 
 
-## SearchSuggestion Cycles
 
-* `fetchSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when there is text
-  0. `GET /api/notes` is called with `text` param.
-  0. `receiveSearchSuggestions` is set as the success callback.
+## Question Cycles
 
-* `receiveSearchSuggestions`
+### Question API Request Actions
+
+* `fetchResponses`
+  0. invoked from `Questions` button on a users page`didMount`/`willReceiveProps`
+  0. `GET /api/responses` is called, sent user id
+  0. `receiveResponses` is set as the success callback. (this also gets questions)
+
+* `fetchSingleQuestion`
+  0. invoked from `Answer Question` `didMount`/`willReceiveProps`
+  0. `GET /api/messages/:id` is called.
+  0. `receiveSingleQuestion` is set as the success callback.
+
+* `createUserResponse`
+  0. invoked from new message button `onClick`
+  0. `POST /api/responses` is called.
+  0. `receiveSingleResponse` is set as the callback.
+
+* `updateSingleResponse`
+  0. invoked from `Edit` button `didMount`/`willReceiveProps`
+  0. `PATCH /api/responses/:id` is called.
+  0. `receiveSingleResponse` is set as the success callback.
+
+* `destroySingleResponee`
+  0. invoked from delete message button `onClick`
+  0. `DELETE /api/responses/:id` is called.
+  0. `removeResponse` is set as the success callback.
+
+### Messages API Response Actions
+
+* `receiveAllResponses`
   0. invoked from an API callback.
-  0. `SearchSuggestion` store updates `_suggestions` and emits change.
+  0. `Response` store updates `_responses` and emits change.
 
-* `removeSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when empty
-  0. `SearchSuggestion` store resets `_suggestions` and emits change.
+* `receiveSingleQuestion`
+  0. invoked from an API callback.
+  0. `Question` store updates `_questions[id]` and emits change.
+
+* `receiveSingleResponse`
+  0. invoked from an API callback.
+  0. `Response` store updates `_responses[id]` and emits change.
+
+* `removeResponse`
+  0. invoked from an API callback.
+  0. `Response` store removes `_responses[id]` and emits change.
 
 ### Store Listeners
 
-* `SearchBarSuggestions` component listens to `SearchSuggestion` store.
+* `QuestionForm` component listens to `Questions` store.
+* `Questions` component listens to `Responses` store.

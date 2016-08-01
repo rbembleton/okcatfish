@@ -1,22 +1,36 @@
 # View Wireframes
 
-## New User
-![new-user]
+## Log In / Register
+![sign-in-register]
 
-## New Session
-![new-session]
+## Register
+![register-1]
+![register-2] (^^ For sure)
+![register-3] (vv Maybe)
+![register-4]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+## Profile Show
+![profile-show]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## Browse Matches (match search)
+![browse-matches]
 
-## NotebookForm
-![notebook-form]
+## Quick Match (also liking)
+![quick-match]
 
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[notes]: ./wireframes/root_notes.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
+## Message Inbox and Show
+![message-inbox-and-show]
+
+## Question Response
+![question-response]
+
+[sign-in-register]: ./wireframes/sign_in_register.jpg
+[register-1]: ./wireframes/register_01.jpg
+[register-2]: ./wireframes/register_02.jpg
+[register-3]: ./wireframes/register_03.jpg
+[register-4]: ./wireframes/register_04.jpg
+[profile-show]: ./wireframes/profile_show.jpg
+[browse-matches]: ./wireframes/browse_matches.jpg
+[quick-match]: ./wireframes/quick_match.jpg
+[message-inbox-and-show]: ./wireframes/message_inbox_and_show.jpg
+[question-response]: ./wireframes/question_response.jpg

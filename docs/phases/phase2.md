@@ -2,39 +2,50 @@
 
 ## Rails
 ### Models
-* Note
+* Profile
+
+### Database
+* Photo Repository
+* Profile Text
+* Looking for
+* Personal Details
+* Photo Album  
 
 ### Controllers
-* Api::NotesController (create, destroy, index, show, update)
+* Api::ProfilesController (show, update, destroy)
 
 ### Views
-* notes/index.json.jbuilder
-* notes/show.json.jbuilder
+* profiles/search.json.jbuilder
+* profiles/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NotesIndex
-  - NotesIndexItem
-* NoteForm
+* ProfileShow
+  - ProfilePic
+    - ProfilePhotoAlbum
+  - ProfileText
+  - ProfileLookingFor
+  - ProfileDetails
+* ProfileSearch
 
 ### Stores
-* Note
+* Profile
 
 ### Actions
-* `ApiActions.receiveAllNotes`
-* `ApiActions.receiveSingleNote`
-* `ApiActions.deleteNote`
-* `NoteActions.fetchAllNotes`
-* `NoteActions.fetchSingleNote`
-* `NoteActions.createNote`
-* `NoteActions.editNote`
-* `NoteActions.destroyNote`
+* `ApiActions.receiveProfiles`
+* `ApiActions.receiveSingleProfile`
+* `ApiActions.deleteProfile`
+* `ProfileActions.fetchProfiles`
+* `ProfileActions.fetchSingleProfile`
+* `ProfileActions.createProfile`
+* `ProfileActions.editProfile`
+* `ProfileActions.destroyProfile`
 
 ### ApiUtil
-* `ApiUtil.fetchAllNotes`
-* `ApiUtil.fetchSingleNote`
-* `ApiUtil.createNote`
-* `ApiUtil.editNote`
-* `ApiUtil.destroyNote`
+* `ApiUtil.fetchProfiles`
+* `ApiUtil.fetchSingleProfile`
+* `ApiUtil.createProfile`
+* `ApiUtil.editProfile`
+* `ApiUtil.destroyProfile`
 
 ## Gems/Libraries

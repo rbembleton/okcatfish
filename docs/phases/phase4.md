@@ -3,21 +3,35 @@
 ## Rails
 
 ### Models
-* Tag
-* Taggings
+* Question
+* Response
+* UserResponse
 
 ### Controllers
+Api::QuestionController (show, index)
+Api::UserResponseController (create, destroy, index, show, update)
 
 ### Views
-* tags/show.json.jbuilder
-* SearchIndex
+* question/show.json.jbuilder
+* user_response/show.json.jbuilder
+* user/id/questions/index.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NoteTags
+* ProfileQuestions (responses)
+* AnswerQuestions
 
 ### Stores
+* Question
 
 ### Actions
+* `ApiActions.receiveResponses`
+* `ApiActions.receiveSingleQuestion`
+* `ApiActions.deleteResponse`
+* `ProfileActions.fetchResponses`
+* `ProfileActions.fetchSingleQuestion`
+* `ProfileActions.createResponse`
+* `ProfileActions.editResponse`
+* `ProfileActions.destroyResponse`
 
 ## Gems/Libraries

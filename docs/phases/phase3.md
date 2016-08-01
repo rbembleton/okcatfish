@@ -2,41 +2,52 @@
 
 ## Rails
 ### Models
-* Notebook
-* Tag
-* Tagging
+* Message
+* Like
 
 ### Controllers
-* Api::NotebooksController (create, destroy, index, show, update)
+* Api::MessagesController (create, destroy, index, show, update)
+
 
 ### Views
-* notebooks/index.json.jbuilder
-* notebooks/show.json.jbuilder
+* messages/index.json.jbuilder
+* messages/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NotebooksIndex
-  - NotebookIndexItem
-* NotebookForm
+* Inbox
+  - ReadMessage
+* CreateMessage
+* LikeBox
 
 ### Stores
-* Notebook
+* Inbox
+* Like
 
 ### Actions
-* `ApiActions.receiveAllNotebooks`
-* `ApiActions.receiveSingleNotebook`
-* `ApiActions.deleteNotebook`
-* `NotebookActions.fetchAllNotebooks`
-* `NotebookActions.fetchSingleNotebook`
-* `NotebookActions.createNotebook`
-* `NotebookActions.editNotebook`
-* `NotebookActions.destroyNotebook`
+* `ApiActions.receiveAllMessages`
+* `ApiActions.receiveSingleMessage`
+* `ApiActions.deleteMessage`
+* `MessageActions.fetchAllMessages`
+* `MessageActions.fetchSingleMessage`
+* `MessageActions.createMessage`
+* `MessageActions.destroyMessage`
+* `ApiActions.receiveAllLikes`
+* `ApiActions.receiveSingleLike`
+* `ApiActions.deleteLike`
+* `LikeActions.fetchAllLikes`
+* `LikeActions.fetchSingleLike`
+* `LikeActions.createLike`
+* `LikeActions.destroyLike`
 
 ### ApiUtil
-* `ApiUtil.fetchAllNotebooks`
-* `ApiUtil.fetchSingleNotebook`
-* `ApiUtil.createNotebook`
-* `ApiUtil.editNotebook`
-* `ApiUtil.destroyNotebook`
+* `ApiUtil.fetchAllMessages`
+* `ApiUtil.fetchSingleMessage`
+* `ApiUtil.createMessage`
+* `ApiUtil.destroyMessage`
+* `ApiUtil.fetchAllLikes`
+* `ApiUtil.fetchSingleLike`
+* `ApiUtil.createLike`
+* `ApiUtil.destroyLike`
 
 ## Gems/Libraries

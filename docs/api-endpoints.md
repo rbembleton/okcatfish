@@ -19,34 +19,39 @@
 - `DELETE /api/session`
 - `GET /api/session`
 
-### Notes
+### Profiles
 
-- `GET /api/notes`
-  - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `GET /api/profiles`
+  * Matching search criteria
+- `POST /api/profiles`
+- `GET /api/profiles/:id`
+- `PATCH /api/profiles/:id`
+- `DELETE /api/profiles/:id`
 
-### Notebooks
+### Messages
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+- `GET /api/users/:userid/messages`
+  * Inbox
+- `POST /api/users/:userid/messages`
+- `GET /api/users/:userid/messages/:id`
+- `PATCH /api/users/:userid/messages/:id`
+- `DELETE /api/users/:userid/messages/:id`
 
-### Tags
+### Likes
+- `GET /api/users/:userid/likes`
+- `POST /api/users/:userid/likes`
+- `GET /api/users/:userid/likes/:id`
+- `DELETE /api/users/:userid/likes/:id`
 
-- A note's tags will be included in the note show template
-- `GET /api/tags`
-  - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
-  name
+
+### Questions (and Responses)
+
+- `GET /api/questions/:id`
+  * Get Specific question
+- `GET /api/users/:userid/questions`
+  * Get responses from a user
+- `POST /api/users/:userid/questions`
+  * Add responses using THIS url
+- `GET /api/users/:userid/questions/:id`
+- `PATCH /api/users/:userid/questions/:id`
+- `DELETE /api/users/:userid/messages/:id`

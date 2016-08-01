@@ -1,33 +1,32 @@
-# FresherNote
+# OKCatfish
 
-[Heroku link][heroku] **Note:** This should be a link to your production site
+[Heroku link][heroku]
 
 [heroku]: http://www.herokuapp.com
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+OKCatfish is a web application inspired by OKCupid that will be build using Ruby on Rails and React.js. By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [ ] Hosting on Heroku
-- [ ] New account creation, login, and guest/demo login
-- [ ] A production README, replacing this README (**NB**: check out the [sample production README](docs/production_readme.md) -- you'll write this later)
-- [ ] Notes
+- [ ] New user creation, login, and demo login
+- [ ] A production README, replacing this README
+- [ ] Profiles, Match Search by location and "looking for"
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
-- [ ] Notebooks for organizing notes
+- [ ] Messaging and Likes
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
-- [ ] Tags for notes
+- [ ] Personality Questions
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
-- [ ] Rich Text Editing of notes
+- [ ] Match Percentages based on Questions
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
   - [ ] Adequate CSS styling
-- [ ] Infinite Scroll for Notes
 
 ## Design Docs
 * [View Wireframes][views]
@@ -46,93 +45,100 @@ FresherNote is a web application inspired by Evernote that will be build using R
 
 ### Phase 1: Backend setup and Front End User Authentication (2 days, W1 W 6pm)
 
-**Objective:** Functioning rails project with front-end Authentication
+**Objective:** Functioning rails project with front-end Authentication and CSS'd Home Page
 
 - [ ] create new project
-- [ ] create `User` model
+- [ ] create `User` table/model
 - [ ] authentication backend setup
 - [ ] create `StaticPages` controller and root view
-- [ ] set up webpack & flux scaffold with skeleton files
+- [ ] set up webpack & flux folders
 - [ ] setup `APIUtil` to interact with the API
-- [ ] set up flux cycle for frontend auth
+- [ ] set up flux cycle for frontend authentication
 - [ ] user signup/signin components
 - [ ] blank landing component after signin
 - [ ] style signin/signup components
+- [ ] well designed home page
 - [ ] seed users
 
-### Phase 2: Notes Model, API, and components (2 days, W1 F 6pm)
+### Phase 2: Profile Model, API, and components (2 days, W1 F 6pm)
 
-**Objective:** Notes can be created, read, edited and destroyed through
-the API.
+**Objective:** Logged in user's profile can be viewed and edited,
+User can view and search for others profiles. Profiles have text, details, looking for, and photo albums.
 
-- [ ] create `Note` model
+- [ ] create `Profile` model
+- [ ] create `Photo Repository` table and add several repositories of photos for seeding
 - [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`NotesController`)
-- [ ] jBuilder views for notes
+- [ ] CRUD API for profiles (`ProfileTextController`) and (`ProfilePhotoAlbumController`)
+- [ ] jBuilder views for profiles
 - [ ] test out API interaction in the console.
-- implement each note component, building out the flux loop as needed.
-  - [ ] `NotesIndex`
-  - [ ] `NoteIndexItem`
-  - [ ] `NoteForm`
-- [ ] save Notes to the DB when the form loses focus or is left idle after editing.
-- [ ] style notes components
-- [ ] seed notes
+- implement each profile component, building out the flux loop as needed.
+  - [ ] `ProfileShow`
+  - [ ] `ProfilePhotoAlbumShow`
+  - [ ] `UserProfileShow`
+  - [ ] `UserProfileEdit`
+  - [ ] `UserProfilePhotoAlbumShow`
+  - [ ] `UserProfilePhotoAlbumEdit`
+  - [ ] `ProfileSearch`
+- [ ] save Profile Information to the DB when the user saves
+- [ ] seed profiles
+- [ ] CSS profiles
 
-### Phase 3: Notebooks (2 day, W2 Tu 6pm)
+### Phase 3: Messaging and Likes (2 days, W2 Tu 6pm)
 
-**Objective:** Notes belong to Notebooks, and can be viewed by notebook.
+**Objective:** Users can message each other, Users can "like" each other.
 
-- [ ] create `Notebook` model
+- [ ] create `Message` model
+- [ ] create `Like` model
 - build out API, Flux loop, and components for:
-  - [ ] Notebook CRUD
-  - [ ] adding notes requires a notebook
-  - [ ] moving notes to a different notebook
-  - [ ] viewing notes by notebook
+  - [ ] Message CRUD
+  - [ ] writing messages
+  - [ ] reading messages
+  - [ ] liking Users
+  - [ ] unliking Users
 - [ ] Use CSS to style new components
-- [ ] Seed Notebooks
+- [ ] Seed messages and likes
+- [ ] Add automated messages if two users like each other
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook,
-which has its own `Index` view.
 
-### Phase 4: Tags (1 days, W2 W 6pm)
+### Phase 4: Questions (1 day, W2 W 6pm)
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
+**Objective:** Users can answer a series of questions to improve the quality of their matches.
 
-- [ ] create `Tag` model and join table
+- [ ] create `Question` and `Response` models
 - build out API, Flux loop, and components for:
-  - [ ] fetching tags for notebook
-  - [ ] adding tags to notebook
-  - [ ] creating tags while adding to notebooks
-  - [ ] searching notebooks by tag
+  - [ ] answering questions
+  - [ ] skipping questions
+  - [ ] viewing questions
 - [ ] Style new elements
-- [ ] Seed tags and tag the seeded Notebooks
+- [ ] Seed questions, responses and user responses
 
-### Phase 5: Allow Complex Styling in Notes (1 days, W2 Th 6pm)
+### Phase 5: Match Percentages based on Questions (1 day, W2 Th 6pm)
 
-**objective:** Enable complex styling of notes.
+**objective:** Calculate and display match percentages based on Questions, add weight to questions.
 
-- [ ] Integrate `react-quill` (based on Quill.js).
-- [ ] Use Rails helpers to sanitize HTML before rendering.
-- [ ] Style the new Quill elements.
-- [ ] Add Quill styling to seeded notes
+- [ ] figure out logic to optimize match percentage storage, add weight to `user responses`
+- [ ] add match percentages to profile search
+- [ ] update CSS
 
-### Phase 6: - Pagination / infinite scroll for Notes Index (1 day, W2 F 6pm)
 
-**objective:** Add infinite scroll to Notes Index
+### Phase 6: - Infinite scroll for Match Search (1 day, W2 F 6pm)
 
-- [ ] Paginate Notes Index API to send 20 results at a time
+**objective:** Add infinite scroll to Match Search
+
+- [ ] Paginate Match Search API to send 20 results at a time
 - [ ] Append next set of results when user scrolls and is near bottom
 - [ ] Make sure styling still looks good
-- [ ] Ensure we have enough seeded notes to demo infinite scroll
+- [ ] Ensure we have enough seeded profiles to demo infinite scroll
 
 ### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
-- [ ] Multiple sessions
+- [ ] Search for users based on username
+- [ ] Block or Hide users
+- [ ] Integrate messaging with chat
+- [ ] Build up repositories of photos
 
 [phase-one]: docs/phases/phase1.md
 [phase-two]: docs/phases/phase2.md
 [phase-three]: docs/phases/phase3.md
 [phase-four]: docs/phases/phase4.md
 [phase-five]: docs/phases/phase5.md
+[phase-six]: docs/phases/phase6.md
