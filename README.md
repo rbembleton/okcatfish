@@ -48,18 +48,18 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
 
 **Objective:** Functioning rails project with front-end Authentication and CSS'd Home Page
 
-- [ ] create new project
-- [ ] create `User` table/model
-- [ ] authentication backend setup
-- [ ] create `StaticPages` controller and root view
-- [ ] set up webpack & flux folders
-- [ ] setup `APIUtil` to interact with the API
-- [ ] set up flux cycle for frontend authentication
-- [ ] user signup/signin components
-- [ ] blank landing component after signin
-- [ ] style signin/signup components
-- [ ] well designed home page
-- [ ] seed users
+- [x] create new project
+- [x] create `User` table/model
+- [x] authentication backend setup
+- [x] create `StaticPages` controller and root view
+- [x] set up webpack & flux folders
+- [x] setup `APIUtil` to interact with the API
+- [x] set up flux cycle for frontend authentication
+- [x] user signup/signin components
+- [x] blank landing component after signin
+- [x] style signin/signup components
+- [x] well designed home page
+- [x] seed users
 
 ### Phase 2: Profile Model, API, and components (2 days, W1 F 6pm)
 

@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+User.delete_all
+
+rb = User.create!({username: rb, password: okcatfish});
+pikachu = User.create!({username: pikachu, password: okcatfish});
+trumpsux = User.create!({username: trumpsux, password: okcatfish});
+pizza = User.create!({username: pizza, password: okcatfish});
+ash = User.create!({username: ash, password: okcatfish});
