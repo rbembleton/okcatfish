@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   def self.generate_session_token
-    token = SecureRandom.urlsafe_base64(16) until (!User.exists?(session_token: token))
+    token = SecureRandom.urlsafe_base64(16)
+      while User.exists?(session_token: token)
+        token = SecureRandom.urlsafe_base64(16)
+      end
+    token
   end
 
   def self.find_by_credentials(credentials)
