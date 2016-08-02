@@ -7,23 +7,34 @@ id              | integer   | not null, primary key
 username        | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
-
-## user_infos
-column name     | data type | details
-----------------|-----------|-----------------------
-id              | integer   | not null, primary key
-user_id         | integer   | not null, foreign key
-country_id      | integer   | not null, foreign key, indexed
+---------------------------
+country         | string    | not null
 location        | integer   | not null, indexed
 birthdate       | datetime  | not null
-orientation id  | integer   | not null, foreign key, indexed
-gender id       | integer   | not null, foreign key, indexed
+orientation_id  | integer   | not null, foreign key, indexed
+gender_id       | integer   | not null, foreign key, indexed
+lf_bottom_age   | integer   | not null, (default to 5/6 age, lowest 18)
+lf_top_age      | integer   | not null, (default to 6/5 age)
 
-## countries
+## looking_for_gender_links
+column name    | data type  | details
+---------------|------------|-----------------------
+id             | integer    | not null, primary key
+looking_for_id | integer    | not null, foreign key, indexed
+gender         | string     | not null, foreign key, indexed
+
+## looking_for_orientation_links
+column name    | data type  | details
+---------------|------------|-----------------------
+id             | integer    | not null, primary key
+looking_for_id | integer    | not null, foreign key, indexed
+orientation_id | integer    | not null, foreign key, indexed
+
+<!-- ## countries
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-name            | string    | not null
+name            | string    | not null -->
 
 ## orientations
 column name     | data type | details
@@ -50,27 +61,7 @@ think_about    | text       |
 saturday_night | text       |
 message_me_if  | text       |  
 
-## looking_fors
-column name    | data type  | details
----------------|------------|-----------------------
-id             | integer    | not null, primary key
-user_id        | integer    | not null, foreign key, indexed
-bottom_age     | integer    | not null, (default to 5/6 age, lowest 18)
-top_age        | integer    | not null, (default to 6/5 age)
 
-## looking_for_gender_links
-column name    | data type  | details
----------------|------------|-----------------------
-id             | integer    | not null, primary key
-looking_for_id | integer    | not null, foreign key, indexed
-gender_id      | integer    | not null, foreign key, indexed
-
-## looking_for_orientation_links
-column name    | data type  | details
----------------|------------|-----------------------
-id             | integer    | not null, primary key
-looking_for_id | integer    | not null, foreign key, indexed
-orientation_id | integer    | not null, foreign key, indexed
 
 
 ## photo_albums
