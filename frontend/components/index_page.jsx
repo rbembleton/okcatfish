@@ -1,6 +1,9 @@
 const React = require('react');
 const SignUpForm = require('./sign_up_form');
 const LogInForm = require('./log_in_form');
+const SessionStore = require('../stores/session_store');
+const SessionActions = require('../actions/session_actions');
+const hashHistory = require('react-router').hashHistory;
 
 const IndexPage = React.createClass({
 
@@ -8,11 +11,26 @@ const IndexPage = React.createClass({
     return({form: "signup"});
   },
 
+  componentDidMount () {
+    this.logInListener = SessionStore.addListener(() => {
+      hashHistory.push("/home/user");
+    });
+  },
+
+  componentWillUnmount () {
+    this.logInListener.remove();
+  },
+
 
   handleClick(e) {
     e.preventDefault();
     const form = this.state.form === "signup" ? "login" : "signup";
     this.setState({form: form});
+  },
+
+  guestLogIn(e) {
+    e.preventDefault();
+    SessionActions.guestLogIn();
   },
 
 
@@ -26,6 +44,9 @@ const IndexPage = React.createClass({
               {this.state.form === "signup" ? "Already a member?" : "Not a member yet?" }
               <button className="log-in-button" onClick={this.handleClick}>
                 {this.state.form === "signup" ? "Sign in" : "Sign Up" }
+              </button>
+              <button className="log-in-button" onClick={this.guestLogIn}>
+                Demo Login
               </button>
             </div>
             <div className="header-logo">

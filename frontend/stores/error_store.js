@@ -10,7 +10,7 @@ const ErrorStore = new Store(AppDispatcher);
 
 const _setErrors = function (form, errors) {
   _form = form;
-  _errors = [errors];
+  _errors = errors;
   ErrorStore.__emitChange();
 };
 

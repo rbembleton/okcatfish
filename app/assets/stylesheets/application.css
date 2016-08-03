@@ -14,6 +14,7 @@
  *= require_self
  *= reset
  *= index
+ *= nav
  */
  body {
    margin: 0px;
@@ -22,3 +23,7 @@
    font-family: 'Open Sans', sans-serif;
    font-weight: 300;
  }
+
+input[type="button"]:hover, button:hover {
+  cursor: pointer;
+}

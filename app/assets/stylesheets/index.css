@@ -29,13 +29,13 @@
 .sign-up-definition>strong {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: 1.5px;
 }
 
 
 .sign-up-form {
-  height: 200px;
+  height: 230px;
   padding: 20px 0px 0px 0px;
 }
 
@@ -50,7 +50,7 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 17px;
   height: 40px;
-  width: 160px;
+  width: 180px;
   padding: 10px 10px 10px 20px;
   margin: 20px;
   border: 0px;
@@ -58,7 +58,8 @@
 }
 
 .errors {
-  color: red;
+  color: #ff75a6;
+  font-size: 17px;
 }
 
 .new-user-button {
@@ -85,12 +86,12 @@
   color: white;
   border: .5px solid;
   border-color: #6391f3;
-  width: 100px;
+  width: 110px;
   height: 40px;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   border-radius: 4px;
-  margin: 20px;
+  margin: 20px 0px 20px 20px;
   text-align: center;
 }
 

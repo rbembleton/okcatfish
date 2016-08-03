@@ -1,0 +1,40 @@
+.nav-bar {
+  background-color: #104DA1;
+  color: white;
+  height: 46px;
+  padding: 10px;
+  line-height: 46px;
+  position: relative;
+}
+
+.nav-left {
+  position: absolute;
+  left: 20px;
+}
+
+.nav-left>img {
+  height: 36px;
+  width: auto;
+  margin: 5px 20px 3px 10px;
+  display: inline-block;
+}
+
+.nav-right {
+  position: absolute;
+  right: 20px;
+}
+
+.log-out-button {
+  background: transparent;
+  color: white;
+  border: .5px solid;
+  border-color: #6391f3;
+  width: 100px;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 16px;
+}

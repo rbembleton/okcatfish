@@ -4,6 +4,7 @@ const IndexPage = require('./components/index_page');
 const UserProfile = require('./components/user_profile');
 const SessionActions = require('./actions/session_actions');
 const SessionStore = require('./stores/session_store');
+const Landing = require('./components/landing');
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
@@ -19,7 +20,6 @@ const App = React.createClass({
 });
 
 const _ensureLoggedIn = function (nextState, replace) {
-  debugger
   if (!SessionStore.isUserLoggedIn()) {
     replace('/');
   }
@@ -30,7 +30,9 @@ const router = (
     <Route path="/" component={App}>
       <IndexRoute component={IndexPage}/>
       <Route path="index" component={IndexPage}/>
-      <Route path="user" component={UserProfile} onEnter={_ensureLoggedIn}/>
+      <Route path="home" component={Landing} onEnter={_ensureLoggedIn}>
+        <Route path="user" component={UserProfile}/>
+      </Route>
     </Route>
   </Router>
 );

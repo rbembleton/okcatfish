@@ -14,7 +14,7 @@ const SignUpForm = React.createClass({
   componentDidMount () {
     this.errorListener = ErrorStore.addListener(this.updateErrors);
     this.logInListener = SessionStore.addListener(() => {
-      hashHistory.push("/user");
+      hashHistory.push("/home/user");
     });
   },
 
@@ -44,7 +44,6 @@ const SignUpForm = React.createClass({
   },
 
   render () {
-
     return (
       <div className="sign-up-form">
         <form onSubmit={this.handleSubmit}>
@@ -70,7 +69,7 @@ const SignUpForm = React.createClass({
             value="Register"
           />
         </form>
-        {this.state.errors.length > 0 ? <div className="errors">{this.state.errors}</div>  : ""}
+        {this.state.errors.length > 0 ? <div className="errors">{this.state.errors.join('. ')+"!"}</div>  : ""}
       </div>
     );
   }

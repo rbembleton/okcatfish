@@ -9,6 +9,10 @@ const SessionActions = {
     SessionApiUtil.signUp(data, SessionActions.receiveCurrentUser, ErrorActions.setErrors, AuthFormConstants.SIGN_UP_FORM);
   },
 
+  guestLogIn () {
+    SessionApiUtil.guestLogIn(SessionActions.receiveCurrentUser, ErrorActions.setErrors, AuthFormConstants.LOG_IN_FORM);
+  },
+
   logIn (data) {
     SessionApiUtil.logIn(data, SessionActions.receiveCurrentUser, ErrorActions.setErrors, AuthFormConstants.LOG_IN_FORM);
   },
