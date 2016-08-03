@@ -15,6 +15,7 @@ const ErrorActions = {
       actionType: ErrorConstants.CLEAR_ERRORS
     });
   }
+
 };
 
 module.exports = ErrorActions;

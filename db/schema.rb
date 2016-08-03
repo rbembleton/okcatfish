@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803150830) do
+ActiveRecord::Schema.define(version: 20160803183434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "photo_album_links", force: :cascade do |t|
+    t.integer "user_id",           null: false
+    t.integer "photo_repo_pic_id", null: false
+  end
+
+  add_index "photo_album_links", ["photo_repo_pic_id"], name: "index_photo_album_links_on_photo_repo_pic_id", using: :btree
+  add_index "photo_album_links", ["user_id"], name: "index_photo_album_links_on_user_id", using: :btree
+
+  create_table "photo_repo_pics", force: :cascade do |t|
+    t.integer "repo_id", null: false
+    t.string  "url",     null: false
+  end
+
+  add_index "photo_repo_pics", ["repo_id"], name: "index_photo_repo_pics_on_repo_id", using: :btree
+
+  create_table "photo_repos", force: :cascade do |t|
+    t.string "label", null: false
+  end
+
+  add_index "photo_repos", ["label"], name: "index_photo_repos_on_label", using: :btree
 
   create_table "profile_texts", force: :cascade do |t|
     t.integer "user_id",   null: false

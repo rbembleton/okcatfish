@@ -41,14 +41,14 @@ msg_me_if      | text       |
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-name        | string    | not null, indexed
+label        | string    | not null, indexed
 
 ## photo_repo_pic
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-repo_id     | integer   | not null, foreign key
-url         | string    | not null, indexed
+repo_id     | integer   | not null, foreign key, indexed
+url         | string    | not null
 
 ## photo_album_links
 column name       | data type | details

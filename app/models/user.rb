@@ -41,6 +41,14 @@ class User < ActiveRecord::Base
 
   has_one(:profile_text)
 
+  has_many(:photo_album_links)
+
+  has_many(
+    :repo_photos,
+    through: :photo_album_links,
+    source: :photo_repo_pic
+  )
+
 ### AUTH VVV
 
     def self.generate_session_token
@@ -93,6 +101,14 @@ class User < ActiveRecord::Base
 
   def create_profile_text
     ProfileText.create!({ user_id: self.id })
+  end
+
+  def photos
+    self.repo_photos
+  end
+
+  def prof_pic
+    self.photos.first
   end
 
 

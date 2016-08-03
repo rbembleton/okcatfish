@@ -2,7 +2,7 @@
 
 [Heroku link][heroku]
 
-[heroku]: http://www.herokuapp.com
+[heroku]: http://okcatfish.herokuapp.com
 
 ## Minimum Viable Product
 
@@ -67,8 +67,8 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
 User can view and search for others profiles. Profiles have text, details, looking for, and photo albums.
 
 - [x] create `Profile` model
-- [ ] create `Photo Repository` table and add several repositories of photos for seeding
-- [ ] seed the database with a small amount of test data
+- [x] create `Photo Repository` table and add several repositories of photos for seeding
+- [x] seed the database with a small amount of test data
 - [ ] CRUD API for profiles (`ProfileTextController`) and (`ProfilePhotoAlbumController`)
 - [ ] jBuilder views for profiles
 - [ ] test out API interaction in the console.
