@@ -7,12 +7,7 @@ id              | integer   | not null, primary key
 username        | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
-
-#user_profiles
-column name     | data type | details
-----------------|-----------|-----------------------
-id              | integer   | not null, primary key
-user_id         | integer   | not null, foreign key, indexed
+ indexed
 <!-- country_id      | integer   | not null, foreign key, indexed -->
 location        | integer   | not null, indexed
 birthdate       | datetime  | not null
@@ -34,13 +29,13 @@ column name    | data type  | details
 ---------------|------------|-----------------------
 id             | integer    | not null, primary key
 user_id        | integer    | not null, foreign key, indexed
-about_me       | text       |
-what_im_doing  | text       |
-favorites      | text       |
-three_things   | text       |
-think_about    | text       |
-saturday_night | text       |
-message_me_if  | text       |  
+about          | text       |
+doing          | text       |
+faves          | text       |
+things         | text       |
+think          | text       |
+sat_night      | text       |
+msg_me_if      | text       |  
 
 ## photo_repos
 column name | data type | details

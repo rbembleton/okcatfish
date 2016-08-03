@@ -66,7 +66,7 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
 **Objective:** Logged in user's profile can be viewed and edited,
 User can view and search for others profiles. Profiles have text, details, looking for, and photo albums.
 
-- [ ] create `Profile` model
+- [x] create `Profile` model
 - [ ] create `Photo Repository` table and add several repositories of photos for seeding
 - [ ] seed the database with a small amount of test data
 - [ ] CRUD API for profiles (`ProfileTextController`) and (`ProfilePhotoAlbumController`)
