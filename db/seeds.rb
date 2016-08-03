@@ -9,8 +9,10 @@
 
 User.delete_all
 
-rb = User.create!({username: "rb", password: "okcatfish"});
+demo = User.create!({username: "pro_catfisher", password: "okcatfish"});
+
+rb = User.create!({username: "rbrb", password: "okcatfish"});
 pikachu = User.create!({username: "pikachu", password: "okcatfish"});
 trumpsux = User.create!({username: "trumpsux", password: "okcatfish"});
 pizza = User.create!({username: "pizza", password: "okcatfish"});
-ash = User.create!({username: "ash", password: "okcatfish"});
+ash = User.create!({username: "ash_", password: "okcatfish"});
