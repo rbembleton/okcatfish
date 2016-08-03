@@ -35,6 +35,10 @@ const IndexPage = React.createClass({
           <div className="sign-up-bottom">
             <div className="sign-up-catchphrase">
               When being yourself just isn&#39;t enough.
+              <div className="sign-up-definition">
+                <strong>catfish</strong>{" | "}<em>noun</em>{" | cat·fish | a person who sets up a false personal profile"}
+                <br/>{"on a social networking site for fraudulent or deceptive purposes"}
+              </div>
             </div>
             {this.state.form === "signup" ? <SignUpForm/> : <LogInForm /> }
           </div>

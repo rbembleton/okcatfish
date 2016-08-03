@@ -1,0 +1,139 @@
+.sign-up-bkg {
+  background-color: #104DA1;
+}
+
+.sign-up-header {
+  position: relative;
+  height: 160px;
+  padding: 40px 0px 0px 0px;
+  margin: 0px 40px 20px 40px;
+}
+
+.sign-up-bottom {
+  text-align: center;
+}
+.sign-up-catchphrase {
+  height: 140px;
+  line-height: 70px;
+  margin: auto;
+  color: white;
+  font-size: 36px;
+}
+
+.sign-up-definition {
+  line-height: 30px;
+  height: 60px;
+  font-size: 18px;
+}
+
+.sign-up-definition>strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+
+.sign-up-form {
+  height: 200px;
+  padding: 20px 0px 0px 0px;
+}
+
+.sign-up-baity {
+  background-color: white;
+}
+
+.sign-up-form>form>input[type="text"],
+.sign-up-form>form>input[type="password"] {
+  background-color: #3260c7;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
+  height: 40px;
+  width: 160px;
+  padding: 10px 10px 10px 20px;
+  margin: 20px;
+  border: 0px;
+  text-align: left;
+}
+
+.errors {
+  color: red;
+}
+
+.new-user-button {
+  background-color: #29d58f;
+  color: white;
+  border: 0px;
+  width: 160px;
+  height: 60px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  border-radius: 4px;
+  margin: 20px;
+}
+
+.header-login {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: white;
+}
+
+.log-in-button {
+  background: transparent;
+  color: white;
+  border: .5px solid;
+  border-color: #6391f3;
+  width: 100px;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 20px;
+  text-align: center;
+}
+
+.sign-up-form>form>input {
+  box-shadow: 0px 1px 1px 1px #07408d;
+}
+
+.image-container {
+  width: 880px;
+  margin: auto;
+  color: #3260c7;
+  font-weight: 400;
+}
+
+.entry-image>img {
+  height: 160px;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+
+
+.entry-image {
+  text-align: center;
+  display: block;
+  float: left;
+  width: 250px;
+  margin: 20px;
+}
+
+.header-logo>img {
+  height: 70px;
+  width: auto;
+  display: inline-block;
+}
+
+.header-logo {
+  position: absolute;
+  left: auto;
+  right: auto;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  float: right;
+  text-align: center;
+}
