@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   after_initialize :default_looking_for_ages
-  after_commit :create_profile_text
+  after_create :create_profile_text
 
   has_one(:profile_text)
 
@@ -79,17 +79,20 @@ class User < ActiveRecord::Base
 
 
   def default_looking_for_ages
+    return nil unless birthdate
+    return if lf_bottom_age && lf_top_age
     self.lf_bottom_age = self.age * 5/6 > 18 ? self.age * 5/6 : 18
     self.lf_top_age = self.age * 6/5
   end
 
   def age
+    return nil unless birthdate
     now = Time.now.utc.to_date
     now.year - self.birthdate.year - (self.birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
   end
 
   def create_profile_text
-    ProfileText.create!({ user_id: self.user_id })
+    ProfileText.create!({ user_id: self.id })
   end
 
 

@@ -27,7 +27,7 @@ const Landing = React.createClass({
 
   render () {
     return (
-      <div>
+      <div className="main-page">
         <nav className="nav-bar">
           <div className="nav-left">
             <img src={window.okclogo}/>

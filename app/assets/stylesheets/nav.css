@@ -5,6 +5,7 @@
   padding: 10px;
   line-height: 46px;
   position: relative;
+  border-bottom: .5px solid #6391f3;
 }
 
 .nav-left {
@@ -37,4 +38,9 @@
   text-align: center;
   line-height: 40px;
   margin-right: 16px;
+}
+
+.main-page {
+  background-color: #104DA1;
+  height: 1000px;
 }

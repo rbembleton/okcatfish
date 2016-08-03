@@ -21,8 +21,8 @@ const _clearErrors = function () {
 };
 
 ErrorStore.errors = function (form) {
-  if (form === _form) { return _errors.slice(); }
-  return _errors.slice();
+  if (form && form === _form) { return _errors.slice(); }
+  return [];
 };
 
 ErrorStore.__onDispatch = function (payload) {
