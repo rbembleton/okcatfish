@@ -15,4 +15,4 @@ rb = User.create!({username: "rbrb", password: "okcatfish"});
 pikachu = User.create!({username: "pikachu", password: "okcatfish"});
 trumpsux = User.create!({username: "trumpsux", password: "okcatfish"});
 pizza = User.create!({username: "pizza", password: "okcatfish"});
-ash = User.create!({username: "ash_", password: "okcatfish"});
+ash = User.create!({username: "ash_k", password: "okcatfish"});
