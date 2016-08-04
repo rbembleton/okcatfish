@@ -18,6 +18,7 @@
   width: auto;
   margin: 5px 20px 3px 10px;
   display: inline-block;
+  float: left;
 }
 
 .nav-right {
@@ -26,6 +27,22 @@
 }
 
 .log-out-button {
+  background: transparent;
+  color: white;
+  border: .5px solid;
+  border-color: #6391f3;
+  width: 100px;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 40px;
+  margin-right: 16px;
+}
+
+.browse-button {
+  display: inline-block;
   background: transparent;
   color: white;
   border: .5px solid;

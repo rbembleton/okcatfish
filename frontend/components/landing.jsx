@@ -27,16 +27,27 @@ const Landing = React.createClass({
     SessionActions.logOut();
   },
 
+  browseClick (e) {
+    e.preventDefault();
+    hashHistory.push('home/browse');
+  },
+
+  profileClick (e) {
+    e.preventDefault();
+    hashHistory.push('home/user');
+  },
+
   render () {
     return (
       <div className="main-page">
         <nav className="nav-bar">
           <div className="nav-left">
-            <img src={window.okclogo}/>
+            <img src={window.okclogo} />
+            <input className="browse-button" type="button" onClick={this.browseClick} value="Browse"/>
           </div>
           <div className="nav-right">
             <div className="mini-pic-container">
-              <img src={SessionStore.currentUser().prof_pic.url}/>
+              <img src={SessionStore.currentUser().prof_pic.url} onClick={this.profileClick}/>
             </div>
             <input className="log-out-button" type="button" onClick={this.logOutClick} value="Log Out"/>
           </div>

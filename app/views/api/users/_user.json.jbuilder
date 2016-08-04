@@ -9,9 +9,21 @@ json.(user,
   :lf_top_age,
   :gender,
   :orientation,
-  :prof_pic,
   :profile_text,
   :lat,
   :lng,
   :loc_desc
 )
+#
+# json.(user, prof_pic: do
+#   {url: (image_url 'empty_profile.png')}
+# end)
+
+
+json.prof_pic do
+  if user.prof_pic
+    json.url user.prof_pic.url
+  else
+    json.url asset_path('empty_profile.png')
+  end
+end

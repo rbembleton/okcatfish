@@ -20,6 +20,7 @@
 #
 
 class User < ActiveRecord::Base
+
   validates :username, :session_token, presence: true, uniqueness: true
   validates :password_digest, :lat, :lng, :loc_desc, presence: true
   validates :username, length: { maximum: 20, minimum: 4 }
@@ -33,6 +34,13 @@ class User < ActiveRecord::Base
     :lf_top_age,
     presence: true
 
+  # geo kit gem
+  acts_as_mappable :default_units => :miles,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :lat,
+                   :lng_column_name => :lng
+
   validates_inclusion_of :gender, in: %w(male female)
   validates_inclusion_of :orientation, in: %w(straight gay lesbian bisexual)
 
@@ -40,7 +48,6 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   after_initialize :default_looking_for_ages
-  # after_initialize :ensure_lat_lng_loc_desc
   after_create :create_profile_text
 
   has_one(:profile_text)
@@ -52,12 +59,6 @@ class User < ActiveRecord::Base
     through: :photo_album_links,
     source: :photo_repo_pic
   )
-
-
-  def self.find_users_by_location_and_proximity(lat, lng, miles)
-
-
-  end
 
 ### AUTH VVV
 
@@ -118,14 +119,10 @@ class User < ActiveRecord::Base
   end
 
   def prof_pic
-    self.photos.first || { url: "http://www.ogubin.com/images/empty_profile2.png" }
+    # self.photos.first || { url: "http://www.ogubin.com/images/empty_profile2.png" }
+    self.photos.first #|| image_url "empty_profile.png"
   end
 
-  # def ensure_lat_lng_loc_desc
-  #   return if self.lat && self.lng && self.loc_desc
-  #   set_lat_lng_loc_desc
-  #
-  # end
 
   def set_lat_lng_loc_desc(zip)
     response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{zip}&sensor=true")
@@ -135,6 +132,7 @@ class User < ActiveRecord::Base
     self.loc_desc += ", " + get_state(body_json["address_components"])
     self.lat = body_json["geometry"]["location"]["lat"]
     self.lng = body_json["geometry"]["location"]["lng"]
+
   end
 
   def zip=(zip)

@@ -12,6 +12,16 @@ class Api::UsersController < ApplicationController
 
   end
 
+  def show
+    @user = User.find(params[:id])
+
+    if @user
+      render :show
+    else
+      render json: "User not found"
+    end
+  end
+
 
   private
 

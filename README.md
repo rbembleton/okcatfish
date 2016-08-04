@@ -69,20 +69,20 @@ User can view and search for others profiles. Profiles have text, details, looki
 - [x] create `Profile` model
 - [x] create `Photo Repository` table and add several repositories of photos for seeding
 - [x] seed the database with a small amount of test data
-- [ ] CRUD API for profiles (`ProfileTextController`) and (`ProfilePhotoAlbumController`)
-- [ ] jBuilder views for profiles
-- [ ] test out API interaction in the console.
+- [x] CRUD API for profiles (`ProfileTextController`) and (`ProfilePhotoAlbumController`)
+- [x] jBuilder views for profiles
+- [x] test out API interaction in the console.
 - implement each profile component, building out the flux loop as needed.
-  - [ ] `ProfileShow`
+  - [x] `ProfileShow`
   - [ ] `ProfilePhotoAlbumShow`
-  - [ ] `UserProfileShow`
-  - [ ] `UserProfileEdit`
+  - [x] `UserProfileShow`
+  - [x] `UserProfileEdit`
   - [ ] `UserProfilePhotoAlbumShow`
   - [ ] `UserProfilePhotoAlbumEdit`
-  - [ ] `ProfileSearch`
-- [ ] save Profile Information to the DB when the user saves
+  - [x] `ProfileSearch`
+- [x] save Profile Information to the DB when the user saves
 - [ ] seed profiles
-- [ ] CSS profiles
+- [x] CSS profiles
 
 ### Phase 3: Messaging and Likes (2 days, W2 Tu 6pm)
 

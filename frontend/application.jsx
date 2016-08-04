@@ -5,6 +5,8 @@ const UserProfile = require('./components/profile/user_profile');
 const SessionActions = require('./actions/session_actions');
 const SessionStore = require('./stores/session_store');
 const Landing = require('./components/landing');
+const BrowseMatches = require('./components/browse_matches');
+const MatchProfile = require('./components/profile/match_profile');
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
@@ -32,6 +34,8 @@ const router = (
       <Route path="index" component={IndexPage}/>
       <Route path="home" component={Landing} onEnter={_ensureLoggedIn}>
         <Route path="user" component={UserProfile}/>
+        <Route path="browse" component={BrowseMatches}/>
+        <Route path="match/:userId" component={MatchProfile}/>
       </Route>
     </Route>
   </Router>
