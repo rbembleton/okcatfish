@@ -150,7 +150,7 @@ const InitialRegistration = React.createClass({
       let registration = {
         orientation: this.state.orientation,
         gender: this.state.gender,
-        location: this.state.location,
+        zip: this.state.location,
         birthdate: `${this.state.birthdateYear}-${this.state.birthdateMonth}-${this.state.birthdateDay}`
       };
       formToDisplay = (<SignUpForm regData={registration}/>);

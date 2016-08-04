@@ -13,7 +13,7 @@ demo = User.create!({
   username: "pro_catfisher",
   password: "okcatfish",
   birthdate: DateTime.new(1980,10,3),
-  location: 10018,
+  zip: 10018,
   orientation: "straight",
   gender: "female",
 })
@@ -24,7 +24,7 @@ rb = User.create!({
   username: "rbem",
   password: "okcatfish",
   birthdate: DateTime.new(1988,8,4),
-  location: 10032,
+  zip: 10032,
   orientation: "gay",
   gender: "male",
 })
@@ -33,7 +33,7 @@ pikachu = User.create!({
   username: "pikachu",
   password: "okcatfish",
   birthdate: DateTime.new(1995,10,10),
-  location: 10012,
+  zip: 10012,
   orientation: "gay",
   gender: "male",
 })
@@ -42,7 +42,7 @@ trumpsux = User.create!({
   username: "trumpsux",
   password: "okcatfish",
   birthdate: DateTime.new(1960,2,6),
-  location: 10012,
+  zip: 10012,
   orientation: "straight",
   gender: "male",
 })
@@ -51,7 +51,7 @@ pizza = User.create!({
   username: "pizza",
   password: "okcatfish",
   birthdate: DateTime.new(1994,3,18),
-  location: 10014,
+  zip: 10014,
   orientation: "lesbian",
   gender: "female",
 })

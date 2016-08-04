@@ -19,10 +19,11 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(
       :password,
       :username,
-      :location,
+      :zip,
       :birthdate,
       :gender,
-      :orientation
+      :orientation,
+      :location
     )
   end
 
