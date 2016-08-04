@@ -10,7 +10,7 @@ const ProfileHeader = React.createClass({
         </div>
         <div className="profile-vitals">
           <h1>{this.props.user.username}</h1>
-          <h2>{this.props.user.age} &#8729; {this.props.user.gender} &#8729; {this.props.user.location}</h2>
+          <h2>{this.props.user.age} &#8729; {this.props.user.gender} &#8729; {this.props.user.loc_desc}</h2>
         </div>
       </div>
     );

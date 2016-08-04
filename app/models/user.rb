@@ -18,7 +18,7 @@
 
 class User < ActiveRecord::Base
   validates :username, :session_token, presence: true, uniqueness: true
-  validates :password_digest, presence: true
+  validates :password_digest, :lat, :lng, :loc_desc, presence: true
   validates :username, length: { maximum: 20, minimum: 4 }
   validates :password, length: { minimum: 6, allow_nil: true }
 
@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   after_initialize :default_looking_for_ages
+  after_initialize :ensure_lat_lng_loc_desc
   after_create :create_profile_text
 
   has_one(:profile_text)
@@ -109,6 +110,17 @@ class User < ActiveRecord::Base
 
   def prof_pic
     self.photos.first || { url: "http://www.ogubin.com/images/empty_profile2.png" }
+  end
+
+  def ensure_lat_lng_loc_desc
+    response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{self.location}&sensor=true")
+    body_json = JSON.parse response.body
+
+    self.loc_desc = body_json["results"][0]["address_components"][1]["short_name"]
+    self.loc_desc += ", " + body_json["results"][0]["address_components"][4]["short_name"]
+    self.lat = body_json["results"][0]["geometry"]["location"]["lat"]
+    self.lng = body_json["results"][0]["geometry"]["location"]["lat"]
+
   end
 
 

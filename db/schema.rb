@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803183434) do
+ActiveRecord::Schema.define(version: 20160804155225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,11 +62,16 @@ ActiveRecord::Schema.define(version: 20160803183434) do
     t.integer  "lf_top_age",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "loc_desc",        null: false
+    t.float    "lat",             null: false
+    t.float    "lng",             null: false
   end
 
   add_index "users", ["gender"], name: "index_users_on_gender", using: :btree
+  add_index "users", ["lat"], name: "index_users_on_lat", using: :btree
   add_index "users", ["lf_bottom_age"], name: "index_users_on_lf_bottom_age", using: :btree
   add_index "users", ["lf_top_age"], name: "index_users_on_lf_top_age", using: :btree
+  add_index "users", ["lng"], name: "index_users_on_lng", using: :btree
   add_index "users", ["location"], name: "index_users_on_location", using: :btree
   add_index "users", ["orientation"], name: "index_users_on_orientation", using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
