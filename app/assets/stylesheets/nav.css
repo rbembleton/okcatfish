@@ -42,5 +42,9 @@
 
 .main-page {
   background-color: #104DA1;
-  height: 1000px;
+  padding-bottom: 100px;
+}
+
+.blue-bkg {
+  background-color: #104DA1;
 }

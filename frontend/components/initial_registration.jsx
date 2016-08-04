@@ -5,6 +5,7 @@ const hashHistory = require('react-router').hashHistory;
 const AuthFormConstants = require('../constants/auth_form_constants');
 const SignUpForm = require('./sign_up_form');
 const ErrorStore = require('../stores/error_store');
+const ProfileConstants = require('../constants/profile_constants');
 
 const InitialRegistration = React.createClass({
 
@@ -42,10 +43,10 @@ const InitialRegistration = React.createClass({
     e.preventDefault();
     let orientation;
     if (this.state.lookingForGenders === "both"){ orientation = "bisexual";
-  } else if (this.state.lookingForGenders === "men") {
+    } else if (this.state.lookingForGenders === "men") {
         if (this.state.gender === "male") { orientation = "gay"; }
         else if (this.state.gender === "female") { orientation = "straight"; }
-    } else if (this.state.lookingForGenders === "female") {
+    } else if (this.state.lookingForGenders === "women") {
         if (this.state.gender === "male") { orientation = "straight"; }
         else if (this.state.gender === "female") { orientation = "lesbian"; }
     }
@@ -94,19 +95,10 @@ const InitialRegistration = React.createClass({
   render () {
 
     let formToDisplay;
-    let daysDDown = [];
-    let monthsDDown = ["January","February","March","April","May","June","July",
-  "August","September","October","November","December"];
-    let yearsDDown = [];
 
-    for (var i = 1; i <= 31; i++) {
-      daysDDown.push(i);
-    }
-
-    for (var j = 1998; j >= 1900; j--) {
-      yearsDDown.push(j);
-    }
-
+    const daysDDown = ProfileConstants.DATE_DAYS;
+    const monthsDDown = ProfileConstants.DATE_MONTHS;
+    const yearsDDown = ProfileConstants.DATE_YEARS;
 
     if (this.state.regStage === 0) {
       formToDisplay = (

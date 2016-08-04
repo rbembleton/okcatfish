@@ -70,22 +70,45 @@ h3 {
   font-weight: 600;
   color: #2662b6;
   font-size: 19px;
+  margin-top: 0px;
 }
 
-.profile-text>p {
+.profile-text>div>p {
   font-weight: 200;
   color: black;
   font-size: 16px;
   margin-bottom: 40px;
 }
 
+.profile-text>div>h3>input {
+  background: transparent;
+  color: #29d58f;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  font-weight: 300;
+  width: 40px;
+  height: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 16px;
+  margin-left: 10px;
+  padding: 3px;
+}
+
 .profile-looking-for {
   display: inline-block;
   right: 0px;
-  width: 200px;
+  width: 158px;
   vertical-align: top;
   text-align: left;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  padding: 20px;
+  border-radius: 10px;
 }
+
 
 .profile-looking-for>ul>li {
   list-style-type: circle;

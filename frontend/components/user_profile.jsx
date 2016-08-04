@@ -1,6 +1,7 @@
 const React = require('react');
 const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
+const ProfileConstants = require('../constants/profile_constants');
 
 const UserProfile = React.createClass({
 
@@ -19,8 +20,31 @@ const UserProfile = React.createClass({
 
   },
 
+  editText (e) {
+    e.preventDefault();
+    const toEdit = e.currentTarget.dataset.type;
+    debugger
+  },
+
   render () {
     let currUser = SessionStore.currentUser() || {};
+
+    const profileTexts = [];
+    Object.keys(ProfileConstants.PROFILE_TEXTS).forEach((el, i) => {
+      profileTexts.push(
+        <div key={i}>
+          <h3>{ProfileConstants.PROFILE_TEXTS[el]}
+            <input type="button" data-type={el} value="edit" onClick={this.editText}/>
+          </h3>
+          {(currUser.profile_text[el]) ? <p>{currUser.profile_text[el]}</p> : <p></p>}
+        </div>
+      );
+    });
+
+    // <h3>About Me</h3>
+    // <p>{currUser.profile_text.about || ""}</p>
+    // <h3>Things I Do</h3>
+    // <p>{currUser.profile_text.doing || ""}</p>
 
     return (
       <div className="profile-container">
@@ -35,10 +59,7 @@ const UserProfile = React.createClass({
         </div>
         <div className="profile-main">
           <div className="profile-text">
-            <h3>About Me</h3>
-            <p>{currUser.profile_text.about || ""}</p>
-            <h3>What I&apos;m Doinnnn</h3>
-            <p>{currUser.profile_text.doing || ""}</p>
+            {profileTexts}
           </div>
           <div className="profile-looking-for">
             <h3>Looking for</h3>

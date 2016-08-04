@@ -7,10 +7,12 @@ const Landing = React.createClass({
 
 
   componentDidMount () {
+    $(document.body).addClass("blue-bkg");
     this.seshListener = SessionStore.addListener(this.checkLogOut);
   },
 
   componentWillUnmount () {
+    $(document.body).removeClass("blue-bkg");
     this.seshListener.remove();
   },
 
@@ -33,6 +35,9 @@ const Landing = React.createClass({
             <img src={window.okclogo}/>
           </div>
           <div className="nav-right">
+            <div className="mini-pic-container">
+              <img src={SessionStore.currentUser().prof_pic.url}/>
+            </div>
             <input className="log-out-button" type="button" onClick={this.logOutClick} value="Log Out"/>
           </div>
         </nav>
