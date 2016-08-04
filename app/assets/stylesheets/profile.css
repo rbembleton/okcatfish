@@ -114,3 +114,13 @@ h3 {
   list-style-type: circle;
   margin-left: 20px;
 }
+
+.profile-edit-textarea {
+  width: 560px;
+  height: auto;
+  margin-bottom: 40px;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  padding: 10px;
+
+}
