@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
   end
 
   def prof_pic
-    self.photos.first
+    self.photos.first || { url: "http://www.ogubin.com/images/empty_profile2.png" }
   end
 
 

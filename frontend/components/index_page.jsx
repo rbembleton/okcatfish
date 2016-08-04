@@ -1,9 +1,9 @@
 const React = require('react');
-const SignUpForm = require('./sign_up_form');
 const LogInForm = require('./log_in_form');
 const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 const hashHistory = require('react-router').hashHistory;
+const InitialRegistration = require('./initial_registration');
 
 const IndexPage = React.createClass({
 
@@ -61,7 +61,7 @@ const IndexPage = React.createClass({
                 <br/>{"on a social networking site for fraudulent or deceptive purposes"}
               </div>
             </div>
-            {this.state.form === "signup" ? <SignUpForm/> : <LogInForm /> }
+            {this.state.form === "signup" ? <InitialRegistration/> : <LogInForm /> }
           </div>
         </div>
         <div className="sign-up-baity">

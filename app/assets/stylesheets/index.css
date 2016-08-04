@@ -37,6 +37,8 @@
 .sign-up-form {
   height: 230px;
   padding: 20px 0px 0px 0px;
+  color: white;
+  font-size: 20px;
 }
 
 .sign-up-baity {
@@ -44,7 +46,9 @@
 }
 
 .sign-up-form>form>input[type="text"],
-.sign-up-form>form>input[type="password"] {
+.sign-up-form>form>input[type="password"],
+.sign-up-form>form>select,
+.sign-up-form>form>select>option {
   background-color: #3260c7;
   color: white;
   font-family: 'Open Sans', sans-serif;
@@ -55,6 +59,32 @@
   margin: 20px;
   border: 0px;
   text-align: left;
+}
+
+.input-gender {
+  width: 100px !important;
+}
+
+.input-zip {
+  width: 70px !important;
+}
+
+.bday-day {
+  width: 50px !important;
+  margin-right: 0px !important;
+}
+
+.bday-month {
+  width: 120px !important;
+  margin-right: 0px !important;
+}
+
+.bday-year {
+  width: 90px !important;
+}
+
+.ddown {
+  height: 60px !important;
 }
 
 .errors {

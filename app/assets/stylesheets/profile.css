@@ -5,6 +5,7 @@
   padding: 40px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: .5px .8px 1px #07408d;
 }
 
 .profile-vitals>h1 {
@@ -26,6 +27,7 @@
   margin: 10px;
   display: inline-block;
   float: left;
+  background-color: #104DA1;
 }
 
 .profile-pic-container>img {

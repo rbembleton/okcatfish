@@ -29,7 +29,7 @@ const SignUpForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    SessionActions.signUp(this.state);
+    SessionActions.signUp(Object.assign(Object.assign({}, this.state), this.props.regData));
     this.setState({username: "", password: ""});
   },
 
@@ -44,8 +44,9 @@ const SignUpForm = React.createClass({
   },
 
   render () {
+
     return (
-      <div className="sign-up-form">
+
         <form onSubmit={this.handleSubmit}>
           <input
             className="input-text"
@@ -69,8 +70,7 @@ const SignUpForm = React.createClass({
             value="Register"
           />
         </form>
-        {this.state.errors.length > 0 ? <div className="errors">{this.state.errors.join('. ')+"!"}</div>  : ""}
-      </div>
+
     );
   }
 
