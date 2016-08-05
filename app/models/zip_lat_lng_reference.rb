@@ -12,6 +12,14 @@
 class ZipLatLngReference < ActiveRecord::Base
   validates :zip_code, :lat, :lng, :description, presence: true
 
+  has_many(
+    :users,
+    class_name: "User",
+    foreign_key: :location_id,
+    primary_key: :id
+  )
+
+
   def self.get_locality(contents)
     contents.each do |content|
       if content["types"].include?("locality") || content["types"].include?("sublocality")

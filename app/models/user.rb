@@ -65,6 +65,13 @@ class User < ActiveRecord::Base
     source: :photo_repo_pic
   )
 
+  belongs_to(
+    :location,
+    class_name: "ZipLatLngReference",
+    foreign_key: :location_id,
+    primary_key: :id
+  )
+
   def self.find_by_looking_for(gender, orientation)
     if gender == "female"
       if orientation == "lesbian"
@@ -170,7 +177,6 @@ class User < ActiveRecord::Base
   # end
 
   def zip=(zip)
-    self.location = zip
     if zip.to_s.length == 5
       @zllr = ZipLatLngReference.find_by(zip_code: zip)
 
@@ -178,11 +184,21 @@ class User < ActiveRecord::Base
         @zllr = ZipLatLngReference.create_with_zip(zip)
       end
 
-      self.lat = @zllr.lat
-      self.lng = @zllr.lng
-      self.loc_desc = @zllr.description
+      self.location_id = @zllr.id
     end
 
+  end
+
+  def lat
+    self.location.lat
+  end
+
+  def lng
+    self.location.lat
+  end
+
+  def loc_desc
+    self.location.description
   end
 
 
