@@ -31,7 +31,13 @@ const BrowseMatches = React.createClass({
     e.preventDefault();
     const currentUser = SessionStore.currentUser();
     const userLocation = {lat: currentUser.lat, lng: currentUser.lng};
-    SearchActions.getMatches({user_id:currentUser.id, location: userLocation, distance: this.state.distance});
+    SearchActions.getMatches({
+      user_id: currentUser.id,
+      location: userLocation,
+      distance: this.state.distance,
+      looking_for: currentUser.gender,
+      orientation: currentUser.orientation
+    });
   },
 
   render () {

@@ -9,13 +9,13 @@
 OKCatfish is a web application inspired by OKCupid that will be built using Ruby on Rails and React.js. By the end of Week 9, this app will, at the very least, satisfy the following criteria:
 
 - [x] Hosting on Heroku
-- [ ] New user creation, login, and demo login
+- [x] New user creation, login, and demo login
 - [ ] A production README, replacing this README
-- [ ] Profile CRUD, Match Search by location and "looking for"
-  - [ ] Smooth, bug-free navigation
+- [x] Profile CRUD, Match Search by location and "looking for"
+  - [x] Smooth, bug-free navigation
   - [ ] "Celebrity" photo repositories
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Elegant, Simple, and Clear CSS styling
+  - [x] Adequate seed data to demonstrate the site's features
+  - [x] Elegant, Simple, and Clear CSS styling
 - [ ] Messaging and Likes
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features

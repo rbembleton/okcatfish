@@ -65,6 +65,35 @@ class User < ActiveRecord::Base
     source: :photo_repo_pic
   )
 
+  def self.find_by_looking_for(gender, orientation)
+    if gender == "female"
+      if orientation == "lesbian"
+        User.where(gender: "female", orientation: ["bisexual","lesbian"])
+      elsif orientation == "straight"
+        User.where(gender: "male", orientation: ["straight", "bisexual"])
+      elsif orientation == "bisexual"
+        User.where(
+          "(gender = ? AND orientation IN (?,?)) OR
+          (gender = ? AND orientation IN (?,?))",
+          'female', 'lesbian', 'bisexual',
+          'male', 'straight', 'bisexual')
+      end
+    elsif gender == "male"
+      if orientation == "gay"
+        User.where(gender: "male", orientation: ["bisexual", "gay"])
+      elsif orientation == "straight"
+        User.where(gender: "female", orientation: ["straight", "bisexual"])
+      elsif orientation == "bisexual"
+        User.where(
+          "(gender = ? AND orientation IN (?,?)) OR
+          (gender = ? AND orientation IN (?,?))",
+          'male', 'gay', 'bisexual',
+          'female', 'straight', 'bisexual')
+      end
+    end
+  end
+
+
 ### AUTH VVV
 
     def self.generate_session_token

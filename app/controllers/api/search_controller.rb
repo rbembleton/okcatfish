@@ -1,13 +1,20 @@
 class Api::SearchController < ApplicationController
 
   def index
+
+    @users = User.find_by_looking_for(
+      search_params[:looking_for],
+      search_params[:orientation]
+    )
+
+
     if search_params[:distance]!="none"
-      @users = User.within(
+      @users = @users.within(
         search_params[:distance],
         origin: [search_params[:location][:lat], search_params[:location][:lng]]
       ).where.not(id: search_params[:user_id])
     else
-      @users = User.where.not(id: search_params[:user_id])
+      @users = @users.where.not(id: search_params[:user_id])
     end
 
     if @users
@@ -21,7 +28,13 @@ class Api::SearchController < ApplicationController
   private
 
   def search_params
-    params.require(:search).permit(:user_id, :distance, {location: [:lat, :lng]})
+    params.require(:search).permit(
+      :user_id,
+      :distance,
+      {location: [:lat, :lng]},
+      :looking_for,
+      :orientation
+    )
   end
 
 end
