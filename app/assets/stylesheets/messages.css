@@ -1,0 +1,94 @@
+.messages-container {
+  width: 800px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 40px 40px 100px 40px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: .5px .8px 1px #07408d;
+}
+
+.inbox-thread {
+  width: 740px;
+  height: 54px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: left;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.inbox-label {
+  font-weight: 600;
+  color: #2662b6;
+  font-size: 19px;
+  margin: 0px 20px 20px 20px;
+}
+
+.inbox-mini-pic-container>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inbox-mini-pic-container {
+  height: 50px;
+  width: 50px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0px 14px 0px 10px;
+  display: inline-block;
+  float: left;
+  background-color: #104DA1;
+  border: .5px solid;
+  border-color: #6391f3;
+}
+
+.inbox-thread-preview {
+  height: 100%;
+  width: 460px;
+  font-size: 17px;
+  overflow: hidden;
+  display:inline-block;
+  float: left
+}
+
+.inbox-thread-preview>em {
+  margin-right: 5px;
+}
+.inbox-thread-preview>strong {
+  color: #29d58f;
+  font-weight: 400;
+  font-size: 20px;
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.inbox-time-sent {
+  float: right;
+  bottom: 0;
+  display: inline-block;
+  width: 190px;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 24px;
+  font-size: 18px;
+
+
+}
+
+.thread-new-message-form {
+  width: 740px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: left;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  padding: 10px;
+  border-radius: 10px;
+}

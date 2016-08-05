@@ -32,6 +32,11 @@ const Landing = React.createClass({
     hashHistory.push('home/browse');
   },
 
+  inboxClick (e) {
+    e.preventDefault();
+    hashHistory.push('home/messages/inbox');
+  },
+
   profileClick (e) {
     e.preventDefault();
     hashHistory.push('home/user');
@@ -46,6 +51,7 @@ const Landing = React.createClass({
             <input className="browse-button" type="button" onClick={this.browseClick} value="Browse"/>
           </div>
           <div className="nav-right">
+            <input className="log-out-button" type="button" onClick={this.inboxClick} value="Inbox"/>
             <div className="mini-pic-container">
               <img src={SessionStore.currentUser().prof_pic.url} onClick={this.profileClick}/>
             </div>

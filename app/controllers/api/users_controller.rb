@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
       sign_in(@user)
       render :show
     else
-      [:lat, :lng, :loc_desc].each { |sym| @user.errors.delete(sym) }
+      [:lat, :lng].each { |sym| @user.errors.delete(sym) }
       render json:  @user.errors.full_messages, status: 422
     end
 

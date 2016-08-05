@@ -11,17 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805140356) do
+ActiveRecord::Schema.define(version: 20160805150218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "messages", force: :cascade do |t|
-    t.integer  "thread_id",               null: false
-    t.integer  "author_id",               null: false
-    t.text     "body",       default: "", null: false
+  create_table "message_threads", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "thread_id",                  null: false
+    t.integer  "author_id",                  null: false
+    t.text     "body",       default: "",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_read",    default: false, null: false
   end
 
   add_index "messages", ["author_id"], name: "index_messages_on_author_id", using: :btree
@@ -61,21 +67,18 @@ ActiveRecord::Schema.define(version: 20160805140356) do
 
   add_index "profile_texts", ["user_id"], name: "index_profile_texts_on_user_id", unique: true, using: :btree
 
-  create_table "threads", force: :cascade do |t|
-    t.integer  "user1_id",   null: false
-    t.integer  "user2_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "thread_user_links", force: :cascade do |t|
+    t.integer "user_id",   null: false
+    t.integer "thread_id", null: false
   end
 
-  add_index "threads", ["user1_id"], name: "index_threads_on_user1_id", using: :btree
-  add_index "threads", ["user2_id"], name: "index_threads_on_user2_id", using: :btree
+  add_index "thread_user_links", ["thread_id"], name: "index_thread_user_links_on_thread_id", using: :btree
+  add_index "thread_user_links", ["user_id"], name: "index_thread_user_links_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
     t.string   "password_digest", null: false
     t.string   "session_token",   null: false
-    t.integer  "location",        null: false
     t.datetime "birthdate",       null: false
     t.string   "orientation",     null: false
     t.string   "gender",          null: false
@@ -83,10 +86,9 @@ ActiveRecord::Schema.define(version: 20160805140356) do
     t.integer  "lf_top_age",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "loc_desc",        null: false
+    t.integer  "location_id",     null: false
     t.float    "lat",             null: false
     t.float    "lng",             null: false
-    t.integer  "location_id",     null: false
   end
 
   add_index "users", ["gender"], name: "index_users_on_gender", using: :btree
@@ -94,7 +96,6 @@ ActiveRecord::Schema.define(version: 20160805140356) do
   add_index "users", ["lf_bottom_age"], name: "index_users_on_lf_bottom_age", using: :btree
   add_index "users", ["lf_top_age"], name: "index_users_on_lf_top_age", using: :btree
   add_index "users", ["lng"], name: "index_users_on_lng", using: :btree
-  add_index "users", ["location"], name: "index_users_on_location", using: :btree
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["orientation"], name: "index_users_on_orientation", using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree

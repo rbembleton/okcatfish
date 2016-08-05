@@ -88,6 +88,16 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     msg_me_if: Faker::Hipster.paragraph,
   })
 
+  if rand(3) == 0
+    mt = MessageThread.new_from_user_ids(u1.id, demo.id)
+    1.upto(rand(12)) do
+      mt.new_message({
+        body: Faker::Hipster.sentence,
+        author_id: [u1.id, demo.id, demo.id].sample
+      })
+    end
+  end
+
 end
 
 

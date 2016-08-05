@@ -6,7 +6,6 @@
 #  username        :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
-#  location        :integer          not null
 #  birthdate       :datetime         not null
 #  orientation     :string           not null
 #  gender          :string           not null
@@ -14,7 +13,7 @@
 #  lf_top_age      :integer          not null
 #  created_at      :datetime
 #  updated_at      :datetime
-#  loc_desc        :string           not null
+#  location_id     :integer          not null
 #  lat             :float            not null
 #  lng             :float            not null
 #
@@ -25,17 +24,14 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :username, length: { maximum: 16, minimum: 4 }
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates :location, length: { is: 5 }
 
-  validates :location,
-    :birthdate,
+  validates :birthdate,
     :orientation,
     :gender,
     :lf_bottom_age,
     :lf_top_age,
     :lat,
     :lng,
-    :loc_desc,
     presence: true
 
   # geo kit gem
@@ -55,6 +51,9 @@ class User < ActiveRecord::Base
   after_initialize :default_looking_for_ages
   after_create :create_profile_text
 
+
+### ASSOCIATIONS
+
   has_one(:profile_text)
 
   has_many(:photo_album_links)
@@ -71,6 +70,27 @@ class User < ActiveRecord::Base
     foreign_key: :location_id,
     primary_key: :id
   )
+
+  has_many(
+    :thread_user_links,
+    class_name: "ThreadUserLink",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :threads,
+    through: :thread_user_links,
+    source: :thread
+  )
+
+  has_many(
+    :messages,
+    through: :threads,
+    source: :messages
+  )
+
+### CUSTOM QUERIES
 
   def self.find_by_looking_for(gender, orientation)
     if gender == "female"
@@ -101,42 +121,41 @@ class User < ActiveRecord::Base
   end
 
 
-### AUTH VVV
+### AUTH
 
-    def self.generate_session_token
-      token = SecureRandom.urlsafe_base64(16)
-        while User.exists?(session_token: token)
-          token = SecureRandom.urlsafe_base64(16)
-        end
-      token
-    end
+  def self.generate_session_token
+    token = SecureRandom.urlsafe_base64(16)
+      while User.exists?(session_token: token)
+        token = SecureRandom.urlsafe_base64(16)
+      end
+    token
+  end
 
-    def self.find_by_credentials(credentials)
-      user = User.find_by(username: credentials[:username])
-      return user if user && user.valid_password?(credentials[:password])
-    end
+  def self.find_by_credentials(credentials)
+    user = User.find_by(username: credentials[:username])
+    return user if user && user.valid_password?(credentials[:password])
+  end
 
-    def ensure_session_token
-      self.session_token ||= User.generate_session_token
-    end
+  def ensure_session_token
+    self.session_token ||= User.generate_session_token
+  end
 
-    def reset_session_token!
-      self.session_token = User.generate_session_token
-      self.save!
-      self.session_token
-    end
+  def reset_session_token!
+    self.session_token = User.generate_session_token
+    self.save!
+    self.session_token
+  end
 
-    def password=(password)
-      @password = password
-      self.password_digest = BCrypt::Password.create(password)
-    end
+  def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
+  end
 
-    def valid_password?(password)
-      BCrypt::Password.new(self.password_digest).is_password?(password)
-    end
+  def valid_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
 
-### AUTH ^^^
-
+## AGE
 
   def default_looking_for_ages
     return nil unless birthdate
@@ -145,36 +164,35 @@ class User < ActiveRecord::Base
     self.lf_top_age = self.age * 6/5
   end
 
+
   def age
     return nil unless birthdate
     now = Time.now.utc.to_date
     now.year - self.birthdate.year - (self.birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
   end
 
+
+## PROFILE TEXT
+
   def create_profile_text
     ProfileText.create!({ user_id: self.id })
   end
+
+
+
+## PROFILE PHOTOS
 
   def photos
     self.repo_photos
   end
 
   def prof_pic
-    # self.photos.first || { url: "http://www.ogubin.com/images/empty_profile2.png" }
     self.photos.first #|| image_url "empty_profile.png"
   end
 
 
-  # def set_lat_lng_loc_desc(zip)
-  #   response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{zip}&sensor=true")
-  #   body_json = (JSON.parse response.body)["results"][0]
-  #
-  #   self.loc_desc = get_locality(body_json["address_components"])
-  #   self.loc_desc += ", " + get_state(body_json["address_components"])
-  #   self.lat = body_json["geometry"]["location"]["lat"]
-  #   self.lng = body_json["geometry"]["location"]["lng"]
-  #
-  # end
+
+## LOCATION
 
   def zip=(zip)
     if zip.to_s.length == 5
@@ -185,16 +203,9 @@ class User < ActiveRecord::Base
       end
 
       self.location_id = @zllr.id
+      self.lat = @zllr.lat
+      self.lng = @zllr.lng
     end
-
-  end
-
-  def lat
-    self.location.lat
-  end
-
-  def lng
-    self.location.lat
   end
 
   def loc_desc

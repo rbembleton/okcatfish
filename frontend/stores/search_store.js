@@ -15,7 +15,7 @@ function resetMatches(users) {
 
 SearchStore.all = function () {
   return Object.keys(_matches).map((userId) => {
-    return _matches[userId];
+    return Object.assign({}, _matches[userId]);
   });
 };
 

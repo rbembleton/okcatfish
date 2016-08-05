@@ -7,6 +7,10 @@ const SessionStore = require('./stores/session_store');
 const Landing = require('./components/landing');
 const BrowseMatches = require('./components/browse_matches');
 const MatchProfile = require('./components/profile/match_profile');
+const MessagesMain = require('./components/messages/messages_main');
+const Inbox = require('./components/messages/inbox');
+window.MessagesApiUtil = require('./util/messages_api_util');
+const ThreadShow = require('./components/messages/thread_show');
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
@@ -36,6 +40,10 @@ const router = (
         <Route path="user" component={UserProfile}/>
         <Route path="browse" component={BrowseMatches}/>
         <Route path="match/:userId" component={MatchProfile}/>
+        <Route path="messages" component={MessagesMain}>
+          <Route path="inbox" component={Inbox}/>
+          <Route path=":threadId" component={ThreadShow}/>
+        </Route>
       </Route>
     </Route>
   </Router>

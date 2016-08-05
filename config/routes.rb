@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :profile_texts, only: [:update]
     resource :session, only: [:create, :destroy]
     resources :search, only: [:index]
+    resources :messages, only: [:index, :show, :create]
   end
 end
