@@ -56,6 +56,40 @@ pizza = User.create!({
   gender: "female",
 })
 
+zip_codes = (10001..10014).to_a + (10016..10041).to_a
+go_combos = {"male" => ["straight", "gay", "bisexual"],
+  "female" => ["straight", "lesbian", "bisexual"]};
+
+50.times do
+  rand(2) == 1 ? gend = "male" : gend = "female"
+  ori = go_combos[gend][rand(3)];
+
+  uname = Faker::Internet.user_name
+  while uname.length < 4 || uname.length > 16 do
+    uname = Faker::Internet.user_name
+  end
+
+  u1 = User.create!({
+    username: uname,
+    password: "okcatfish",
+    birthdate: Faker::Date.between(18.years.ago, 40.years.ago),
+    zip: zip_codes[rand(39)],
+    orientation: ori,
+    gender: gend,
+  })
+
+  u1.profile_text.update!({
+    about: Faker::Hipster.paragraph,
+    doing: Faker::Hipster.paragraph,
+    faves: "Book: #{Faker::Book.title}, Beer: #{Faker::Beer.name}",
+    things: Faker::Hipster.words(3).join(", "),
+    think: Faker::Hipster.paragraph,
+    sat_night: Faker::Hipster.paragraph,
+    msg_me_if: Faker::Hipster.paragraph,
+  })
+
+end
+
 
 
 # ---------------------------------------------------

@@ -91,6 +91,8 @@
 .errors {
   color: #ff75a6;
   font-size: 17px;
+  width: 600px;
+  margin: auto;
 }
 
 .new-user-button {

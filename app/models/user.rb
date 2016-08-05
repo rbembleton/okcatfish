@@ -22,9 +22,10 @@
 class User < ActiveRecord::Base
 
   validates :username, :session_token, presence: true, uniqueness: true
-  validates :password_digest, :lat, :lng, :loc_desc, presence: true
-  validates :username, length: { maximum: 20, minimum: 4 }
+  validates :password_digest, presence: true
+  validates :username, length: { maximum: 16, minimum: 4 }
   validates :password, length: { minimum: 6, allow_nil: true }
+  validates :location, length: { is: 5 }
 
   validates :location,
     :birthdate,
@@ -32,6 +33,9 @@ class User < ActiveRecord::Base
     :gender,
     :lf_bottom_age,
     :lf_top_age,
+    :lat,
+    :lng,
+    :loc_desc,
     presence: true
 
   # geo kit gem
@@ -45,6 +49,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :orientation, in: %w(straight gay lesbian bisexual)
 
   attr_reader :password
+
   after_initialize :ensure_session_token
 
   after_initialize :default_looking_for_ages
@@ -124,39 +129,35 @@ class User < ActiveRecord::Base
   end
 
 
-  def set_lat_lng_loc_desc(zip)
-    response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{zip}&sensor=true")
-    body_json = (JSON.parse response.body)["results"][0]
-
-    self.loc_desc = get_locality(body_json["address_components"])
-    self.loc_desc += ", " + get_state(body_json["address_components"])
-    self.lat = body_json["geometry"]["location"]["lat"]
-    self.lng = body_json["geometry"]["location"]["lng"]
-
-  end
+  # def set_lat_lng_loc_desc(zip)
+  #   response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{zip}&sensor=true")
+  #   body_json = (JSON.parse response.body)["results"][0]
+  #
+  #   self.loc_desc = get_locality(body_json["address_components"])
+  #   self.loc_desc += ", " + get_state(body_json["address_components"])
+  #   self.lat = body_json["geometry"]["location"]["lat"]
+  #   self.lng = body_json["geometry"]["location"]["lng"]
+  #
+  # end
 
   def zip=(zip)
-    self.location = zip unless self.location == zip
-    set_lat_lng_loc_desc(zip)
-  end
+    self.location = zip
+    if zip.to_s.length == 5
+      @zllr = ZipLatLngReference.find_by(zip_code: zip)
 
-
-  def get_locality(contents)
-    contents.each do |content|
-      if content["types"].include?("locality") || content["types"].include?("sublocality")
-        return content["short_name"]
+      unless @zllr
+        @zllr = ZipLatLngReference.create_with_zip(zip)
       end
+
+      self.lat = @zllr.lat
+      self.lng = @zllr.lng
+      self.loc_desc = @zllr.description
     end
+
   end
 
-  def get_state(contents)
-    contents.each do |content|
-      if content["types"].include?("administrative_area_level_1") ||
-        content["types"].include?("country")
-        return content["short_name"]
-      end
-    end
-  end
+
+
 
 
 

@@ -7,8 +7,8 @@ module.exports = {
       success (resp) {
         successCallback(resp);
       },
-      error (resp, form) {
-        errorCallback(resp.responseJSON);
+      error (resp) {
+        errorCallback(resp.responseJSON, form);
       }
     });
   },
@@ -21,8 +21,8 @@ module.exports = {
       success (resp) {
         successCallback(resp);
       },
-      error (resp, form) {
-        errorCallback(resp.responseJSON);
+      error (resp) {
+        errorCallback(resp.responseJSON, form) ;
       }
     });
   },
@@ -36,7 +36,7 @@ module.exports = {
         successCallback(resp);
       },
       error (resp, form) {
-        errorCallback(resp.responseJSON);
+        errorCallback(resp.responseJSON, form);
       }
     });
   },

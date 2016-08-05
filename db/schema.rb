@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804155225) do
+ActiveRecord::Schema.define(version: 20160805035114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,5 +76,12 @@ ActiveRecord::Schema.define(version: 20160804155225) do
   add_index "users", ["orientation"], name: "index_users_on_orientation", using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "zip_lat_lng_references", force: :cascade do |t|
+    t.integer "zip_code",    null: false
+    t.float   "lat",         null: false
+    t.float   "lng",         null: false
+    t.string  "description", null: false
+  end
 
 end

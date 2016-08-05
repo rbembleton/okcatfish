@@ -26,6 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Added specific to this site
 gem 'rest-client'
 gem 'geokit-rails'
+gem 'faker'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
