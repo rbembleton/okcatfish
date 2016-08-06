@@ -16,17 +16,21 @@ const ThreadShow = React.createClass({
   componentDidMount() {
     this.threadListener = MessagesStore.addListener(this.updateThread);
     MessagesActions.getSingleThread(this.props.params.threadId);
+    this.messageGetTimer = setInterval(this.messageGet, 10000);
+  },
+
+  messageGet() {
+    MessagesActions.getSingleThread(this.props.params.threadId);
   },
 
   componentWillUnmount() {
     this.threadListener.remove();
+    clearInterval(this.messageGetTimer);
   },
 
   updateThread() {
     this.setState({thread: MessagesStore.currentThread() || {}});
   },
-
-
 
   render () {
     const currentUser = SessionStore.currentUser();
