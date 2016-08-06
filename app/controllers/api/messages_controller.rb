@@ -1,15 +1,14 @@
 class Api::MessagesController < ApplicationController
 
   def index
-    MessageThread.uncached do
+    # MessageThread.uncached do
     #   Message.uncached do
+
       @threads = MessageThread.
         find_by_user_id(message_user_params[:user_id]).
-        order(:updated_at).
-        includes(:messages)
-    #   end
-    end
-
+        order(updated_at: :desc)
+      # end
+    # end
     if @threads
       render :index
     else

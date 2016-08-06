@@ -3,15 +3,12 @@ const Store = require('flux/utils').Store;
 const AppDispatcher = require('../dispatcher/dispatcher');
 const MessagesConstants = require('../constants/messages_constants');
 
-let _threads = {};
+let _threads = [];
 let _thread = {};
 const MessagesStore = new Store(AppDispatcher);
 
 function resetThreads(threads) {
-  _threads = {};
-  threads.forEach((thread) => {
-    _threads[thread.id] = thread;
-  });
+  _threads = threads;
 }
 
 function resetThread(thread) {
@@ -24,8 +21,8 @@ function addMessage(message) {
 }
 
 MessagesStore.allThreads = function () {
-  return Object.keys(_threads).map((threadId) => {
-    return Object.assign({}, _threads[threadId]);
+  return _threads.map((thread) => {
+    return Object.assign({}, thread);
   });
 };
 

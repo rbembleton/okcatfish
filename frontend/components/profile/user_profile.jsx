@@ -6,11 +6,15 @@ const ProfileConstants = require('../../constants/profile_constants');
 const UserProfileText = require('./user_profile_text');
 const LookingFor = require('./looking_for');
 const ProfileHeader = require('./profile_header');
+const NewPhotoForm = require('../photos/new_photo_form');
 
 const UserProfile = React.createClass({
 
   componentDidMount() {
     MessagesActions.getAllThreads(SessionStore.currentUser().id); // optimize thread loading
+  },
+
+  componentWillUnmount() {
   },
 
   render () {
@@ -30,6 +34,7 @@ const UserProfile = React.createClass({
     return (
       <div className="profile-container">
         <ProfileHeader user={currentUser}/>
+        <NewPhotoForm />
         <div className="profile-main">
           <div className="profile-text">
             {profileTexts}

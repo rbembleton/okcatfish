@@ -180,7 +180,7 @@ class User < ActiveRecord::Base
 
   def create_profile_text
     ProfileText.create!({ user_id: self.id })
-    UserPhoto.create!({ user_id: self.id })
+    # UserPhoto.create!({ user_id: self.id })
   end
 
 
@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
 ## PROFILE PHOTOS
 
   def photos
-    # self.user_photos.to_a.map { |photo| photo.image } +
+    self.user_photos.to_a.map { |photo| photo.image } +
     self.repo_photos.to_a
   end
 
@@ -197,9 +197,9 @@ class User < ActiveRecord::Base
   end
 
   def add_pic(data)
-    up = UserPhoto.create!(user_id: self.id)
+    up = UserPhoto.new(user_id: self.id)
     up.image = data
-    up.save! if up.image.url
+    up.save! if up.image.url != "empty_profile.png"
   end
 
   def remove_pic(up_id)

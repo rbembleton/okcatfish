@@ -81,23 +81,23 @@ User can view and search for others profiles. Profiles have text, details, looki
   - [ ] `UserProfilePhotoAlbumEdit`
   - [x] `ProfileSearch`
 - [x] save Profile Information to the DB when the user saves
-- [ ] seed profiles
+- [x] seed profiles
 - [x] CSS profiles
 
 ### Phase 3: Messaging and Likes (2 days, W2 Tu 6pm)
 
 **Objective:** Users can message each other, Users can "like" each other.
 
-- [ ] create `Thread` and `Message` model
+- [x] create `Thread` and `Message` model
 - [ ] create `Like` model
 - build out API, Flux loop, and components for:
-  - [ ] Message CRUD
-  - [ ] writing messages
-  - [ ] reading messages
-  - [ ] viewing thread
+  - [x] Message CRUD
+  - [x] writing messages
+  - [x] reading messages
+  - [x] viewing thread
   - [ ] liking Users
   - [ ] unliking Users
-- [ ] Use CSS to style new components
+- [x] Use CSS to style new components
 - [ ] Seed messages and likes
 - [ ] Add automated messages if two users like each other
 

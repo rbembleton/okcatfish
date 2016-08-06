@@ -12,6 +12,17 @@ const ProfileActions = {
       actionType: ProfileConstants.UPDATE_PROFILE_TEXT,
       profileText: resp
     });
+  },
+
+  addUserPhoto(data) {
+    ProfileApiUtil.addUserPhoto(data, ProfileActions.updateUserPhotos);
+  },
+
+  updateUserPhotos(resp) {
+    AppDispatcher.dispatch({
+      actionType: ProfileConstants.UPDATE_USER_PHOTOS,
+      photos: resp
+    });
   }
 
 

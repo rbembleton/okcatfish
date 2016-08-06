@@ -8,5 +8,19 @@ module.exports = {
         successCallback(resp);
       }
     });
+  },
+
+  addUserPhoto (data, successCallback) {
+    $.ajax({
+      method: "POST",
+      url: `api/user_photos`,
+      dataType: "json",
+      contentType: false,
+      processData: false,
+      data: data,
+      success(resp) {
+        successCallback(resp);
+      }
+    })
   }
 };

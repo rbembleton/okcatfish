@@ -35,7 +35,8 @@ module.exports = {
     "sat_night": "On Saturday Night I'm Probably",
     "msg_me_if": "Message Me If"
   },
-  UPDATE_PROFILE_TEXT: "UPDATE_PROFILE_TEXT"
+  UPDATE_PROFILE_TEXT: "UPDATE_PROFILE_TEXT",
+  UPDATE_USER_PHOTOS: "UPDATE_USER_PHOTOS"
 
 
 
