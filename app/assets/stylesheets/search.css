@@ -9,7 +9,7 @@
 }
 
 .search-criteria {
-  width: 640px;
+  width: 720px;
   height: 70px;
   margin: auto;
   margin-bottom: 40px;
@@ -38,10 +38,8 @@
 .search-button {
   display: inline-block;
   float: right;
-  background: transparent;
-  color: black;
-  border: .5px solid;
-  border-color: #96e5c5;
+  background-color: #29d58f;
+  color: white;
   width: 100px;
   height: 40px;
   font-family: 'Open Sans', sans-serif;
@@ -50,6 +48,7 @@
   text-align: center;
   line-height: 40px;
   margin: 16px;
+  box-shadow: 1px 1px 2px #b1d9de;
 }
 
 .profile-search-vitals>h1 {

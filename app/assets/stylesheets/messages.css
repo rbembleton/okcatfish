@@ -76,19 +76,122 @@
   margin-right: 10px;
   margin-top: 24px;
   font-size: 18px;
-
-
 }
 
 .thread-new-message-form {
-  width: 740px;
-  height: 100px;
+  width: 780px;
+  min-height: 90px;
   margin: auto;
   margin-bottom: 10px;
+  margin-top: 30px;
   font-size: 20px;
+  border: .5px solid;
+  border-color: #dbe9fe;
+  border-radius: 10px;
+}
+
+.message-send-button {
+  display: inline-block;
+  float: right;
+  top: 0;
+  text-align: center;
+  background-color: #29d58f;
+  color: white;
+  border: 0px;
+  width: 160px;
+  height: 60px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  border-radius: 4px;
+  margin: 16px;
+}
+
+.new-message-text {
+  resize: none;
+  display: inline-block;
+  float: left;
   text-align: left;
+  font-size: 16px;
+  width: 506px;
+  height: auto;
+  min-height: 40px;
   border: .5px solid;
   border-color: #dbe9fe;
   padding: 10px;
-  border-radius: 10px;
+  margin: 10px;
+}
+
+.new-message-text:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: grey;
+  font-style: italic;
+}
+
+.thread-message {
+  display: block;
+  margin: 0px 0px 10px 0px
+}
+
+.thread-message-body {
+  display: inline-block;
+  padding: 6px;
+  border: .5px solid #d5e1ec;
+  border-radius: 12px;
+  box-shadow: 1px 1px 3px #edf0f5;
+}
+
+.t-m-left {
+  text-align: left
+}
+
+.t-m-left>.thread-message-body {
+  background-color: #29d58f
+}
+
+.t-m-right {
+  text-align: right
+}
+
+.t-m-right>.thread-message-body {
+  background-color: #eff1f3
+}
+
+.thread-profile-pic-container {
+  height: 120px;
+  width: 120px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: 10px;
+  display: inline-block;
+  float: left;
+  background-color: #104DA1;
+}
+
+.thread-profile-pic-container>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thread-profile-vitals  {
+  display: inline-block;
+  float: left;
+  margin: 40px 0px 40px 0px;
+}
+
+.thread-profile-header {
+  display: block;
+  height: 160px;
+}
+
+.thread-profile-vitals>h1 {
+  font-weight: 300;
+  font-size: 30px;
+}
+
+.thread-profile-vitals>h2 {
+  font-weight: 300;
+  font-size: 20px;
+  color: grey;
 }

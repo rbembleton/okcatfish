@@ -5,6 +5,7 @@ const LookingFor = require('./looking_for');
 const ProfileHeader = require('./profile_header');
 const SearchActions = require('../../actions/search_actions');
 const MatchProfileStore = require('../../stores/match_profile_store');
+const NewMessageForm = require('../messages/new_message_form');
 
 const MatchProfile = React.createClass({
 
@@ -44,6 +45,11 @@ const MatchProfile = React.createClass({
     const toRender = (this.state.user.id) ? (
       <div>
         <ProfileHeader user={this.state.user}/>
+        <div className="profile-new-message-form">
+          <NewMessageForm
+            recipient_id={this.state.user.id}
+          />
+        </div>
         <div className="profile-main">
           <div className="profile-text">
             {this.state.user ? this.profileTexts() : []}

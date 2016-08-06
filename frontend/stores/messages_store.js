@@ -19,7 +19,8 @@ function resetThread(thread) {
 }
 
 function addMessage(message) {
-  _thread.messages.push(message);
+  if (_thread.messages)
+    {_thread.messages.push(message);}
 }
 
 MessagesStore.allThreads = function () {

@@ -13,10 +13,10 @@ const NewMessageForm = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     MessagesActions.sendNewMessage({
-      thread_id: this.props.thread.id,
+      thread_id: this.props.thread_id || null,
       body: this.state.body,
       author_id: SessionStore.currentUser().id,
-      recipient_id: this.props.thread.other_user.id
+      recipient_id: this.props.recipient_id
     });
     this.setState({body: ""});
   },
@@ -27,19 +27,25 @@ const NewMessageForm = React.createClass({
   },
 
   render () {
+    // <div contentEditable="true"
+    //   className="new-message-text"
+    //   placeholder="...message"
+    //   name="body"
+    //   onInput={this.bodyChange}
+    //   />
 
     return (
 
         <form onSubmit={this.handleSubmit}>
           <textarea
-            className="input-text"
+            className="new-message-text"
             placeholder="...message"
             value={this.state.body}
             name="body"
             onChange={this.bodyChange}
           />
           <input
-            className="new-user-button"
+            className="message-send-button"
             type="submit"
             value="Send"
           />

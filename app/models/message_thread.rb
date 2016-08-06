@@ -73,6 +73,9 @@ class MessageThread < ActiveRecord::Base
   def new_message(options)
     # return nil unless options[:author_id] == users.first.id ||
     #   options[:author_id] == users.last.id
+    self.updated_at = Time.now
+    self.save!
+
     Message.create!({
       body: options[:body],
       author_id: options[:author_id],

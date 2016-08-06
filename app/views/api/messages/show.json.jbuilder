@@ -1,6 +1,6 @@
 other_user = @thread.users.first.id == current_user.id ? @thread.users.second : @thread.users.first
 
-json.(@thread, :id, :created_at)
+json.(@thread, :id, :created_at, :updated_at)
 
 json.messages @thread.messages do |message|
   json.(message, :body, :author_id)
@@ -9,7 +9,7 @@ json.messages @thread.messages do |message|
 end
 
 json.other_user do
-  json.(other_user, :id, :username, :loc_desc)
+  json.(other_user, :id, :username, :loc_desc, :gender, :age)
   json.prof_pic do
     if other_user.prof_pic
       json.url other_user.prof_pic.url

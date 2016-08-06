@@ -1,7 +1,7 @@
 class Api::MessagesController < ApplicationController
 
   def index
-    @threads = MessageThread.find_by_user_id(message_user_params[:user_id])
+    @threads = MessageThread.find_by_user_id(message_user_params[:user_id]).order(:updated_at)
 
     if @threads
       render :index
@@ -25,7 +25,7 @@ class Api::MessagesController < ApplicationController
 
 
   def create
-    if message_params[:thread_id]
+    if message_params[:thread_id] != ""
       @message = MessageThread.find(message_params[:thread_id]).new_message(
         body: message_params[:body],
         author_id: message_params[:author_id]
