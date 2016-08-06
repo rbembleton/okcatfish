@@ -25,7 +25,8 @@ module.exports = {
         test: /\.node$/,
         loader: "node-loader"
       }
-    ]
+    ],
+    noParse: /node_modules\/quill\/dist/
   },
   devtool: 'source-maps'
 };

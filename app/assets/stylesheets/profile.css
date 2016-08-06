@@ -39,7 +39,7 @@
 .profile-vitals  {
   display: inline-block;
   float: left;
-  margin: 80px 0px 80px 0px;
+  margin: 80px 0px 80px 10px;
 }
 
 .profile-header {
@@ -142,4 +142,5 @@ h3 {
   border: .5px solid;
   border-color: #dbe9fe;
   border-radius: 10px;
+  display: inline-block;
 }
