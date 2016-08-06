@@ -1,16 +1,14 @@
-json.array!(@threads) do |thread|
-  other_user = thread.users.first.id == current_user.id ? thread.users.second : thread.users.first
+json.array!(@threads) do |message_thread|
+  other_user = message_thread.users.first.id == current_user.id ? message_thread.users.second : message_thread.users.first
+  json.(message_thread, :id, :created_at, :updated_at)
 
-  json.id thread.id
-  json.created_at thread.created_at
-  json.updated_at thread.updated_at
 
   json.most_recent_message do
-    json.id thread.most_recent_message
-    json.body thread.most_recent_message.body
-    json.is_read thread.most_recent_message.is_read
-    json.time_ago time_ago_in_words(thread.most_recent_message.created_at)
-    json.author thread.most_recent_message.author.username
+    json.id message_thread.messages.last
+    json.body message_thread.messages.last.body
+    json.is_read message_thread.messages.last.is_read
+    json.time_ago time_ago_in_words(message_thread.messages.last.created_at)
+    json.author message_thread.messages.last.author.username
   end
 
   json.other_user do

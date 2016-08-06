@@ -8,6 +8,12 @@
 
 
 User.delete_all
+PhotoAlbumLink.delete_all
+PhotoRepoPic.delete_all
+PhotoRepo.delete_all
+MessageThread.delete_all
+Message.delete_all
+ThreadUserLink.delete_all
 
 demo = User.create!({
   username: "pro_catfisher",
@@ -90,7 +96,7 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
 
   if rand(3) == 0
     mt = MessageThread.new_from_user_ids(u1.id, demo.id)
-    1.upto(rand(12)) do
+    (rand(12)+1).times do
       mt.new_message({
         body: Faker::Hipster.sentence,
         author_id: [u1.id, demo.id, demo.id].sample
@@ -102,11 +108,10 @@ end
 
 
 
+
 # ---------------------------------------------------
 
-PhotoAlbumLink.delete_all
-PhotoRepoPic.delete_all
-PhotoRepo.delete_all
+
 
 pr1 = PhotoRepo.create!({ label: "Ariana" })
 
@@ -163,6 +168,8 @@ pal2 = PhotoAlbumLink.create!({
     user_id: demo.id,
     photo_repo_pic_id: prp1_2.id
   })
+
+UserPhoto.where(user_id: demo.id).destroy_all
 
 # ---------------------------------------
 

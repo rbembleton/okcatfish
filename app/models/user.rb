@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     source: :photo_repo_pic
   )
 
+  has_many(
+    :user_photos
+  )
+
   belongs_to(
     :location,
     class_name: "ZipLatLngReference",
@@ -176,6 +180,7 @@ class User < ActiveRecord::Base
 
   def create_profile_text
     ProfileText.create!({ user_id: self.id })
+    UserPhoto.create!({ user_id: self.id })
   end
 
 
@@ -183,11 +188,23 @@ class User < ActiveRecord::Base
 ## PROFILE PHOTOS
 
   def photos
-    self.repo_photos
+    # self.user_photos.to_a.map { |photo| photo.image } +
+    self.repo_photos.to_a
   end
 
   def prof_pic
-    self.photos.first #|| image_url "empty_profile.png"
+    self.photos.sample #|| image_url "empty_profile.png"
+  end
+
+  def add_pic(data)
+    up = UserPhoto.create!(user_id: self.id)
+    up.image = data
+    up.save! if up.image.url
+  end
+
+  def remove_pic(up_id)
+    up = UserPhoto.find(up_id)
+    up.delete! if up.user_id = self.id
   end
 
 
