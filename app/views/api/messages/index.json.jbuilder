@@ -1,7 +1,9 @@
-json.(@threads) do |thread|
+json.array!(@threads) do |thread|
   other_user = thread.users.first.id == current_user.id ? thread.users.second : thread.users.first
 
-  json.(thread, :id, :created_at, :updated_at)
+  json.id thread.id
+  json.created_at thread.created_at
+  json.updated_at thread.updated_at
 
   json.most_recent_message do
     json.(thread.most_recent_message, :id, :body, :is_read)

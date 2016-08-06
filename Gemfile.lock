@@ -190,7 +190,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   faker
   geokit-rails
-  jbuilder (~> 2.0)
+  jbuilder (~> 2.6.0)
   jquery-rails
   pg (~> 0.15)
   pry-rails
