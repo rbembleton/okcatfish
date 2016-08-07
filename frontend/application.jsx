@@ -9,8 +9,8 @@ const BrowseMatches = require('./components/browse_matches');
 const MatchProfile = require('./components/profile/match_profile');
 const MessagesMain = require('./components/messages/messages_main');
 const Inbox = require('./components/messages/inbox');
-window.MessagesApiUtil = require('./util/messages_api_util');
 const ThreadShow = require('./components/messages/thread_show');
+const Modal = require('react-modal');
 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
@@ -52,6 +52,7 @@ const router = (
 
 document.addEventListener("DOMContentLoaded", () => {
   if(window.currentUser) {SessionActions.receiveCurrentUser(window.currentUser);}
+  Modal.setAppElement(document.body);
   let root = document.getElementById('content');
   ReactDOM.render(router, root);
 });

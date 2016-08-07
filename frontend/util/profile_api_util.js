@@ -21,6 +21,18 @@ module.exports = {
       success(resp) {
         successCallback(resp);
       }
-    })
+    });
+  },
+
+  fetchUserPhotos (id, successCallback) {
+    $.ajax({
+      method: "GET",
+      url: `api/user_photos`,
+      dataType: "json",
+      data: {user: {user_id: id}},
+      success(resp) {
+        successCallback(resp);
+      }
+    });
   }
 };

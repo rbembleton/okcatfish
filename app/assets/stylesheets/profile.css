@@ -186,15 +186,55 @@ h3 {
 .file-upload {
   display: inline-block;
   float: left;
-  /*background-color: #29d58f;
-  color: white;*/
   width: 220px;
-  height: 30px;
+  height: 20px;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
-  /*border-radius: 4px;
-  text-align: center;*/
   line-height: 20px;
-  /*box-shadow: 1px 1px 2px #b1d9de;*/
+}
 
+.file-upload::-webkit-file-upload-button {
+
+  display: block;
+  float: left;
+  background-color: #29d58f;
+  color: white;
+  width: 80px;
+  height: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 20px;
+  border: 0px;
+  box-shadow: 1px 1px 2px #b1d9de;
+  padding: 0px;
+}
+
+.file-upload::-webkit-file-upload-button:focus {
+  background-color: red;
+
+}
+
+.modal-match-photos {
+  height: 600px;
+  display: block;
+  overflow: hidden;
+
+}
+
+.modal-match-photos>img {
+  height: 600px;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+
+.slick-prev {
+  margin-left: 5px;
+}
+
+.slick-next {
+  margin-right: 5px;
 }

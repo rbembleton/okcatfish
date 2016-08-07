@@ -4,26 +4,36 @@ const MatchProfileText = require('./match_profile_text');
 const LookingFor = require('./looking_for');
 const ProfileHeader = require('./profile_header');
 const SearchActions = require('../../actions/search_actions');
+const ProfileActions = require('../../actions/profile_actions');
 const MatchProfileStore = require('../../stores/match_profile_store');
 const NewMessageForm = require('../messages/new_message_form');
+const PhotosStore = require('../../stores/photos_store');
+const PhotoCarousel = require('../photos/photo_carousel');
 
 const MatchProfile = React.createClass({
 
   getInitialState() {
-    return({user: {}});
+    return({user: {}, photos: []});
   },
 
   updateUser() {
     this.setState({user: MatchProfileStore.match()});
   },
 
+  updatePhotos() {
+    this.setState({photos: PhotosStore.all()});
+  },
+
   componentDidMount() {
     this.profileListener = MatchProfileStore.addListener(this.updateUser);
+    this.photoListener = PhotosStore.addListener(this.updatePhotos);
     SearchActions.getMatch(this.props.params.userId);
+    ProfileActions.getUserPhotos(this.props.params.userId);
   },
 
   componentWillUnmount() {
     this.profileListener.remove();
+    this.photoListener.remove();
   },
 
   profileTexts() {
@@ -45,6 +55,10 @@ const MatchProfile = React.createClass({
     const toRender = (this.state.user.id) ? (
       <div>
         <ProfileHeader user={this.state.user}/>
+        <PhotoCarousel
+          user={this.state.user}
+          photos={this.state.photos}
+        />
         <div className="profile-new-message-form">
           <NewMessageForm
             recipient_id={this.state.user.id}

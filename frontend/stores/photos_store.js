@@ -11,8 +11,8 @@ function resetPhotos(photos) {
   _photos = photos;
 }
 
-PhotosStore.match = function () {
-  return Object.assign({}, _match);
+PhotosStore.all = function () {
+  return _photos.map((photo) => { return Object.assign({}, photo); });
 };
 
 PhotosStore.__onDispatch = function (payload) {

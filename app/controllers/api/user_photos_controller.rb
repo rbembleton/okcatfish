@@ -1,5 +1,19 @@
 class Api::UserPhotosController < ApplicationController
 
+
+  def index
+    @user = User.find(photo_params[:user_id])
+    @photos = @user.photos
+
+    if @photos
+      render :index
+    else
+      render json: @photos.errors.full_messages
+    end
+
+  end
+
+
   def create
     @user = User.find(photo_params[:user_id])
 
