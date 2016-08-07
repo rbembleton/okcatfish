@@ -147,8 +147,17 @@ h3 {
 
 .image-preview {
   height: 50px;
-  width: auto;
+  width: 50px;
   display: inline-block;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.image-preview[src=""] {
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
 }
 
 .add-photo-form {
@@ -161,7 +170,7 @@ h3 {
 }
 .submit-photo-button {
   display: inline-block;
-  float: right;
+  float: left;
   background-color: #29d58f;
   color: white;
   width: 60px;
@@ -174,18 +183,18 @@ h3 {
   box-shadow: 1px 1px 2px #b1d9de;
 }
 
-.file-upload>button {
+.file-upload {
   display: inline-block;
-  float: right;
-  background-color: #29d58f;
-  color: white;
-  width: 60px;
-  height: 20px;
+  float: left;
+  /*background-color: #29d58f;
+  color: white;*/
+  width: 220px;
+  height: 30px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
-  border-radius: 4px;
-  text-align: center;
+  font-size: 15px;
+  /*border-radius: 4px;
+  text-align: center;*/
   line-height: 20px;
-  box-shadow: 1px 1px 2px #b1d9de;
+  /*box-shadow: 1px 1px 2px #b1d9de;*/
 
 }

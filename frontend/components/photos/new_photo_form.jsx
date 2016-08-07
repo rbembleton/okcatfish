@@ -57,12 +57,12 @@ const NewPhotoForm = React.createClass({
             type="file"
             onChange={this.updateFile}
           />
-
           <input
             className="submit-photo-button"
             type="submit"
             value="Upload"
-          />
+            />
+
         </form>
 
       </div>
