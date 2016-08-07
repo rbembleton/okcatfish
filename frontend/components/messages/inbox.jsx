@@ -1,6 +1,6 @@
 const React = require('react');
 const SessionStore = require('../../stores/session_store');
-const MessagesActions = require('../../util/messages_api_util');
+const MessagesActions = require('../../actions/messages_actions');
 const MessagesStore = require('../../stores/messages_store');
 const InboxThread = require('./inbox_thread');
 
@@ -12,6 +12,8 @@ const Inbox = React.createClass({
 
   componentDidMount() {
     this.threadsListener = MessagesStore.addListener(this.updateThreads);
+    const currentUser = SessionStore.currentUser();
+    MessagesActions.getAllThreads(currentUser.id);
   },
 
   componentWillUnmount() {

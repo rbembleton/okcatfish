@@ -56,7 +56,6 @@ const MatchProfile = React.createClass({
       <div>
         <ProfileHeader user={this.state.user}/>
         <PhotoCarousel
-          user={this.state.user}
           photos={this.state.photos}
         />
         <div className="profile-new-message-form">

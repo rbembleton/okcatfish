@@ -7,14 +7,28 @@ const UserProfileText = require('./user_profile_text');
 const LookingFor = require('./looking_for');
 const ProfileHeader = require('./profile_header');
 const NewPhotoForm = require('../photos/new_photo_form');
+const PhotosStore = require('../../stores/photos_store');
+const PhotoCarousel = require('../photos/photo_carousel');
+const ProfileActions = require('../../actions/profile_actions');
 
 const UserProfile = React.createClass({
 
+  getInitialState() {
+    return({photos: []});
+  },
+
   componentDidMount() {
     MessagesActions.getAllThreads(SessionStore.currentUser().id); // optimize thread loading
+    this.photoListener = PhotosStore.addListener(this.updatePhotos);
+    ProfileActions.getUserPhotos(SessionStore.currentUser().id);
   },
 
   componentWillUnmount() {
+    this.photoListener.remove();
+  },
+
+  updatePhotos() {
+    this.setState({photos: PhotosStore.all()});
   },
 
   render () {
@@ -34,6 +48,9 @@ const UserProfile = React.createClass({
     return (
       <div className="profile-container">
         <ProfileHeader user={currentUser}/>
+          <PhotoCarousel
+            photos={this.state.photos}
+          />
         <NewPhotoForm />
         <div className="profile-main">
           <div className="profile-text">

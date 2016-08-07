@@ -8,10 +8,10 @@ const PhotoCarousel = React.createClass({
     return({show: this.props.show});
   },
 
-  closeModal: function(){
+  closeModal () {
     this.setState({ show: false });
   },
-  openModal: function(e){
+  openModal (e) {
     e.preventDefault();
     this.setState({ show: true });
   },
@@ -29,14 +29,7 @@ const PhotoCarousel = React.createClass({
       variablewidth: true,
       accessibility: true
     };
-
-    const photoDisplay = this.props.photos.map((photo, idx) => {
-      return (
-        <div key={idx} className="modal-match-photos">
-          <img src={photo.url}/>
-        </div>);
-    });
-
+    
     const style = {
       overlay : {
         position: 'fixed',
@@ -59,6 +52,14 @@ const PhotoCarousel = React.createClass({
         background: 'transparent'
       }
     };
+
+    const photoDisplay = this.props.photos.map((photo, idx) => {
+      return (
+        <div key={idx} className="modal-match-photos">
+          <img src={photo.url}/>
+        </div>);
+    });
+
 
 
     return (

@@ -8,7 +8,7 @@ const InitialRegistration = require('./initial_registration');
 const IndexPage = React.createClass({
 
   getInitialState() {
-    return({form: "signup"});
+    return({showModal: false});
   },
 
   componentDidMount () {
@@ -23,14 +23,21 @@ const IndexPage = React.createClass({
 
 
   handleClick(e) {
-    e.preventDefault();
-    const form = this.state.form === "signup" ? "login" : "signup";
-    this.setState({form: form});
+    this.openModal(e);
   },
 
   guestLogIn(e) {
     e.preventDefault();
     SessionActions.guestLogIn();
+  },
+
+  closeModal () {
+    this.setState({ showModal: false });
+  },
+
+  openModal (e) {
+    e.preventDefault();
+    this.setState({ showModal: true });
   },
 
 
@@ -41,10 +48,11 @@ const IndexPage = React.createClass({
         <div className="sign-up-bkg">
           <div className="sign-up-header">
             <div className="header-login">
-              {this.state.form === "signup" ? "Already a member?" : "Not a member yet?" }
+              Already a member?
               <button className="log-in-button" onClick={this.handleClick}>
-                {this.state.form === "signup" ? "Sign in" : "Sign Up" }
+                Sign in
               </button>
+              <LogInForm show={this.state.showModal} closeModal={this.closeModal}/>
               <button className="log-in-button" onClick={this.guestLogIn}>
                 Demo Login
               </button>
@@ -61,7 +69,7 @@ const IndexPage = React.createClass({
                 <br/>{"on a social networking site for fraudulent or deceptive purposes"}
               </div>
             </div>
-            {this.state.form === "signup" ? <InitialRegistration/> : <LogInForm /> }
+            <InitialRegistration/>
           </div>
         </div>
         <div className="sign-up-baity">

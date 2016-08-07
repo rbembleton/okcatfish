@@ -59,6 +59,40 @@
   margin: 20px;
   border: 0px;
   text-align: left;
+  display: inline-block;
+}
+
+.log-in-form {
+  height: 100%;
+  width: 100%;
+  padding: 20px 0px 0px 0px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  background-color: #104DA1;
+  padding: 0px;
+
+}
+
+.log-in-form>form>input[type="text"],
+.log-in-form>form>input[type="password"],
+.log-in-form>form>select,
+.log-in-form>form>select>option {
+  background-color: #3260c7;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
+  height: 40px;
+  width: 180px;
+  padding: 10px 10px 10px 20px;
+  margin: 20px;
+  border: 0px;
+  text-align: left;
+}
+
+.log-in-form>.errors {
+  font-size: 17px;
+  width: 100%;
 }
 
 .input-gender {
