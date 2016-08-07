@@ -29,6 +29,7 @@ const UserProfileText = React.createClass({
       return (
         <input
           type="button"
+          className="white-button-w-green"
           data-type={this.props.textType}
           value="save"
           onClick={this.saveText}/>
@@ -37,6 +38,7 @@ const UserProfileText = React.createClass({
       return (
         <input
           type="button"
+          className="white-button-w-green"
           data-type={this.props.textType}
           value="edit"
           onClick={this.editText}/>
@@ -54,7 +56,7 @@ const UserProfileText = React.createClass({
       return (
         <textarea
           data-type={this.props.textType}
-          className="profile-edit-textarea"
+          className="profile-edit-textarea white-container"
           value={this.state.text}
           onChange={this.handleChange}/>
       );

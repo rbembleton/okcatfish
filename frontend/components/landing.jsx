@@ -44,18 +44,22 @@ const Landing = React.createClass({
 
   render () {
     return (
-      <div className="main-page">
-        <nav className="nav-bar">
-          <div className="nav-left">
+      <div className="main-page blue-bkg">
+        <nav className="nav-bar blue-bkg clearfix">
+          <div className="nav-left clearfix">
             <img src={window.okclogo} />
-            <input className="browse-button" type="button" onClick={this.browseClick} value="Browse"/>
+            <input className="browse-button blue-button" type="button" onClick={this.browseClick} value="Browse"/>
           </div>
-          <div className="nav-right">
-            <input className="log-out-button" type="button" onClick={this.inboxClick} value="Inbox"/>
-            <div className="mini-pic-container">
-              <img src={SessionStore.currentUser().prof_pic.url} onClick={this.profileClick}/>
+          <div className="nav-right clearfix">
+            <div className="mini-pic-container round-pic-cont">
+              <img
+                src={SessionStore.currentUser().prof_pic.url}
+                onClick={this.profileClick}
+                className="round-pic-img"
+                />
             </div>
-            <input className="log-out-button" type="button" onClick={this.logOutClick} value="Log Out"/>
+            <input className="log-out-button blue-button" type="button" onClick={this.inboxClick} value="Inbox"/>
+            <input className="log-out-button blue-button" type="button" onClick={this.logOutClick} value="Log Out"/>
           </div>
         </nav>
         <main>

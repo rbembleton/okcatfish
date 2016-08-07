@@ -1,11 +1,5 @@
 .messages-container {
-  width: 800px;
-  margin: auto;
-  margin-top: 30px;
-  padding: 40px 40px 100px 40px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: .5px .8px 1px #07408d;
+
 }
 
 .inbox-thread {
@@ -15,10 +9,7 @@
   margin-bottom: 10px;
   font-size: 20px;
   text-align: left;
-  border: .5px solid;
-  border-color: #dbe9fe;
   padding: 10px;
-  border-radius: 10px;
 }
 
 .inbox-label {
@@ -89,8 +80,6 @@
   margin-bottom: 10px;
   margin-top: 30px;
   font-size: 20px;
-  border: .5px solid;
-  border-color: #dbe9fe;
   border-radius: 10px;
   padding: 6px;
   display: inline-block;
@@ -100,15 +89,9 @@
   display: inline-block;
   float: right;
   top: 0;
-  text-align: center;
-  background-color: #29d58f;
-  color: white;
-  border: 0px;
   width: 160px;
-  height: 60px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 20px;
-  border-radius: 4px;
+  height: 60px !important;
+  font-size: 20px !important;
   margin: 16px;
 }
 
@@ -120,8 +103,6 @@
   font-size: 16px;
   width: 510px;
   min-height: 30px;
-  /*border: .5px solid;
-  border-color: #dbe9fe;*/
   padding: 10px;
   margin: 10px;
   overflow: visible;

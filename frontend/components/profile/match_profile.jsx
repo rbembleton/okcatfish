@@ -58,7 +58,7 @@ const MatchProfile = React.createClass({
         <PhotoCarousel
           photos={this.state.photos}
         />
-        <div className="profile-new-message-form">
+      <div className="profile-new-message-form white-container">
           <NewMessageForm
             recipient_id={this.state.user.id}
           />
@@ -75,7 +75,7 @@ const MatchProfile = React.createClass({
     );
 
     return (
-      <div className="profile-container">
+      <div className="profile-container center-container">
         {toRender}
       </div>
     );

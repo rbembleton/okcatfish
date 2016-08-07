@@ -62,7 +62,7 @@ const NewMessageForm = React.createClass({
             onChange={this.bodyChange}
           />
           <input
-            className="message-send-button"
+            className="message-send-button green-button"
             type="submit"
             value="Send"
           />

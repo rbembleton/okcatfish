@@ -129,16 +129,12 @@
   margin: auto;
 }
 
-.new-user-button {
-  background-color: #29d58f;
-  color: white;
-  border: 0px;
+.registration-button {
   width: 160px;
-  height: 60px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 20px;
-  border-radius: 4px;
   margin: 20px;
+  height: 60px !important;
+  line-height: 60px !important;
+  font-size: 20px !important;
 }
 
 .header-login {
@@ -149,17 +145,8 @@
 }
 
 .log-in-button {
-  background: transparent;
-  color: white;
-  border: .5px solid;
-  border-color: #6391f3;
   width: 110px;
-  height: 40px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  border-radius: 4px;
   margin: 20px 0px 20px 20px;
-  text-align: center;
 }
 
 .sign-up-form>form>input {
@@ -187,40 +174,4 @@
   float: left;
   width: 250px;
   margin: 20px;
-}
-
-.header-logo>img {
-  height: 70px;
-  width: auto;
-  display: inline-block;
-}
-
-.header-logo {
-  position: absolute;
-  left: auto;
-  right: auto;
-  bottom: 0;
-  height: 70px;
-  width: 100%;
-  float: right;
-  text-align: center;
-}
-
-.mini-pic-container {
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
-  overflow: hidden;
-  margin: 2px 20px 2px 20px;
-  display: inline-block;
-  float: left;
-  background-color: #104DA1;
-  border: .5px solid;
-  border-color: #6391f3;
-}
-
-.mini-pic-container>img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }

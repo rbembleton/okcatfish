@@ -14,7 +14,8 @@ const InboxThread = React.createClass({
 
   render () {
     return (
-      <div className="inbox-thread" onClick={this.handleClick}>
+      <div className="inbox-thread white-container" 
+          onClick={this.handleClick}>
         <div className="inbox-thread-prof-pic">
           <div className="inbox-mini-pic-container">
             <img src={this.props.thread.other_user.prof_pic.url}/>

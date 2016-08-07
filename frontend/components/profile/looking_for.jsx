@@ -20,7 +20,7 @@ const LookingFor = React.createClass({
   render() {
 
     return (
-      <div className="profile-looking-for">
+      <div className="profile-looking-for white-container">
         <h3>Looking for</h3>
         <ul>
           <li>{this.lookingFor(this.props.user.gender, this.props.user.orientation)}</li>

@@ -54,15 +54,15 @@ const BrowseMatches = React.createClass({
     });
 
     return (
-      <div className="search-container">
-        <div className="search-criteria">
+      <div className="search-container center-container">
+        <div className="search-criteria white-container">
           <form onSubmit={this.startSearch}>
             Distance from you:&nbsp;
             <select className="search-drop-down" onChange={this.distanceChange}>
               {distanceOptions}
               <option value="none">Any!</option>
             </select>
-            <input className="search-button" type="submit" value="Search"/>
+            <input className="search-button green-button" type="submit" value="Search"/>
           </form>
         </div>
         <div className="matches-container">

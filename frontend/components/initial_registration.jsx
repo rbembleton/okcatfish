@@ -115,7 +115,7 @@ const InitialRegistration = React.createClass({
             <option value="both">both</option>
           </select>
           <input
-            className="new-user-button"
+            className="registration-button green-button"
             type="submit"
             value="Continue"
             />
@@ -140,7 +140,7 @@ const InitialRegistration = React.createClass({
             {yearsDDown.map((el, i)=>{return(<option key={i} value={el}>{el}</option>);})}
           </select>
           <input
-            className="new-user-button"
+            className="registration-button green-button"
             type="submit"
             value="Continue"
             />

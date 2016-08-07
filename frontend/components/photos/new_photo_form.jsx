@@ -59,7 +59,7 @@ const NewPhotoForm = React.createClass({
           />
 
           <input
-            className="submit-photo-button"
+            className="submit-photo-button green-button"
             type="submit"
             value="Upload"
             />

@@ -1,11 +1,5 @@
 .search-container {
-  width: 800px;
-  margin: auto;
-  margin-top: 30px;
-  padding: 40px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: .5px .8px 1px #07408d;
+  padding: 40px !important;
 }
 
 .search-criteria {
@@ -15,8 +9,6 @@
   margin-bottom: 40px;
   font-size: 20px;
   text-align: left;
-  border: .5px solid;
-  border-color: #dbe9fe;
   padding: 20px;
   border-radius: 10px;
 }
@@ -38,17 +30,8 @@
 .search-button {
   display: inline-block;
   float: right;
-  background-color: #29d58f;
-  color: white;
   width: 100px;
-  height: 40px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  border-radius: 4px;
-  text-align: center;
-  line-height: 40px;
   margin: 16px;
-  box-shadow: 1px 1px 2px #b1d9de;
 }
 
 .profile-search-vitals>h1 {
@@ -97,8 +80,6 @@
   display: inline-block;
   height: 300px;
   width: 230px;
-  border: .5px solid;
-  border-color: #dbe9fe;
   border-radius: 5px;
   margin: 0px 16px 30px 16px;
 }

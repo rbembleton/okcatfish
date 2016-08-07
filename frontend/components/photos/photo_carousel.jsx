@@ -18,7 +18,7 @@ const PhotoCarousel = React.createClass({
 
 
   render: function () {
-    const settings = {
+    const slickSettings = {
       dots: true,
       infinite: false,
       speed: 500,
@@ -29,8 +29,8 @@ const PhotoCarousel = React.createClass({
       variablewidth: true,
       accessibility: true
     };
-    
-    const style = {
+
+    const modalStyle = {
       overlay : {
         position: 'fixed',
         top: 0,
@@ -72,8 +72,8 @@ const PhotoCarousel = React.createClass({
         <Modal
           isOpen={this.state.show}
           onRequestClose={this.closeModal}
-          style={style}>
-          <Slider {...settings}>
+          style={modalStyle}>
+          <Slider {...slickSettings}>
             {photoDisplay}
           </Slider>
         </Modal>

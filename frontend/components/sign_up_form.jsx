@@ -65,7 +65,7 @@ const SignUpForm = React.createClass({
             onChange={this.passwordChange}
           />
           <input
-            className="new-user-button"
+            className="registration-button green-button"
             type="submit"
             value="Register"
           />

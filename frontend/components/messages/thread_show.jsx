@@ -54,7 +54,7 @@ const ThreadShow = React.createClass({
         <div className="thread-messages">
           {messagesDisplay}
         </div>
-        <div className="thread-new-message-form">
+        <div className="thread-new-message-form white-container">
           <NewMessageForm
             recipient_id={ this.state.thread.id ?
               this.state.thread.other_user.id :

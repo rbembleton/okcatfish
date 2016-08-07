@@ -1,11 +1,5 @@
 .profile-container {
-  width: 800px;
-  margin: auto;
-  margin-top: 30px;
-  padding: 40px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: .5px .8px 1px #07408d;
+
 }
 
 .profile-vitals>h1 {
@@ -22,18 +16,10 @@
 .profile-pic-container {
   height: 200px;
   width: 200px;
-  border-radius: 100%;
-  overflow: hidden;
   margin: 10px;
   display: inline-block;
   float: left;
   background-color: #104DA1;
-}
-
-.profile-pic-container>img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .profile-vitals  {
@@ -56,21 +42,12 @@
   margin: 0 auto;
 }
 .profile-text {
-  font-family: 'Open Sans', sans-serif;
   display: inline-block;
   width: 580px;
   left: 0px;
   vertical-align: top;
   padding-right: 20px;
 
-}
-
-
-h3 {
-  font-weight: 600;
-  color: #2662b6;
-  font-size: 19px;
-  margin-top: 0px;
 }
 
 .profile-text>div>p {
@@ -88,20 +65,8 @@ h3 {
 }
 
 .profile-text>div>h3>input {
-  background: transparent;
-  color: #29d58f;
-  border: .5px solid;
-  border-color: #dbe9fe;
-  font-weight: 300;
   width: 40px;
-  height: 16px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 15px;
-  border-radius: 4px;
-  text-align: center;
-  line-height: 16px;
   margin-left: 10px;
-  padding: 3px;
 }
 
 .profile-looking-for {
@@ -110,10 +75,7 @@ h3 {
   width: 158px;
   vertical-align: top;
   text-align: left;
-  border: .5px solid;
-  border-color: #dbe9fe;
   padding: 20px;
-  border-radius: 10px;
 }
 
 
@@ -126,9 +88,8 @@ h3 {
   width: 560px;
   height: auto;
   margin-bottom: 40px;
-  border: .5px solid;
-  border-color: #dbe9fe;
   padding: 10px;
+  border-radius: 0px !important;
 
 }
 
@@ -139,9 +100,6 @@ h3 {
   margin-bottom: 20px;
   margin-top: 0px;;
   font-size: 20px;
-  border: .5px solid;
-  border-color: #dbe9fe;
-  border-radius: 10px;
   display: inline-block;
 }
 
@@ -171,15 +129,10 @@ h3 {
 .submit-photo-button {
   display: inline-block;
   float: left;
-  background-color: #29d58f;
-  color: white;
   width: 60px;
-  height: 20px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
-  border-radius: 4px;
-  text-align: center;
-  line-height: 20px;
+  height: 20px !important;
+  font-size: 12px !important;
+  line-height: 20px !important;
   box-shadow: 1px 1px 2px #b1d9de;
 }
 
@@ -213,7 +166,6 @@ h3 {
 }
 
 .file-upload::-webkit-file-upload-button:focus {
-  background-color: red;
 
 }
 

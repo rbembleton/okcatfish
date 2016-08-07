@@ -46,7 +46,7 @@ const UserProfile = React.createClass({
     });
 
     return (
-      <div className="profile-container">
+      <div className="profile-container center-container">
         <ProfileHeader user={currentUser}/>
           <PhotoCarousel
             photos={this.state.photos}

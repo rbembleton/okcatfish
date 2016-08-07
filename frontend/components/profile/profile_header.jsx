@@ -5,8 +5,9 @@ const ProfileHeader = React.createClass({
   render () {
     return(
       <div className="profile-header">
-        <div className="profile-pic-container">
-          <img src={this.props.user.prof_pic.url}/>
+        <div className="profile-pic-container round-pic-cont">
+          <img className="round-pic-img"
+          src={this.props.user.prof_pic.url}/>
         </div>
         <div className="profile-vitals">
           <h1>{this.props.user.username}</h1>

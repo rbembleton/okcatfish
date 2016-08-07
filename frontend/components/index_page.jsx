@@ -49,11 +49,11 @@ const IndexPage = React.createClass({
           <div className="sign-up-header">
             <div className="header-login">
               Already a member?
-              <button className="log-in-button" onClick={this.handleClick}>
+              <button className="log-in-button blue-button" onClick={this.handleClick}>
                 Sign in
               </button>
               <LogInForm show={this.state.showModal} closeModal={this.closeModal}/>
-              <button className="log-in-button" onClick={this.guestLogIn}>
+              <button className="log-in-button blue-button" onClick={this.guestLogIn}>
                 Demo Login
               </button>
             </div>
