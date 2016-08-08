@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806194117) do
+ActiveRecord::Schema.define(version: 20160808145019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_from_id", null: false
+    t.integer  "user_to_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["user_from_id"], name: "index_likes_on_user_from_id", using: :btree
+  add_index "likes", ["user_to_id", "user_from_id"], name: "index_likes_on_user_to_id_and_user_from_id", unique: true, using: :btree
+  add_index "likes", ["user_to_id"], name: "index_likes_on_user_to_id", using: :btree
 
   create_table "message_threads", force: :cascade do |t|
     t.datetime "created_at"

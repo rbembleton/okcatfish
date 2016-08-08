@@ -78,7 +78,7 @@
 
 .profile-search-box {
   display: inline-block;
-  height: 300px;
+  height: 350px;
   width: 230px;
   border-radius: 5px;
   margin: 0px 16px 30px 16px;
@@ -86,4 +86,11 @@
 
 .matches-container {
   margin: auto;
+}
+
+.like-button {
+  display: block;
+  margin: auto;
+  width: 160px;
+  margin-top: 10px;
 }

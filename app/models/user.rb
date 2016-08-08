@@ -94,6 +94,33 @@ class User < ActiveRecord::Base
     source: :messages
   )
 
+  has_many(
+    :from_likes,
+    class_name: "Like",
+    foreign_key: :user_from_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :to_likes,
+    class_name: "Like",
+    foreign_key: :user_to_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :likes,
+    through: :from_likes,
+    source: :likee
+  )
+
+  has_many(
+    :likers,
+    through: :to_likes,
+    source: :liker
+  )
+
+
 ### CUSTOM QUERIES
 
   def self.find_by_looking_for(gender, orientation)

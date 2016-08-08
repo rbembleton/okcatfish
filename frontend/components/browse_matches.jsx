@@ -3,15 +3,17 @@ const SearchStore = require('../stores/search_store');
 const SessionStore = require('../stores/session_store');
 const SearchActions = require('../actions/search_actions');
 const ProfileSearchBox = require('./profile/profile_search_box');
+const LikeActions = require('../actions/like_actions');
 
 const BrowseMatches = React.createClass({
 
   getInitialState () {
-    return({matches: [], distance: 2});
+    return({ matches: [], distance: 2 });
   },
 
   componentDidMount() {
     this.searchListener = SearchStore.addListener(this.updateMatches);
+    LikeActions.getMyLikes(SessionStore.currentUser().id);
   },
 
   componentWillUnmount() {
@@ -50,7 +52,12 @@ const BrowseMatches = React.createClass({
 
 
     const matchesDisplay = this.state.matches.map((match, idx) => {
-      return (<ProfileSearchBox key={idx} user={match}/>);
+      return (
+        <ProfileSearchBox
+          key={idx}
+          user={match}
+        />
+      );
     });
 
     return (
@@ -58,11 +65,18 @@ const BrowseMatches = React.createClass({
         <div className="search-criteria white-container">
           <form onSubmit={this.startSearch}>
             Distance from you:&nbsp;
-            <select className="search-drop-down" onChange={this.distanceChange}>
+            <select
+              className="search-drop-down"
+              onChange={this.distanceChange}
+            >
               {distanceOptions}
               <option value="none">Any!</option>
             </select>
-            <input className="search-button green-button" type="submit" value="Search"/>
+            <input
+              className="search-button green-button"
+              type="submit"
+              value="Search"
+            />
           </form>
         </div>
         <div className="matches-container">
