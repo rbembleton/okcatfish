@@ -190,3 +190,9 @@
 .slick-next {
   margin-right: 5px;
 }
+
+.profile-like-toggle {
+  display: inline-block;
+  float: right;
+
+}

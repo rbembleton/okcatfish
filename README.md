@@ -16,10 +16,10 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
   - [ ] "Celebrity" photo repositories
   - [x] Adequate seed data to demonstrate the site's features
   - [x] Elegant, Simple, and Clear CSS styling
-- [ ] Messaging and Likes
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Elegant, Simple, and Clear CSS styling
+- [x] Messaging and Likes
+  - [x] Smooth, bug-free navigation
+  - [x] Adequate seed data to demonstrate the site's features
+  - [x] Elegant, Simple, and Clear CSS styling
 - [ ] Personality Questions
   - [ ] Smooth, bug-free navigation
   - [ ] Adequate seed data to demonstrate the site's features
@@ -89,17 +89,17 @@ User can view and search for others profiles. Profiles have text, details, looki
 **Objective:** Users can message each other, Users can "like" each other.
 
 - [x] create `Thread` and `Message` model
-- [ ] create `Like` model
+- [x] create `Like` model
 - build out API, Flux loop, and components for:
   - [x] Message CRUD
   - [x] writing messages
   - [x] reading messages
   - [x] viewing thread
-  - [ ] liking Users
-  - [ ] unliking Users
+  - [x] liking Users
+  - [x] unliking Users
 - [x] Use CSS to style new components
-- [ ] Seed messages and likes
-- [ ] Add automated messages if two users like each other
+- [x] Seed messages and likes
+- [x] Add automated messages if two users like each other
 
 
 ### Phase 4: Questions (1 day, W2 W 6pm)

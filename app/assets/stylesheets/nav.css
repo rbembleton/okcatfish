@@ -73,3 +73,20 @@
   border: .5px solid;
   border-color: #6391f3;
 }
+
+.display-inbox-badge {
+  display: inline-block;
+  height: 22px;
+  min-width: 13px;
+  line-height: 22px;
+  border-radius: 50%;
+  margin: 5px;
+  background-image: linear-gradient(#ff5e79, #e93d59);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px 5px;
+}
+
+.hide-inbox-badge {
+  display: none;
+}

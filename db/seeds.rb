@@ -14,6 +14,7 @@ PhotoRepo.delete_all
 MessageThread.delete_all
 Message.delete_all
 ThreadUserLink.delete_all
+Like.delete_all
 
 demo = User.create!({
   username: "pro_catfisher",
@@ -35,43 +36,28 @@ rb = User.create!({
   gender: "male",
 })
 
-pikachu = User.create!({
-  username: "pikachu",
-  password: "okcatfish",
-  birthdate: DateTime.new(1995,10,10),
-  zip: 10012,
-  orientation: "gay",
-  gender: "male",
+rb.profile_text.update!({
+  about: Faker::Hipster.paragraph,
+  doing: Faker::Hipster.paragraph,
+  faves: "Book: #{Faker::Book.title}, Beer: #{Faker::Beer.name}",
+  things: Faker::Hipster.words(3).join(", "),
+  think: Faker::Hipster.paragraph,
+  sat_night: Faker::Hipster.paragraph,
+  msg_me_if: Faker::Hipster.paragraph,
 })
 
-trumpsux = User.create!({
-  username: "trumpsux",
-  password: "okcatfish",
-  birthdate: DateTime.new(1960,2,6),
-  zip: 10012,
-  orientation: "straight",
-  gender: "male",
-})
 
-pizza = User.create!({
-  username: "pizza",
-  password: "okcatfish",
-  birthdate: DateTime.new(1994,3,18),
-  zip: 10014,
-  orientation: "lesbian",
-  gender: "female",
-})
 
 zip_codes = (10001..10014).to_a + (10016..10041).to_a
 go_combos = {"male" => ["straight", "gay", "bisexual"],
   "female" => ["straight", "lesbian", "bisexual"]};
 
-50.times do
+100.times do
   rand(2) == 1 ? gend = "male" : gend = "female"
   ori = go_combos[gend][rand(3)];
 
   uname = Faker::Internet.user_name
-  while uname.length < 4 || uname.length > 16 do
+  while uname.length < 4 || uname.length > 16 || User.exists?(username: uname) do
     uname = Faker::Internet.user_name
   end
 
@@ -96,16 +82,58 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
 
   if rand(3) == 0
     mt = MessageThread.new_from_user_ids(u1.id, demo.id)
-    (rand(12)+1).times do
-      mt.new_message({
-        body: Faker::Hipster.sentence,
-        author_id: [u1.id, demo.id, demo.id].sample
-      })
-    end
-  end
+    mess1 = Message.create!({
+      body: Faker::Hipster.sentence,
+      author_id: [u1.id, demo.id, demo.id].sample,
+      thread_id: mt.id
+    })
 
+    most_recent = Faker::Time.backward(14, :all)
+    mess1.update!(created_at: most_recent, updated_at: most_recent);
+
+
+    (rand(12)+1).times do
+      mess2 = Message.create!({
+        body: Faker::Hipster.sentence,
+        author_id: [u1.id, demo.id, demo.id].sample,
+        thread_id: mt.id
+      })
+
+      this_time = Faker::Time.backward(14, :all)
+      mess2.update!(created_at: this_time, updated_at: this_time);
+
+      if this_time > most_recent
+        most_recent = this_time;
+      end
+
+    end
+
+    mt.update!(updated_at: most_recent);
+
+    if rand(2) == 0
+      Like.from_to_ids_create!(u1.id, demo.id)
+    end
+
+    if rand(5) == 0
+      Like.from_to_ids_create!(demo.id, u1.id)
+    end
+
+  end
 end
 
+MessageThread.where("updated_at < ?", 3.days.ago).each do |mt|
+  mt.messages.update_all(is_read: true)
+end
+
+# MessageThread.where("updated_at >= ?", 3.days.ago).each do |mt|
+#   first_message_author_id = mt.most_recent_message.author_id
+#   keep_going = true
+#   mt.messages.each do |message|
+#     next if keep_going && message.author_id == first_message_author_id
+#     keep_going = false
+#     message.update!(is_read: true)
+#   end
+# end
 
 
 

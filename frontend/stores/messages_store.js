@@ -20,6 +20,15 @@ function addMessage(message) {
     {_thread.messages.push(message);}
 }
 
+MessagesStore.numberOfNotifications = function (userId) {
+  let num = 0;
+  _threads.forEach((thread) => {
+    num += thread.unread_messages[userId];
+  });
+
+  return num;
+};
+
 MessagesStore.allThreads = function () {
   return _threads.map((thread) => {
     return Object.assign({}, thread);

@@ -73,7 +73,7 @@ class MessageThread < ActiveRecord::Base
 
 
   def most_recent_message
-    messages.last
+    messages.order(created_at: :desc).first
   end
 
 
@@ -91,6 +91,24 @@ class MessageThread < ActiveRecord::Base
     })
   end
 
+  def unread_messages
+    unreads = {}
+    switch_hash = {
+      self.users.first.id => self.users.second.id,
+      self.users.second.id => self.users.first.id
+    }
+
+    unreads[self.users.first.id] = 0
+    unreads[self.users.second.id] = 0
+
+    messages.each do |message|
+      if message.is_read == false
+        unreads[switch_hash[message.author_id]] += 1
+      end
+    end
+
+    unreads
+  end
 
 
 

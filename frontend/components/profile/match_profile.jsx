@@ -54,7 +54,7 @@ const MatchProfile = React.createClass({
 
     const toRender = (this.state.user.id) ? (
       <div>
-        <ProfileHeader user={this.state.user}/>
+        <ProfileHeader user={this.state.user} showLikeBox={true}/>
         <PhotoCarousel
           photos={this.state.photos}
         />
