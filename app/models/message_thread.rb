@@ -29,6 +29,13 @@ class MessageThread < ActiveRecord::Base
     foreign_key: :thread_id
   )
 
+  has_many(
+    :message_notifications,
+    class_name: "MessageNotification",
+    primary_key: :id,
+    foreign_key: :thread_id
+  )
+
   def self.new_from_user_ids(user1_id, user2_id)
     mt = MessageThread.create!()
     ThreadUserLink.create!(user_id: user1_id, thread_id: mt.id)
@@ -79,9 +86,11 @@ class MessageThread < ActiveRecord::Base
     Message.create!({
       body: options[:body],
       author_id: options[:author_id],
-      thread_id: self.id
+      thread_id: self.id,
+      notification: options[:notification] || false
     })
   end
+
 
 
 

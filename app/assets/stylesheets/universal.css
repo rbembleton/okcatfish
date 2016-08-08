@@ -1,5 +1,6 @@
 .green-button {
-  background-color: #29d58f;
+  background-image: linear-gradient(#31e099,#29d571);
+  /*background-color: #29d58f;*/
   color: white;
   height: 40px;
   font-size: 16px;
@@ -9,15 +10,8 @@
   box-shadow: 1px 1px 2px #b1d9de;
 }
 
-.yellow-button {
-  background-color: rgb(241, 211, 87);
-  color: white;
-  height: 40px;
-  font-size: 16px;
-  border-radius: 4px;
-  text-align: center;
-  line-height: 40px;
-  box-shadow: 1px 1px 2px #b1d9de;
+.like-button {
+
 }
 
 

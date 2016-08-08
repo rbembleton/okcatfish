@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :profile_texts, only: [:update]
     resource :session, only: [:create, :destroy]
     resources :search, only: [:index]
-    resources :messages, only: [:index, :show, :create]
+    resources :messages, only: [:index, :show, :update, :create]
     resources :user_photos, only: [:index, :create, :destroy]
     resources :likes, only: [:index, :create, :destroy]
   end

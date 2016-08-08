@@ -33,3 +33,9 @@ Beige light - f8efe2
 Beige dark - efe2d0
 Green light - 37bf34
 Green dark - 35b339
+
+
+New colors:
+salmon: #ff5e79
+darker-salmon: #e93d59
+yellow: #ffd83b

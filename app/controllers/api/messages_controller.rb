@@ -29,6 +29,17 @@ class Api::MessagesController < ApplicationController
 
   end
 
+  def update
+    @thread = MessageThread.find(params[:id])
+
+    if @thread.messages.update_all(is_read: true)
+      render :show
+    else
+      render json: @thread.errors.full_messages
+    end
+    
+  end
+
 
   def create
     if message_params[:thread_id] != ""
@@ -53,7 +64,7 @@ class Api::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:messages).permit(:author_id, :recipient_id, :body, :thread_id)
+    params.require(:messages).permit(:author_id, :recipient_id, :body, :thread_id, :is_read)
   end
 
   def message_user_params

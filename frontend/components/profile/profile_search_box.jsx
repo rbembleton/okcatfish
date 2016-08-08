@@ -10,7 +10,7 @@ const ProfileSearchBox = React.createClass({
 
   render () {
     return(
-      <div className="profile-search-box white-container"
+      <div className="profile-search-box"
           onClick={this.showProfile}>
         <div className="profile-search-pic-container">
           <img src={this.props.user.prof_pic.url}/>

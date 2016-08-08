@@ -13,6 +13,10 @@ const LikeToggle = React.createClass({
     this.likeListener = LikesStore.addListener(this.verifyLikeState);
   },
 
+  componentWillUnmount () {
+    this.likeListener.remove();
+  },
+
   toggleLike (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -36,14 +40,18 @@ const LikeToggle = React.createClass({
   },
 
   render () {
+    const thisClass = (
+      "like-button " + (this.state.liked ? "liked-state" : "unliked-state")
+    );
+
     return(
 
       <div className="profile-search-like-box">
         <button
           name="like-toggle"
-          className="yellow-button like-button"
+          className={thisClass}
           onClick={this.toggleLike}
-        >{this.state.liked ? "Unlike" : "Like"}</button>
+        >{this.state.liked ? `★` : `☆`}</button>
       </div>
 
       );

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808145019) do
+ActiveRecord::Schema.define(version: 20160808202718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,12 +33,13 @@ ActiveRecord::Schema.define(version: 20160808145019) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "thread_id",                  null: false
-    t.integer  "author_id",                  null: false
-    t.text     "body",       default: "",    null: false
+    t.integer  "thread_id",                    null: false
+    t.integer  "author_id",                    null: false
+    t.text     "body",         default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_read",    default: false, null: false
+    t.boolean  "is_read",      default: false, null: false
+    t.boolean  "notification", default: false
   end
 
   add_index "messages", ["author_id"], name: "index_messages_on_author_id", using: :btree

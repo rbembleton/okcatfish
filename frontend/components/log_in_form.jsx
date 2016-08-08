@@ -66,12 +66,12 @@ const LogInForm = React.createClass({
         right: 0,
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.75)',
-        zIndex: 10
+        zIndex: 10,
+        padding: 0
       },
       content : {
-        position: 'relative',
+        position: 'fixed',
         margin: 'auto',
-        marginTop: '200px',
         width: '300px',
         height: '340px',
         overflow: 'hidden',
@@ -79,7 +79,7 @@ const LogInForm = React.createClass({
         border: '0px',
         zIndex: 11,
         padding: '0px',
-        boxShadow: '2px 2px 3px black',
+        boxShadow: '2px 2px 3px #151528',
         backgroundColor: 'transparent'
       }
     };
@@ -108,7 +108,7 @@ const LogInForm = React.createClass({
               onChange={this.passwordChange}
             />
             <input
-              className="new-user-button"
+              className="registration-button green-button"
               type="submit"
               value="Log In"
             />

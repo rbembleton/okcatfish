@@ -38,6 +38,19 @@ module.exports = {
         console.log(resp);
       }
     });
+  },
+
+  updateThreadAsRead (thread_id, successCallback) {
+    $.ajax({
+      method: "PATCH",
+      url: `api/messages/${thread_id}`,
+      success (resp) {
+        successCallback(resp);
+      },
+      error (resp) {
+        console.log(resp);
+      }
+    });
   }
 
 };

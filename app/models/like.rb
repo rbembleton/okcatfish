@@ -37,6 +37,17 @@ class Like < ActiveRecord::Base
     Like.create!(user_from_id: from_id, user_to_id: to_id)
   end
 
+  def check_reciprocity
+    if Like.exists?(user_to_id: self.user_from_id, user_from_id: self.user_to_id)
+      MessageThread.send_message(
+        author_id: self.user_from_id,
+        recipient_id: self.user_to_id,
+        body: "Wow! You two LIKE each other! You should totes start messaging.",
+        notification: true
+      )
+    end
+  end
+
 
 
 end

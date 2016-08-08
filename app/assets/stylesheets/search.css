@@ -1,5 +1,6 @@
 .search-container {
-  padding: 40px !important;
+  width: 840px !important;
+  padding: 40px 20px !important;
 }
 
 .search-criteria {
@@ -36,13 +37,13 @@
 
 .profile-search-vitals>h1 {
   font-weight: 300;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
 }
 
 .profile-search-vitals>h3 {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
   color: grey;
   text-align: center;
   margin: 2px;
@@ -50,17 +51,15 @@
 
 .profile-search-vitals>h2 {
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   color: grey;
   text-align: center;
 }
 
 .profile-search-pic-container {
-  height: 180px;
-  width: 180px;
-  border-radius: 5px;
+  height: 200px;
+  width: 100%;
   overflow: hidden;
-  margin: 10px auto 10px auto;
   display: block;
   background-color: #104DA1;
 }
@@ -78,14 +77,20 @@
 
 .profile-search-box {
   display: inline-block;
-  height: 350px;
-  width: 230px;
+  height: 380px;
+  width: 234px;
   border-radius: 5px;
   margin: 0px 16px 30px 16px;
+  overflow: hidden;
+  box-shadow: 1px .5px 10px #e2e1e0;
 }
 
 .matches-container {
   margin: auto;
+  width: 800px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .like-button {
@@ -93,4 +98,24 @@
   margin: auto;
   width: 160px;
   margin-top: 10px;
+  margin-bottom: 10px;
+  height: 44px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 44px;
+  border: 1px solid;
+  border-color: #ffd83b;
+  box-shadow: 1px 1px 2px #e4e4e4;
+}
+
+.liked-state {
+  font-size: 28px;
+  background-color: #ffd83b;
+  color: white;
+}
+
+.unliked-state {
+  font-size: 24px;
+  background-color: white;
+  color: #ffd83b;
 }

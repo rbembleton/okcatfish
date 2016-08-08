@@ -10,7 +10,7 @@ const LikesStore = new Store(AppDispatcher);
 
 function resetLikes(likes) {
   _myLikes = {};
-
+  
   likes.forEach((like) => {
     _myLikes[like.user_to_id] = like;
   });

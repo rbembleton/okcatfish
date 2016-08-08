@@ -27,9 +27,9 @@ class Api::LikesController < ApplicationController
     @like = Like.from_to_ids_new(
       like_params[:user_from_id],
       like_params[:user_to_id])
-    # @like = Like.new(like_params)
 
     if @like.save
+      @like.check_reciprocity
       render :show
     else
       render json: @like.errors.full_messages

@@ -4,11 +4,12 @@ json.array!(@threads) do |message_thread|
 
 
   json.most_recent_message do
-    json.id message_thread.messages.last
+    json.id message_thread.messages.last.id
     json.body message_thread.messages.last.body
     json.is_read message_thread.messages.last.is_read
     json.time_ago time_ago_in_words(message_thread.messages.last.created_at)
     json.author message_thread.messages.last.author.username
+    json.notification message_thread.messages.last.notification
   end
 
   json.other_user do

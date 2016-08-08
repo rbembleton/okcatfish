@@ -5,6 +5,7 @@ const MessagesActions = require('../../actions/messages_actions');
 const NewMessageForm = require('./new_message_form');
 const SessionStore = require('../../stores/session_store');
 const MessageProfileHeader = require('./message_profile_header');
+const ThreadNotification = require('./thread_notification');
 
 
 const ThreadShow = React.createClass({
@@ -15,7 +16,8 @@ const ThreadShow = React.createClass({
 
   componentDidMount() {
     this.threadListener = MessagesStore.addListener(this.updateThread);
-    MessagesActions.getSingleThread(this.props.params.threadId);
+    // MessagesActions.getSingleThread(this.props.params.threadId);
+    MessagesActions.makeThreadRead(this.props.params.threadId);
     this.messageGetTimer = setInterval(this.messageGet, 10000);
   },
 
@@ -38,10 +40,16 @@ const ThreadShow = React.createClass({
       (
         this.state.thread.messages.map((message, idx) => {
           return (
+            (message.notification) ?
+            <ThreadNotification
+              key={idx}
+              message={message}
+            /> :
             <ThreadMessage
               key={idx}
               message={message}
-              isCurrentUser={message.author_id !== currentUser.id}/>
+              isCurrentUser={message.author_id !== currentUser.id}
+            />
           );
         })
       ) : (<div></div>);

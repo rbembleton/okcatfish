@@ -15,6 +15,10 @@ const MessagesActions = {
     MessagesApiUtil.sendNewMessage(data, this.receiveMessage);
   },
 
+  makeThreadRead(threadId) {
+    MessagesApiUtil.updateThreadAsRead(threadId, this.receiveSingleThread);
+  },
+
   receiveAllThreads(resp) {
     AppDispatcher.dispatch({
       actionType: MessagesConstants.RECEIVE_ALL_THREADS,
