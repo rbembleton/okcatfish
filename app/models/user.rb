@@ -120,6 +120,14 @@ class User < ActiveRecord::Base
     source: :liker
   )
 
+  has_many :user_responses
+
+  has_many(
+    :questions_answered,
+    through: :user_responses,
+    source: :question
+  )
+
 
 ### CUSTOM QUERIES
 

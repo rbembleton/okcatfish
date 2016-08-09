@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808202718) do
+ActiveRecord::Schema.define(version: 20160809162809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id",       null: false
+    t.integer "order",             null: false
+    t.text    "body"
+    t.string  "personality_trait"
+  end
+
+  add_index "answers", ["order"], name: "index_answers_on_order", using: :btree
+  add_index "answers", ["personality_trait"], name: "index_answers_on_personality_trait", using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_from_id", null: false
@@ -79,6 +90,15 @@ ActiveRecord::Schema.define(version: 20160808202718) do
 
   add_index "profile_texts", ["user_id"], name: "index_profile_texts_on_user_id", unique: true, using: :btree
 
+  create_table "questions", force: :cascade do |t|
+    t.text    "body"
+    t.string  "category"
+    t.integer "order"
+  end
+
+  add_index "questions", ["category"], name: "index_questions_on_category", using: :btree
+  add_index "questions", ["order"], name: "index_questions_on_order", using: :btree
+
   create_table "thread_user_links", force: :cascade do |t|
     t.integer "user_id",   null: false
     t.integer "thread_id", null: false
@@ -86,6 +106,14 @@ ActiveRecord::Schema.define(version: 20160808202718) do
 
   add_index "thread_user_links", ["thread_id"], name: "index_thread_user_links_on_thread_id", using: :btree
   add_index "thread_user_links", ["user_id"], name: "index_thread_user_links_on_user_id", using: :btree
+
+  create_table "user_match_responses", force: :cascade do |t|
+    t.integer "user_response_id", null: false
+    t.integer "answer_id",        null: false
+  end
+
+  add_index "user_match_responses", ["answer_id"], name: "index_user_match_responses_on_answer_id", using: :btree
+  add_index "user_match_responses", ["user_response_id"], name: "index_user_match_responses_on_user_response_id", using: :btree
 
   create_table "user_photos", force: :cascade do |t|
     t.integer  "user_id",            null: false
@@ -96,6 +124,18 @@ ActiveRecord::Schema.define(version: 20160808202718) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  create_table "user_responses", force: :cascade do |t|
+    t.integer  "user_id",                   null: false
+    t.integer  "answer_id",                 null: false
+    t.float    "weight",      default: 0.5, null: false
+    t.text     "explanation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_responses", ["answer_id"], name: "index_user_responses_on_answer_id", using: :btree
+  add_index "user_responses", ["user_id"], name: "index_user_responses_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
