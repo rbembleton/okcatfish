@@ -1,14 +1,11 @@
 class Api::MessagesController < ApplicationController
 
   def index
-    # MessageThread.uncached do
-    #   Message.uncached do
 
-      @threads = MessageThread.
-        find_by_user_id(message_user_params[:user_id]).
-        order(updated_at: :desc)
-      # end
-    # end
+    @threads = MessageThread
+      .find_by_user_id(message_user_params[:user_id])
+      .order(updated_at: :desc).includes(messages: [:author], users: [:user_photos, :repo_photos, :location])
+
     if @threads
       render :index
     else
@@ -19,7 +16,9 @@ class Api::MessagesController < ApplicationController
 
 
   def show
-    @thread = MessageThread.find(params[:id])
+    @thread = MessageThread
+      .includes(messages: [:author], users: [:user_photos, :repo_photos, :location])
+      .find(params[:id])
 
     if @thread
       render :show
@@ -30,14 +29,17 @@ class Api::MessagesController < ApplicationController
   end
 
   def update
-    @thread = MessageThread.find(params[:id])
+    @thread = MessageThread
+      .includes(messages: [:author], users: [:user_photos, :repo_photos, :location])
+      .find(params[:id])
 
     if @thread.messages.update_all(is_read: true)
+      pusher_triggers(@thread.users.first.id, @thread.users.second.id, {thread_id: @thread.id})
       render :show
     else
       render json: @thread.errors.full_messages
     end
-    
+
   end
 
 
@@ -53,6 +55,7 @@ class Api::MessagesController < ApplicationController
 
 
     if @message
+      pusher_triggers(@message.author_id, @message.recipient.id, {thread_id: @message.thread_id})
       render :message
     else
       render json: @message.errors.full_messages
@@ -62,6 +65,20 @@ class Api::MessagesController < ApplicationController
 
 
   private
+
+  def pusher_triggers(user1_id, user2_id, data_hash)
+    Pusher.trigger(
+      "threads_channel_#{user1_id}",
+      'update_threads',
+      data_hash
+    )
+
+    Pusher.trigger(
+      "threads_channel_#{user2_id}",
+      'update_threads',
+      data_hash
+    )
+  end
 
   def message_params
     params.require(:messages).permit(:author_id, :recipient_id, :body, :thread_id, :is_read)

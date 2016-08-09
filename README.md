@@ -74,7 +74,7 @@ User can view and search for others profiles. Profiles have text, details, looki
 - [x] test out API interaction in the console.
 - implement each profile component, building out the flux loop as needed.
   - [x] `ProfileShow`
-  - [ ] `ProfilePhotoAlbumShow`
+  - [x] `ProfilePhotoAlbumShow`
   - [x] `UserProfileShow`
   - [x] `UserProfileEdit`
   - [ ] `UserProfilePhotoAlbumShow`

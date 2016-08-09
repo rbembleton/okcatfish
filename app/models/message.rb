@@ -32,4 +32,28 @@ class Message < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :users,
+    through: :thread,
+    source: :users
+  )
+
+  # has_one(
+  #   :recipient,
+  #   -> { find(user_id: me) },
+  #   through: :thread,
+  #   source: :users
+  # )
+
+  def recipient
+    users.where.not(id: self.author_id).first
+    #
+    #
+    # if self.thread.users.first.id != self.author_id
+    #   self.thread.users.first
+    # else
+    #   self.thread.users.second
+    # end
+  end
+
 end

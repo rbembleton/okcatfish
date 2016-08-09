@@ -3,6 +3,7 @@ const SessionStore = require('../../stores/session_store');
 const MessagesActions = require('../../actions/messages_actions');
 const MessagesStore = require('../../stores/messages_store');
 const InboxThread = require('./inbox_thread');
+// const Pusher = require('pusher-js');
 
 const Inbox = React.createClass({
 
@@ -12,12 +13,24 @@ const Inbox = React.createClass({
 
   componentDidMount() {
     this.threadsListener = MessagesStore.addListener(this.updateThreads);
-    const currentUser = SessionStore.currentUser();
-    MessagesActions.getAllThreads(currentUser.id);
+    // const currentUser = SessionStore.currentUser();
+    // MessagesActions.getAllThreads(currentUser.id);
+
+    // this.pusher = new Pusher('3d8dffa997851fa3e91f', {
+    //   encrypted: true
+    // });
+    //
+    // let channel = this.pusher.subscribe(`threads_channel_${currentUser.id}`);
+    // channel.bind('update_threads', this.getAllThreads);
   },
 
   componentWillUnmount() {
     this.threadsListener.remove();
+    // this.pusher.unsubscribe();
+  },
+
+  getAllThreads() {
+    MessagesActions.getAllThreads(currentUser.id);
   },
 
   updateThreads () {

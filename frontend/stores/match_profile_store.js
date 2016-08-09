@@ -16,7 +16,6 @@ MatchProfileStore.match = function () {
 };
 
 MatchProfileStore.__onDispatch = function (payload) {
-  console.log(payload);
   switch (payload.actionType) {
     case SearchConstants.GET_MATCH:
       resetMatch(payload.match);

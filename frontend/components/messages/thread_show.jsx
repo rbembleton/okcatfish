@@ -6,6 +6,7 @@ const NewMessageForm = require('./new_message_form');
 const SessionStore = require('../../stores/session_store');
 const MessageProfileHeader = require('./message_profile_header');
 const ThreadNotification = require('./thread_notification');
+const Pusher = require('pusher-js');
 
 
 const ThreadShow = React.createClass({
@@ -15,19 +16,32 @@ const ThreadShow = React.createClass({
   },
 
   componentDidMount() {
+    const currentUser = SessionStore.currentUser();
     this.threadListener = MessagesStore.addListener(this.updateThread);
-    // MessagesActions.getSingleThread(this.props.params.threadId);
     MessagesActions.makeThreadRead(this.props.params.threadId);
-    this.messageGetTimer = setInterval(this.messageGet, 10000);
+
+    this.pusher = new Pusher('3d8dffa997851fa3e91f', {
+      encrypted: true
+    });
+
+    let channel = this.pusher.subscribe(`threads_channel_${currentUser.id}`);
+    const threadId = parseInt(this.props.params.threadId);
+
+    channel.bind('update_threads', (resp) => {
+      if (resp.thread_id === threadId)
+        { this.threadGet(); }
+    });
+
   },
 
-  messageGet() {
+  threadGet() {
     MessagesActions.getSingleThread(this.props.params.threadId);
   },
 
   componentWillUnmount() {
     this.threadListener.remove();
     clearInterval(this.messageGetTimer);
+    this.pusher.unsubscribe();
   },
 
   updateThread() {

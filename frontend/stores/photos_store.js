@@ -16,7 +16,6 @@ PhotosStore.all = function () {
 };
 
 PhotosStore.__onDispatch = function (payload) {
-  console.log(payload);
   switch (payload.actionType) {
     case ProfileConstants.UPDATE_USER_PHOTOS:
       resetPhotos(payload.photos);

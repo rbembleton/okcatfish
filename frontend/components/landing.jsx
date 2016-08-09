@@ -4,6 +4,7 @@ const SessionActions = require('../actions/session_actions');
 const hashHistory = require('react-router').hashHistory;
 const MessagesStore = require('../stores/messages_store');
 const MessagesActions = require('../actions/messages_actions');
+const Pusher = require('pusher-js');
 
 const Landing = React.createClass({
 
@@ -13,21 +14,34 @@ const Landing = React.createClass({
 
   componentDidMount () {
     $(document.body).addClass("blue-bkg");
+    const currentUser = SessionStore.currentUser();
     this.seshListener = SessionStore.addListener(this.checkLogOut);
     this.messageListener = MessagesStore.addListener(this.updateBadge);
     MessagesActions.getAllThreads(SessionStore.currentUser().id);
+
+    this.pusher = new Pusher('3d8dffa997851fa3e91f', {
+      encrypted: true
+    });
+
+    let channel = this.pusher.subscribe(`threads_channel_${currentUser.id}`);
+    channel.bind('update_threads', this.fetchThreads);
   },
 
   componentWillUnmount () {
     $(document.body).removeClass("blue-bkg");
     this.seshListener.remove();
     this.messageListener.remove();
+    this.pusher.unsubscribe();
   },
 
   checkLogOut () {
     if (!SessionStore.isUserLoggedIn()) {
       hashHistory.push('/');
     }
+  },
+
+  fetchThreads () {
+    MessagesActions.getAllThreads(SessionStore.currentUser().id);
   },
 
   updateBadge () {
