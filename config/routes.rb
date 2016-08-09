@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :show, :update, :create]
     resources :user_photos, only: [:index, :create, :destroy]
     resources :likes, only: [:index, :create, :destroy]
+    resources :questions, only: [:index, :show]
+    resources :user_responses, only: [:index, :show, :update, :create, :destroy]
   end
 end

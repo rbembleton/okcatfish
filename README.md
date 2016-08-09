@@ -106,7 +106,7 @@ User can view and search for others profiles. Profiles have text, details, looki
 
 **Objective:** Users can answer a series of questions to improve the quality of their matches.
 
-- [ ] create `Question` and `Response` models
+- [x] create `Question` and `Response` models
 - build out API, Flux loop, and components for:
   - [ ] answering questions
   - [ ] skipping questions

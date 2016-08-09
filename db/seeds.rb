@@ -15,6 +15,10 @@ MessageThread.delete_all
 Message.delete_all
 ThreadUserLink.delete_all
 Like.delete_all
+Question.delete_all
+Answer.delete_all
+UserResponse.delete_all
+UserMatchResponse.delete_all
 
 demo = User.create!({
   username: "pro_catfisher",
@@ -206,3 +210,27 @@ demo.profile_text.update!({
     Head in the clouds, got no weight on my shoulders.",
   doing: "Working in a factory outside of NYC making horseshoes."
 })
+
+
+
+
+
+
+# --------------------------------------- QUESTIONS
+
+
+(1..30).to_a.map do |idx|
+  q = Question.create!(
+    body: (Faker::Lorem.sentence[0..-2] + "?" ),
+    order: idx
+  )
+
+  (1..(rand(4)+2)).to_a.map do |idx2|
+    a = Answer.create!(
+      body: Faker::Lorem.sentence,
+      order: idx,
+      question_id: q.id
+    )
+  end
+
+end

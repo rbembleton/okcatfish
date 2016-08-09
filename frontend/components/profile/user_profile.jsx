@@ -10,6 +10,8 @@ const NewPhotoForm = require('../photos/new_photo_form');
 const PhotosStore = require('../../stores/photos_store');
 const PhotoCarousel = require('../photos/photo_carousel');
 const ProfileActions = require('../../actions/profile_actions');
+const UserResponses = require('../questions/user_responses');
+const AnswerQuestions = require('../questions/answer_questions');
 
 const UserProfile = React.createClass({
 
@@ -58,6 +60,8 @@ const UserProfile = React.createClass({
           </div>
           <LookingFor user={currentUser}/>
         </div>
+
+        <AnswerQuestions />
       </div>
     );
 

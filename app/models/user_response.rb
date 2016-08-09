@@ -26,5 +26,20 @@ class UserResponse < ActiveRecord::Base
     source: :question
   )
 
+  def match_responses=(array_of_ids)
+    if array_of_ids && array_of_ids.length != 0
+      array_of_ids.each do |answer_id|
+        UserMatchResponse.create!(
+          answer_id: answer_id,
+          user_id: self.user_id
+        )
+      end
+    else
+      UserMatchResponse.create!(
+        answer_id: self.answer_id,
+        user_id: self.user_id
+      )
+    end
+  end
 
 end
