@@ -5,8 +5,14 @@
   line-height: 46px;
   border-bottom: .5px solid #6391f3;
   min-width: 700px;
-  /*position: fixed;
-  top: 0;*/
+  position: fixed !important;
+  top: 0;
+  box-shadow: 1px 1px 14px #13458b;
+  z-index: 100;
+}
+
+.logged-in-main {
+  margin-top: 100px;
 }
 
 .nav-left {
@@ -81,12 +87,20 @@
   line-height: 22px;
   border-radius: 50%;
   margin: 5px;
-  background-image: linear-gradient(#ff5e79, #e93d59);
+  background-image: linear-gradient(rgba(255, 94, 121, 0), rgba(127, 4, 25, 0.15));
+  background-color: #ed3654;
   font-size: 14px;
   font-weight: bold;
   padding: 2px 5px;
+  transition: all 1.2s cubic-bezier(0.67, 0.06, 0, 0.85);
 }
 
 .hide-inbox-badge {
   display: none;
+}
+
+.badge-flash {
+  background-color: rgb(255, 231, 22);
+
+  transition: all .1s cubic-bezier(0.67, 0.06, 0, 0.85);
 }

@@ -5,6 +5,7 @@ const hashHistory = require('react-router').hashHistory;
 const MessagesStore = require('../stores/messages_store');
 const MessagesActions = require('../actions/messages_actions');
 const Pusher = require('pusher-js');
+const InboxBadge = require('./messages/inbox_badge');
 
 const Landing = React.createClass({
 
@@ -45,6 +46,7 @@ const Landing = React.createClass({
   },
 
   updateBadge () {
+    console.log(this.state.notifications);
     this.setState({ notifications: MessagesStore.numberOfNotifications(SessionStore.currentUser().id) });
   },
 
@@ -69,6 +71,7 @@ const Landing = React.createClass({
   },
 
   render () {
+
     return (
       <div className="main-page blue-bkg">
         <nav className="nav-bar blue-bkg clearfix">
@@ -88,14 +91,12 @@ const Landing = React.createClass({
               className="log-out-button blue-button"
               onClick={this.inboxClick}>
               Inbox
-              <div className={this.state.notifications > 1 ? "display-inbox-badge" : "hide-inbox-badge"}>
-                {this.state.notifications}
-              </div>
+              <InboxBadge notifications={this.state.notifications}/>
             </button>
             <input className="log-out-button blue-button" type="button" onClick={this.logOutClick} value="Log Out"/>
           </div>
         </nav>
-        <main>
+        <main className="logged-in-main">
           {this.props.children}
         </main>
       </div>

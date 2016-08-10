@@ -7,11 +7,41 @@
   border-radius: 4px;
   text-align: center;
   line-height: 40px;
-  box-shadow: 1px 1px 2px #b1d9de;
+  box-shadow: 1px 1px 5px -1px #073c84;
 }
 
-.like-button {
+.green-button:hover {
+  background-image: none;
+  background-color: #ff5e79;
+}
 
+.profile-search-like-box {
+  position: relative;
+}
+
+/*.unliked-state:after {*/
+
+.magic-star-class {
+  position: absolute;
+  display: block;
+  text-align: center;
+  bottom: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.show-star {
+  z-index: -1;
+  font-size: 40px;
+  color: rgb(255, 216, 59);
+}
+
+.fade-star {
+  z-index: 2;
+  font-size: 80px;
+  color: rgba(255, 216, 59, 0);
+  bottom: 120px;
+  transition:all 1s linear;
 }
 
 
@@ -24,6 +54,11 @@
   font-size: 16px;
   border-radius: 4px;
   text-align: center;
+}
+
+.blue-button:hover, .round-pic-cont:hover, .ddown:hover,
+.input-text:hover {
+  box-shadow: 0px 0px 20px -2px white;
 }
 
 .white-button-w-green {

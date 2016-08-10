@@ -44,6 +44,10 @@ const LikeToggle = React.createClass({
       "like-button " + (this.state.liked ? "liked-state" : "unliked-state")
     );
 
+    const magicStarClass = (
+      "magic-star-class " + (this.state.liked ? "fade-star" : "show-star")
+    );
+
     return(
 
       <div className="profile-search-like-box">
@@ -52,6 +56,7 @@ const LikeToggle = React.createClass({
           className={thisClass}
           onClick={this.toggleLike}
         >{this.state.liked ? `★` : `☆`}</button>
+      <div className={magicStarClass}>&#9733;</div>
       </div>
 
       );
