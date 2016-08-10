@@ -139,11 +139,12 @@ const AnswerQuestions = React.createClass({
 
            <div className="answer-weight">
              How imporant is this question to you?
-             {" " + (currentThis.state.weight * 100) + "% "}
+             {" " + (parseInt(currentThis.state.weight * 100)) + "% "}
              <input
                className="answer-weight-slider"
                type="range"
                min="0" max="100" step="1"
+               value={parseInt(currentThis.state.weight * 100)}
                onChange={currentThis.updateWeight}
              />
            </div>

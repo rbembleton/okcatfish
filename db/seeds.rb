@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv' # for csv parsing
 
 
 User.delete_all
@@ -218,19 +219,48 @@ demo.profile_text.update!({
 
 # --------------------------------------- QUESTIONS
 
+    # ======= Random
+#
+# (1..30).to_a.map do |idx|
+#   q = Question.create!(
+#     body: (Faker::Lorem.sentence[0..-2] + "?" ),
+#     order: idx
+#   )
+#
+#   (1..(rand(4)+2)).to_a.map do |idx2|
+#     a = Answer.create!(
+#       body: Faker::Lorem.sentence,
+#       order: idx2,
+#       question_id: q.id
+#     )
+#   end
+#
+# end
 
-(1..30).to_a.map do |idx|
+      # ======= CSV file instead
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'match_questions.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each_with_index do |question, q_idx|
+  next if question == nil
   q = Question.create!(
-    body: (Faker::Lorem.sentence[0..-2] + "?" ),
-    order: idx
+    body: question['question'],
+    order: (q_idx + 1)
   )
 
-  (1..(rand(4)+2)).to_a.map do |idx2|
+  answers = [
+    question['answer-1'],
+    question['answer-2'],
+    question['answer-3'],
+    question['answer-4'],
+    question['answer-5']]
+
+  answers.each_with_index do |answer, a_idx|
+    next if answer == nil
     a = Answer.create!(
-      body: Faker::Lorem.sentence,
-      order: idx2,
+      body: answer,
+      order: (a_idx + 1),
       question_id: q.id
     )
   end
-
 end

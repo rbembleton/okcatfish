@@ -18,7 +18,7 @@ const SingleResponse = React.createClass({
     });
 
     const dispExplanation = currentThis.props.response.explanation ?
-      <div className="single-uresp-explanation">this.props.response.explanation</div> :
+      <div className="single-uresp-explanation">{this.props.response.explanation}</div> :
       "";
 
     return(
