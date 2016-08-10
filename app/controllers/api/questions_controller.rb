@@ -1,7 +1,7 @@
 class Api::QuestionsController < ApplicationController
 
   def index
-    @questions = Question.next_twenty(user_id: question_params[:user_id])
+    @questions = Question.next_twenty(question_params[:user_id])
     render :index
   end
 

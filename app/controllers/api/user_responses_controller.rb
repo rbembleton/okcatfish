@@ -3,7 +3,7 @@ class Api::UserResponsesController < ApplicationController
   def index
     @user_responses = UserResponse
       .where(user_id: response_params[:user_id])
-      .includes(questions: [:answers], :answer)
+      .includes(:answer, question: :answers)
 
     if @user_responses
       render :index
@@ -27,9 +27,15 @@ class Api::UserResponsesController < ApplicationController
 
 
   def create
-    @user_response = UserResponse.new(response_params)
+    @user_response = UserResponse.new(
+      answer_id: response_params[:answer_id],
+      user_id: response_params[:user_id],
+      weight: response_params[:weight],
+      explanation: response_params[:explanation]
+    )
 
     if @user_response.save
+      @user_response.add_match_responses(response_params[:match_responses])
       render :show
     else
       render json: @user_response.errors

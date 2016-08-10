@@ -4,19 +4,20 @@ const React = require('react');
 const SingleResponse = React.createClass({
 
   render () {
+    const currentThis = this;
 
-    const dispAnswers = this.props.response.question.answers.map((answer, idx) => {
-      const thisClass = (this.props.response.answer_id === answer.id) ?
+    const dispAnswers = currentThis.props.response.question.answers.map((answer, idx) => {
+      const thisClass = (currentThis.props.response.answer_id === answer.id) ?
         "single-uresp-answer selected-answer" : "single-uresp-answer";
 
       return (
-        <div className={thisClass} key="idx">
+        <div className={thisClass} key={idx}>
           {answer.order + ": " + answer.body}
         </div>
       );
     });
 
-    const dispExplanation = this.props.response.explanation ?
+    const dispExplanation = currentThis.props.response.explanation ?
       <div className="single-uresp-explanation">this.props.response.explanation</div> :
       "";
 

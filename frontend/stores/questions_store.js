@@ -26,29 +26,23 @@ function updateUserResponses (userId, responses) {
 }
 
 function updateSingleResponse (response) {
-  if (_responses[response.userId]) {
-    if (_responses[response.userId][response.id]) {
-      _responses[response.userId][response.id] = response;
-    } else {
-      _responses[response.userId][response.id] = response;
-      // they're the same?... for now
-    }
-    _responses[response.userId] = response;
+  if (_responses[response.user_id]) {
+    _responses[response.user_id][response.id] = response;
   } else {
     let newRespObj = {};
-    newRespObj[response[id]] = response;
-    _responses[response.userId] = newRespObj;
+    newRespObj[response.id] = response;
+    _responses[response.user_id] = newRespObj;
   }
 }
 
 function updateNextQuestion () {
-  _currentQuestion = _questionsQueue.shift();
+  _currentQuestion = _questionsQueue.shift() || {};
 }
 
 QuestionsStore.nextQuestion = function () {
-  if (!_currentQuestion) {
-    console.log(_currentQuestion); // HEYYYYYY!
-    _currentQuestion = _questionsQueue.shift();
+  if (!_currentQuestion.id) {
+    console.log(_currentQuestion);
+    _currentQuestion = _questionsQueue.shift() || {};
   }
 
   return Object.assign({}, _currentQuestion);
@@ -61,29 +55,31 @@ QuestionsStore.questionsQueue = function () {
 };
 
 QuestionsStore.userResponses = function (userId) {
-  return Object.keys(_responses[userId]).map((response) => {
-    return Object.assign({}, response);
+  if (!_responses[userId]) { return []; }
+  return Object.keys(_responses[userId]).map((responseId) => {
+    return Object.assign({}, _responses[userId][responseId]);
   });
 };
 
 
 QuestionsStore.__onDispatch = function (payload) {
+  console.log(payload.actionType);
   switch (payload.actionType) {
     case QuestionsConstants.RECEIVE_SINGLE_RESPONSE:
       updateSingleResponse(payload.response);
       break;
     case QuestionsConstants.RECEIVE_CREATED_RESPONSE:
-      updateNextQuestion();
       updateSingleResponse(payload.response);
+      updateNextQuestion();
       break;
     case QuestionsConstants.RECEIVE_ALL_RESPONSES:
       updateUserResponses(payload.userId, payload.responses);
       break;
     // case QuestionsConstants.RECEIVE_SINGLE_QUESTION:
-    //   resetPhotos(payload.photos);
+    //   resetPhotos(payload.question);
     //   break;
     case QuestionsConstants.RECEIVE_NEXT_20_QUESTIONS:
-      queueQuestions(payload.photos);
+      queueQuestions(payload.questions);
       break;
   }
   QuestionsStore.__emitChange();

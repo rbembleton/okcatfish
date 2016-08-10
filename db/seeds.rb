@@ -228,7 +228,7 @@ demo.profile_text.update!({
   (1..(rand(4)+2)).to_a.map do |idx2|
     a = Answer.create!(
       body: Faker::Lorem.sentence,
-      order: idx,
+      order: idx2,
       question_id: q.id
     )
   end

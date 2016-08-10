@@ -62,6 +62,7 @@ const UserProfile = React.createClass({
         </div>
 
         <AnswerQuestions />
+        <UserResponses userId={currentUser.id}/>
       </div>
     );
 

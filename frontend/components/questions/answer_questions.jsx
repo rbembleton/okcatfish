@@ -8,7 +8,7 @@ const AnswerQuestions = React.createClass({
 
   getInitialState () {
     return({
-      currentQuestion: QuestionsStore.nextQuestion(),
+      currentQuestion: QuestionsStore.nextQuestion() || null,
       answerId: null,
       matchResponseIds: [],
       weight: 0.5,
@@ -26,7 +26,10 @@ const AnswerQuestions = React.createClass({
 
   updateQuestion() {
     const nextQuestion = QuestionsStore.nextQuestion();
-    if (this.state.current_question && this.state.current_question.id != nextQuestion.id) {
+
+    if (!this.state.currentQuestion.id) {
+      this.setState({ currentQuestion: nextQuestion });
+    } else if (this.state.currentQuestion.id != nextQuestion.id) {
       this.setState({
         currentQuestion: nextQuestion,
         answerId: null,
@@ -47,16 +50,18 @@ const AnswerQuestions = React.createClass({
   },
 
   updateUserAnswer(e) {
-    e.preventDefault();
-    this.setState({ answerId: e.target.value })
+    // no prevent default!!! will ruin radio checking!
+    this.setState({ answerId: parseInt(e.target.value) });
   },
 
   updateMatchAnswers(e) {
-    e.preventDefault();
+    // no prevent default!!! will ruin checkbox checking!
     let newMatchResps = this.state.matchResponseIds;
-    const idIdx = newMatchResps.indexOf(e.target.value)
-    idIdx > -1 ? newMatchResps.splice(idIdx, 1) : newMatchResps.push(e.target.value);
-    this.setState({ matchResponseIds: newMatchResps })
+    const checkedVal = parseInt(e.target.value);
+    const idIdx = newMatchResps.indexOf(checkedVal);
+
+    const temp = (idIdx > -1) ? newMatchResps.splice(idIdx, 1) : newMatchResps.push(checkedVal);
+    this.setState({ matchResponseIds: newMatchResps });
   },
 
 
@@ -74,74 +79,81 @@ const AnswerQuestions = React.createClass({
 
   render () {
 
-
-
-
     let answerForm = "";
     let dispUserAnswerOptions = "";
     let dispMatchAnswerOptions = "";
+    let currentThis = this;
+    let question = "";
 
     if (this.state.currentQuestion.id) {
 
       dispUserAnswerOptions = this.state.currentQuestion.answers.map((answer, idx) => {
          return (
-           <input
-             type="radio"
-             label={answer.body}
-             selected={this.state.answerId === answer.id}
-             value={answer.id}
-             key={idx}
-           />
+           <label key={idx}>
+             <input
+               type="radio"
+               checked={currentThis.state.answerId === answer.id}
+               value={answer.id}
+               key={idx}
+               onChange={currentThis.updateUserAnswer}
+             />
+           {answer.body}
+          </label>
        );
        });
 
-       dispMatchAnswerOptions = this.state.currentQuestion.answers.map((answer, idx) => {
+       dispMatchAnswerOptions = currentThis.state.currentQuestion.answers.map((answer, idx) => {
          return (
-           <label><input
+           <label key={idx}><input
              type="checkbox"
              className="match-answer-choice-checkbox"
              label={answer.body}
-             checked={this.state.matchResponseIds.includes(answer.id)}
+             checked={currentThis.state.matchResponseIds.includes(parseInt(answer.id))}
              value={answer.id}
-             key={idx}
-             onChange={this.updateMatchAnswers}
+             onChange={currentThis.updateMatchAnswers}
            />{answer.body}</label>
          );
        });
 
-       answerform = (
-         <form onSubmit={this.handleSubmit}>
+       question = (
+         <div className="answer-q-question">
+           {currentThis.state.currentQuestion.body}
+         </div>
+       );
 
-           <div className="user-q-response">
-             <radiogroup
-               className="user-answer-choice-radio"
-               onChange={this.updateUserAnswer}
-             >
-               {dispUserAnswerOptions}
-             </radiogroup>
-           </div>
 
-           <div className="match-q-responses">
-             {dispMatchAnswerOptions}
+       answerForm = (
+         <form onSubmit={currentThis.handleSubmit}>
+
+           <div className="user-match-q-cont clearfix">
+             <div className="user-q-response">
+                Your choice:
+                {dispUserAnswerOptions}
+             </div>
+
+             <div className="match-q-responses">
+               Options for your potential match:
+               {dispMatchAnswerOptions}
+             </div>
            </div>
 
            <div className="answer-weight">
-             {this.state.weight * 100 + "%"}
+             How imporant is this question to you?
+             {" " + (currentThis.state.weight * 100) + "% "}
              <input
                className="answer-weight-slider"
                type="range"
                min="0" max="100" step="1"
-               onChange={this.updateWeight}
+               onChange={currentThis.updateWeight}
              />
            </div>
            <div className="answer-explanation">
-             <input
-               className="answer-explanation-text"
-               type="textarea"
+             Explanation: (optional)<br/>
+             <textarea
                placeholder="...explanation"
-               value={this.state.explanation}
-               onChange={this.updateExplanation}
-             />
+               className="answer-explanation-text white-container"
+               value={currentThis.state.explanation}
+               onChange={currentThis.updateExplanation}/>
            </div>
            <input
              className="answer-question-button green-button"
@@ -150,6 +162,7 @@ const AnswerQuestions = React.createClass({
            />
         </form>
      );
+
    }
 
 
@@ -159,7 +172,8 @@ const AnswerQuestions = React.createClass({
 
     return(
       <div className="answer-question-form">
-
+        {question}
+        {answerForm}
       </div>
     );
   }

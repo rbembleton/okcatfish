@@ -16,7 +16,7 @@ const QuestionsActions = {
   },
 
   getAllResponses(userId) {
-    QuestionsApiUtil.fetchAllResponse(userId, this.receiveAllResponses);
+    QuestionsApiUtil.fetchAllResponses(userId, this.receiveAllResponses);
   },
 
   getSingleQuestion(id) {
