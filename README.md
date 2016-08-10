@@ -20,14 +20,14 @@ OKCatfish is a web application inspired by OKCupid that will be built using Ruby
   - [x] Smooth, bug-free navigation
   - [x] Adequate seed data to demonstrate the site's features
   - [x] Elegant, Simple, and Clear CSS styling
-- [ ] Personality Questions
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Elegant, Simple, and Clear CSS styling
-- [ ] Match Percentages based on Questions
-  - [ ] Smooth, bug-free navigation
-  - [ ] Adequate seed data to demonstrate the site's features
-  - [ ] Elegant, Simple, and Clear CSS styling
+- [x] Personality Questions
+  - [x] Smooth, bug-free navigation
+  - [x] Adequate seed data to demonstrate the site's features
+  - [x] Elegant, Simple, and Clear CSS styling
+- [x] Match Percentages based on Questions
+  - [x] Smooth, bug-free navigation
+  - [x] Adequate seed data to demonstrate the site's features
+  - [x] Elegant, Simple, and Clear CSS styling
 
 ## Design Docs
 * [View Wireframes][views]
@@ -112,15 +112,15 @@ User can view and search for others profiles. Profiles have text, details, looki
   - [ ] skipping questions
   - [x] viewing questions
 - [ ] Style new elements
-- [ ] Seed questions, responses and user responses
+- [x] Seed questions, responses and user responses
 
 ### Phase 5: Match Percentages based on Questions (1 day, W2 Th 6pm)
 
 **objective:** Calculate and display match percentages based on Questions, add weight to questions.
 
-- [ ] calculate match percentages, add weight to `user responses`
+- [x] calculate match percentages, add weight to `user responses`
 - [ ] add `MatchPercentage` store, updating whenever new questions are answered
-- [ ] add match percentages to profile search
+- [x] add match percentages to profile search
 - [ ] update CSS
 
 
