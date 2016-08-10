@@ -1,5 +1,6 @@
 const React = require('react');
 const LikeToggle = require('./like_toggle');
+const MatchPercentage = require('./match_percentage');
 
 const ProfileHeader = React.createClass({
 
@@ -18,6 +19,7 @@ const ProfileHeader = React.createClass({
           <div className="profile-like-toggle">
             If you like what you see...
             <LikeToggle matchId={this.props.user.id}/>
+            <MatchPercentage matchPercentage={this.props.user.match_percentage} />
           </div>  : ""
         }
       </div>

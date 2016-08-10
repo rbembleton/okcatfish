@@ -17,7 +17,9 @@ class Api::SearchController < ApplicationController
       @users = @users.where.not(id: search_params[:user_id])
     end
 
+
     if @users
+      @match_percentage_hash = User.find(search_params[:user_id]).calculate_matches(@users)
       render :index
     else
       render json: "No matches found!"
@@ -33,7 +35,8 @@ class Api::SearchController < ApplicationController
       :distance,
       {location: [:lat, :lng]},
       :looking_for,
-      :orientation
+      :orientation,
+      :match_percentage
     )
   end
 

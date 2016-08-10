@@ -21,13 +21,31 @@ class Question < ActiveRecord::Base
 
   def self.next_twenty(user_id)
     if UserResponse.exists?(user_id: user_id)
-      Question
-        .joins('JOIN answers ON answers.question_id = questions.id LEFT OUTER JOIN user_responses ON user_responses.answer_id = answers.id')
-        .where('user_responses.user_id = ? OR user_responses.user_id IS NULL', user_id)
-        .group(:id)
-        .having('COUNT(user_responses.user_id) = 0')
-        .order(order: :asc)
-        .limit(20)
+      # Question
+      #   .joins('JOIN answers ON answers.question_id = questions.id LEFT OUTER JOIN user_responses ON user_responses.answer_id = answers.id')
+      #   .group('questions.id')
+      #
+      #
+      #   # .having('COUNT(user_responses.user_id) = 0')
+      #
+      #   # .where('user_responses.user_id = ? OR user_responses.user_id IS NULL', user_id)
+      #
+      #
+      #   # .order(order: :asc)
+      #   # .limit(20)
+
+      Question.where('id NOT IN (?)', (User.find(user_id).questions_answered.select(:id))).order(order: :asc).limit(20)
+
+
+      # Question
+      #   .joins(:answers)
+      #   .joins('LEFT OUTER JOIN user_responses ON user_responses.answer_id = answers.id')
+      #   .group('questions.id')
+      #   .having('user_responses.user_id != ?', user_id)
+        # .having("COUNT((user_responses.user_id = ?) = 0)", user_id)
+
+        # .where('user_responses.user_id = ? OR user_responses.user_id IS NULL', user_id)
+
     else
       Question.order(order: :asc).limit(20)
     end

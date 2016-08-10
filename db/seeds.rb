@@ -51,7 +51,65 @@ rb.profile_text.update!({
   msg_me_if: Faker::Hipster.paragraph,
 })
 
+# --------------------------------------- QUESTIONS
 
+q_arr = []
+
+    # ======= Random
+#
+# (1..30).to_a.map do |idx|
+#   q = Question.create!(
+#     body: (Faker::Lorem.sentence[0..-2] + "?" ),
+#     order: idx
+#   )
+#
+#   (1..(rand(4)+2)).to_a.map do |idx2|
+#     a = Answer.create!(
+#       body: Faker::Lorem.sentence,
+#       order: idx2,
+#       question_id: q.id
+#     )
+#   end
+#
+# end
+
+    # ======= CSV file instead
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'match_questions.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each_with_index do |question, q_idx|
+  next if question['question'] == nil
+  q = Question.create!(
+    body: question['question'],
+    order: (q_idx + 1)
+  )
+  add_to_q_arr = {question: q, answers: []}
+
+  answers = [
+    question['answer-1'],
+    question['answer-2'],
+    question['answer-3'],
+    question['answer-4'],
+    question['answer-5']]
+
+  answers.each_with_index do |answer, a_idx|
+    next if answer == nil
+    a = Answer.create!(
+      body: answer,
+      order: (a_idx + 1),
+      question_id: q.id
+    )
+    add_to_q_arr[:answers].push(a)
+  end
+
+  q_arr.push(add_to_q_arr)
+end
+
+
+
+
+
+# ----------------------------------------- GENERATE FAKE USERS
 
 zip_codes = (10001..10014).to_a + (10016..10041).to_a
 go_combos = {"male" => ["straight", "gay", "bisexual"],
@@ -85,6 +143,7 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     msg_me_if: Faker::Hipster.paragraph,
   })
 
+  # POPULATE FAKE MESSAGES
   if rand(3) == 0
     mt = MessageThread.new_from_user_ids(u1.id, demo.id)
     mess1 = Message.create!({
@@ -124,6 +183,24 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     end
 
   end
+
+  # POPULATE FAKE ANSWERS
+
+  q_arr.each do |q_obj|
+    u_answer_id1 = q_obj[:answers].sample.id
+    ures = UserResponse.create!(
+      answer_id: u_answer_id1,
+      user_id: u1.id,
+      weight: (((0..100).to_a.sample)/100.00),
+      explanation: Faker::Hipster.sentence
+    )
+    u_answer_id2 = q_obj[:answers].sample.id
+    while u_answer_id2 == u_answer_id1
+      u_answer_id2 = q_obj[:answers].sample.id
+    end
+    ures.add_match_responses([u_answer_id1, u_answer_id2 ])
+  end
+
 end
 
 MessageThread.where("updated_at < ?", 3.days.ago).each do |mt|
@@ -211,56 +288,3 @@ demo.profile_text.update!({
     Head in the clouds, got no weight on my shoulders.",
   doing: "Working in a factory outside of NYC making horseshoes."
 })
-
-
-
-
-
-
-# --------------------------------------- QUESTIONS
-
-    # ======= Random
-#
-# (1..30).to_a.map do |idx|
-#   q = Question.create!(
-#     body: (Faker::Lorem.sentence[0..-2] + "?" ),
-#     order: idx
-#   )
-#
-#   (1..(rand(4)+2)).to_a.map do |idx2|
-#     a = Answer.create!(
-#       body: Faker::Lorem.sentence,
-#       order: idx2,
-#       question_id: q.id
-#     )
-#   end
-#
-# end
-
-      # ======= CSV file instead
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'match_questions.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each_with_index do |question, q_idx|
-  next if question == nil
-  q = Question.create!(
-    body: question['question'],
-    order: (q_idx + 1)
-  )
-
-  answers = [
-    question['answer-1'],
-    question['answer-2'],
-    question['answer-3'],
-    question['answer-4'],
-    question['answer-5']]
-
-  answers.each_with_index do |answer, a_idx|
-    next if answer == nil
-    a = Answer.create!(
-      body: answer,
-      order: (a_idx + 1),
-      question_id: q.id
-    )
-  end
-end

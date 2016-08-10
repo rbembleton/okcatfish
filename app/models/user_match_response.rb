@@ -13,5 +13,10 @@ class UserMatchResponse < ActiveRecord::Base
 
   belongs_to :user_response
   belongs_to :answer
+  has_one(
+    :question,
+    through: :answer,
+    source: :question
+  )
 
 end

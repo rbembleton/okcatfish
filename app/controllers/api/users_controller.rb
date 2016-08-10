@@ -17,6 +17,7 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user
+      @match_p = current_user.calculate_single_match(@user) if @user.id != current_user.id 
       render :show
     else
       render json: "User not found"

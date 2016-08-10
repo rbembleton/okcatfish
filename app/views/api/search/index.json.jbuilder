@@ -1,5 +1,6 @@
 json.array!(@users) do |user|
   json.(user, :id, :username, :gender, :age, :loc_desc)
+  json.match_percentage @match_percentage_hash[user.id]
   json.prof_pic do
     if user.prof_pic
       json.url asset_path(user.prof_pic.url)

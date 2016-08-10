@@ -16,7 +16,13 @@ class UserResponse < ActiveRecord::Base
   validates :user_id, :answer_id, :weight, presence: true
   validates :weight, inclusion: (0.0..1.0)
 
-  belongs_to :user
+  belongs_to(
+    :user,
+    class_name: "User",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+  
   belongs_to :answer
   has_many :user_match_responses
 

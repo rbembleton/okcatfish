@@ -9,6 +9,7 @@ const MatchProfileStore = require('../../stores/match_profile_store');
 const NewMessageForm = require('../messages/new_message_form');
 const PhotosStore = require('../../stores/photos_store');
 const PhotoCarousel = require('../photos/photo_carousel');
+const UserResponses = require('../questions/user_responses');
 
 const MatchProfile = React.createClass({
 
@@ -69,6 +70,7 @@ const MatchProfile = React.createClass({
           </div>
           <LookingFor user={this.state.user}/>
         </div>
+        <UserResponses userId={this.state.user.id}/>
       </div>
     ) : (
       <div></div>

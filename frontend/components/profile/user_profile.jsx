@@ -60,7 +60,6 @@ const UserProfile = React.createClass({
           </div>
           <LookingFor user={currentUser}/>
         </div>
-
         <AnswerQuestions />
         <UserResponses userId={currentUser.id}/>
       </div>

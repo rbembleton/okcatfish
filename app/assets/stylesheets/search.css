@@ -119,3 +119,31 @@
   background-color: white;
   color: #ffd83b;
 }
+
+.search-match-percentage {
+  font-size: 20px;
+  display: block;
+  text-align: center;
+  font-weight: 500;
+  margin: 5px auto;
+}
+
+.mp-green {
+  color: #29d58f
+}
+
+.mp-blue {
+  color: #2662b6;
+}
+
+.mp-yellow {
+  color: #dbb92e
+}
+
+.mp-orange {
+  color: #e38c52;
+}
+
+.mp-red {
+  color: #e93d59;
+}
