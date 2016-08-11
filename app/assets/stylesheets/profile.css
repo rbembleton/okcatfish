@@ -33,6 +33,99 @@
   height: 240px;
 }
 
+.profile-fixed-header {
+  display: block;
+  position: fixed;
+  height: 120px;
+  top: 67px;
+  left: 0px;
+  width: 100%;
+  background-color: #104DA1;
+  text-align: center;
+  border-bottom: .5px solid #6391f3;
+  box-shadow: 1px 1px 14px #13458b;
+}
+
+.profile-fixed-header div {
+  display: inline-block;
+}
+
+.profile-fixed-header .fixed-center-cont {
+  display: inline-block;
+  margin: auto;
+  width: 900px;
+}
+
+.profile-fixed-header .profile-pic-container {
+  width: 96px;
+  height: 96px;
+  float: left;
+  margin-left: 0px;
+}
+
+.profile-fixed-header .search-match-percentage {
+  float: left;
+  line-height: 30px;
+  margin: 0px !important;
+  text-align: left;
+}
+
+.profile-fixed-header .profile-vitals {
+  float: left;
+  line-height: 30px;
+  margin: 14px 10px;
+  color: white;
+  text-align: left;
+}
+
+.profile-fixed-header h1 {
+  font-size: 22px;
+}
+
+.profile-fixed-header h2 {
+  font-size: 18px;
+}
+
+.profile-fixed-header .profile-new-message-form {
+  width: 510px;
+  height: 80px;
+  display: inline-block;
+  float: right;
+  border: 0px;
+}
+
+.fixed-center-cont>.profile-new-message-form {
+  margin: 10px 0px;
+}
+
+.profile-fixed-header textarea {
+  width: 400px;
+  height: 60px !important;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  margin-right: 0px;
+  border-radius: 10px 0px 0px 10px
+}
+
+
+
+.profile-fixed-header .profile-like-toggle {
+  display: inline-block;
+  float: right;
+  text-align: center;
+}
+
+.profile-fixed-header input[type="submit"] {
+  width: 80px;
+  height: 80px !important;
+  font-size: 16px;
+  display: inline-block;
+  float: right;
+  margin: 10px 0px;
+  border-radius: 0px 10px 10px 0px
+}
+
 .num2 {
   background-color: pink;
 }

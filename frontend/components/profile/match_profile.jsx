@@ -8,11 +8,19 @@ const PhotosStore = require('../../stores/photos_store');
 const PhotoCarousel = require('../photos/photo_carousel');
 const MatchAbout = require('./match_about');
 const MatchQuestions = require('./match_questions');
+const ProfileFixedHeader = require('./profile_fixed_header');
+
 
 const MatchProfile = React.createClass({
 
   getInitialState() {
-    return({user: {}, photos: [], whichChild: 'about'});
+    return({
+      user: {},
+      photos: [],
+      whichChild: 'about',
+      whichHeader: 'standard',
+      howFar: 0
+    });
   },
 
   updateUser() {
@@ -28,11 +36,23 @@ const MatchProfile = React.createClass({
     this.photoListener = PhotosStore.addListener(this.updatePhotos);
     SearchActions.getMatch(this.props.params.userId);
     ProfileActions.getUserPhotos(this.props.params.userId);
+    window.addEventListener('scroll', this.handleScroll);
   },
 
   componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
     this.profileListener.remove();
     this.photoListener.remove();
+  },
+
+  handleScroll(e) {
+    // console.log(e.srcElement.body.scrollTop);
+    const currScroll = e.srcElement.body.scrollTop;
+
+    if (currScroll >= 300) {
+      const howFar = (currScroll - 420) <= 67 ? (currScroll - 420) : 67;
+      this.setState({whichHeader: 'fixed', howFar: howFar});
+    } else { this.setState({whichHeader: 'standard'}); }
   },
 
   updateChild(e) {
@@ -48,32 +68,58 @@ const MatchProfile = React.createClass({
         <MatchQuestions user={this.state.user}/>
     );
 
-    const toRender = (this.state.user.id) ? (
-      <div>
-        <ProfileHeader user={this.state.user} showLikeBox={true}/>
-        <div className="profile-new-message-form white-container">
-          <NewMessageForm
-            recipient_id={this.state.user.id}
-          />
+
+
+    let toRender = (<div></div>);
+
+    if (this.state.user.id) {
+
+      const howFarNow = {
+        top: `${this.state.howFar}px`
+      };
+
+      const currHeader = (this.state.whichHeader === 'standard') ?
+        (
+          <div>
+            <ProfileHeader user={this.state.user} showLikeBox={true}/>
+            <div className="profile-new-message-form white-container">
+              <NewMessageForm
+                recipient_id={this.state.user.id}
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            <ProfileHeader user={this.state.user} showLikeBox={true}/>
+            <div className="profile-new-message-form white-container">
+              <NewMessageForm
+                recipient_id={this.state.user.id}
+              />
+            </div>
+            <ProfileFixedHeader user={this.state.user} style={howFarNow}/>
+          </div>
+        );
+
+      toRender = (
+        <div>
+          {currHeader}
+          <div className="select-user-page clearfix">
+            <ul>
+              <li
+                id='about'
+                className={this.state.whichChild === 'about' ? "selected-user-page" : ""}
+                onClick={this.updateChild}>About</li>
+              <li><PhotoCarousel photos={this.state.photos}/></li>
+              <li
+                id='questions'
+                className={this.state.whichChild === 'questions' ? "selected-user-page" : ""}
+                onClick={this.updateChild}>Questions</li>
+            </ul>
+          </div>
+          {currChild}
         </div>
-        <div className="select-user-page clearfix">
-          <ul>
-            <li
-              id='about'
-              className={this.state.whichChild === 'about' ? "selected-user-page" : ""}
-              onClick={this.updateChild}>About</li>
-            <li><PhotoCarousel photos={this.state.photos}/></li>
-            <li
-              id='questions'
-              className={this.state.whichChild === 'questions' ? "selected-user-page" : ""}
-              onClick={this.updateChild}>Questions</li>
-          </ul>
-        </div>
-        {currChild}
-      </div>
-    ) : (
-      <div></div>
-    );
+      );
+    }
 
     return (
       <div className="profile-container center-container">

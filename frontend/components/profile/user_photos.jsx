@@ -1,5 +1,6 @@
 const React = require('react');
 const PhotosStore = require('../../stores/photos_store');
+const SessionStore = require('../../stores/session_store');
 const PhotoCarousel = require('../photos/photo_carousel');
 const NewPhotoForm = require('../photos/new_photo_form');
 const ProfileActions = require('../../actions/profile_actions');
