@@ -133,6 +133,12 @@ class User < ActiveRecord::Base
     source: :question
   )
 
+  has_many(
+    :user_match_responses,
+    through: :user_responses,
+    source: :user_match_responses
+  )
+
 
 ### CUSTOM QUERIES
 
@@ -273,15 +279,26 @@ class User < ActiveRecord::Base
 ## MATCH PERCENTAGES
 
   def calculate_matches(matches)
+    matches_ids = matches.map(&:id);
 
     ## cache and set up
-    cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
-    cached_user_questions = self.questions_answered
+    cached_matches = User
+      .where('users.id IN (?)', matches_ids)
+      .includes(user_responses: [:user_match_responses])
+
+    cached_user = User
+      .where(id: self.id)
+      .includes(user_responses: [:user_match_responses])[0]
+
+    cached_questions = Question
+      .joins(:user_responses)
+      .where('user_responses.user_id IN (?)', matches_ids + [self.id])
+      .includes(:user_responses, :answers)
+
     match_p_hash = {}
 
-
-    matches.each do |match|
-      match_p_hash[match.id] = calculate_single_match(match, cached_user_responses, cached_user_questions)
+    cached_matches.each do |match|
+      match_p_hash[match.id] = calculate_single_match(match, cached_user, cached_questions)
     end
 
     match_p_hash
@@ -292,33 +309,61 @@ class User < ActiveRecord::Base
   def calculate_single_match(match, *cache)
     match_weight_arr = []
 
+
     if cache.length == 2
-      cached_user_responses = cache[0]
-      cached_user_questions = cache[1]
+      cached_user = cache[0];
+      cached_match = match;
+
+      cached_common_questions = cache[1].select do |question|
+        user_ids = question.user_responses.map(&:user_id)
+        user_ids.include?(match.id) && user_ids.include?(self.id)
+      end
+
     else
-      cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
-      cached_user_questions = self.questions_answered
+      cached_match = User
+        .where(id: match.id)
+        .includes(user_responses: [:user_match_responses])[0]
+
+      cached_user = User
+        .where(id: self.id)
+        .includes(user_responses: [:user_match_responses])[0]
+
+      cached_common_questions = Question
+        .joins(:user_responses)
+        .where('user_responses.id IN (?)',
+          UserResponse
+          .where(user_id: self.id)
+          .joins(:question)
+          .where('questions.id IN (?)',
+            UserResponse
+            .where(user_id: match.id)
+            .joins(:question)
+            .select('questions.id')
+          ).select(:id))
+          .group('questions.id')
+          .includes(:answers)
     end
 
-    cached_user_responses.each do |user_response|
 
-      ## if both user and match answered the same question,
-      ## add question to match_p_hash with an array of
-      ## weights and whether or not the other had include the response
-      ## in their user_match_responses
+    cached_common_questions.each do |question|
+      answer_ids = question.answers.map(&:id);
 
-      if match.questions_answered.exists?(user_response.question.id)
-        temp_match_response = match.questions_answered
-          .find(user_response.question.id)
-          .user_responses.find_by(user_id: match.id)
+        temp_match_response = cached_match.user_responses.find do |response|
+          answer_ids.include?(response.answer_id)
+        end
 
-        # debugger
+        temp_user_response = cached_user.user_responses.find do |response|
+          answer_ids.include?(response.answer_id)
+        end
 
-        does_match_accept_user = temp_match_response.user_match_responses.exists?(answer_id: user_response.answer_id)
-        does_user_accept_match = user_response.user_match_responses.exists?(answer_id: temp_match_response.answer_id)
+        does_match_accept_user =
+          !!temp_match_response.user_match_responses.find { |r| r.answer_id ==  temp_user_response.answer_id }
+        does_user_accept_match =
+          !!temp_user_response.user_match_responses.find { |r| r.answer_id == temp_match_response.answer_id }
+
 
         user_arr = {
-          weight: user_response.weight,
+          weight: temp_user_response.weight,
           presence_mod: (does_match_accept_user ? 1 : 0)
         }
         match_arr = {
@@ -328,11 +373,8 @@ class User < ActiveRecord::Base
 
         match_weight_arr.push( {user: user_arr, match: match_arr} )
         # eg: {user: [.70, 1], match: [.5, 0]}
-      end
-
     end
 
-    # debugger
 
     user_total_weight = 0.01
     match_total_weight = 0.01
@@ -353,6 +395,95 @@ class User < ActiveRecord::Base
   end
 
 
+
+
+
+
+
+
+
+
+  ## MATCH PERCENTAGES -- O.G.
+
+  # def calculate_matches(matches)
+  #
+  #   ## cache and set up
+  #   cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
+  #   cached_user_questions = self.questions_answered
+  #   match_p_hash = {}
+  #
+  #
+  #   matches.each do |match|
+  #     match_p_hash[match.id] = calculate_single_match(match, cached_user_responses, cached_user_questions)
+  #   end
+  #
+  #   match_p_hash
+  #
+  # end
+  #
+  #
+  # def calculate_single_match(match, *cache)
+  #   match_weight_arr = []
+  #
+  #   if cache.length == 2
+  #     cached_user_responses = cache[0]
+  #     cached_user_questions = cache[1]
+  #   else
+  #     cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
+  #     cached_user_questions = self.questions_answered
+  #   end
+  #
+  #   cached_user_responses.each do |user_response|
+  #
+  #     ## if both user and match answered the same question,
+  #     ## add question to match_p_hash with an array of
+  #     ## weights and whether or not the other had include the response
+  #     ## in their user_match_responses
+  #
+  #     if match.questions_answered.exists?(user_response.question.id)
+  #       temp_match_response = match.questions_answered
+  #         .find(user_response.question.id)
+  #         .user_responses.find_by(user_id: match.id)
+  #
+  #       # debugger
+  #
+  #       does_match_accept_user = temp_match_response.user_match_responses.exists?(answer_id: user_response.answer_id)
+  #       does_user_accept_match = user_response.user_match_responses.exists?(answer_id: temp_match_response.answer_id)
+  #
+  #       user_arr = {
+  #         weight: user_response.weight,
+  #         presence_mod: (does_match_accept_user ? 1 : 0)
+  #       }
+  #       match_arr = {
+  #         weight: temp_match_response.weight,
+  #         presence_mod: (does_user_accept_match ? 1 : 0)
+  #       }
+  #
+  #       match_weight_arr.push( {user: user_arr, match: match_arr} )
+  #       # eg: {user: [.70, 1], match: [.5, 0]}
+  #     end
+  #
+  #   end
+  #
+  #   # debugger
+  #
+  #   user_total_weight = 0.01
+  #   match_total_weight = 0.01
+  #   user_weighted_sum = 0.00
+  #   match_weighted_sum = 0.00
+  #
+  #   match_weight_arr.each do |match_obj|
+  #     user_total_weight += match_obj[:user][:weight]
+  #     match_total_weight += match_obj[:match][:weight]
+  #     user_weighted_sum += (match_obj[:user][:weight] * match_obj[:user][:presence_mod])
+  #     match_weighted_sum += (match_obj[:match][:weight] * match_obj[:match][:presence_mod])
+  #   end
+  #
+  #   calc_percentage = ((user_weighted_sum / user_total_weight * 0.5) + (match_weighted_sum / match_total_weight * 0.5))
+  #
+  #   (calc_percentage.round(2))
+  #
+  # end
 
 
 

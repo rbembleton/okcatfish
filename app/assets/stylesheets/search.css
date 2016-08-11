@@ -91,6 +91,7 @@
 
 .profile-search-box {
   display: inline-block;
+  float: left;
   height: 380px;
   width: 234px;
   border-radius: 5px;
@@ -102,9 +103,21 @@
 .matches-container {
   margin: auto;
   width: 800px;
-  display: flex;
+  display: block;
   justify-content: space-around;
-  flex-wrap: wrap;
+  transition: all 2s linear;
+  -webkit-transition: max-height 2s;
+  -moz-transition: max-height 2s;
+  -ms-transition: max-height 2s;
+  -o-transition: max-height 2s;
+  transition: max-height 2s;
+  overflow: hidden;
+  max-height: 10000px;
+  text-align: center;
+}
+
+.matches-container.m-c-no-height {
+  max-height: 20px;
 }
 
 .like-button {
@@ -141,6 +154,28 @@
   font-weight: 500;
   margin: 5px auto;
 }
+
+
+.search-transition-enter {
+  opacity: 0.01 !important;
+}
+
+.search-transition-enter.search-transition-enter-active {
+  opacity: 1 !important;
+  transition: opacity .5s linear;
+}
+
+.search-transition-leave {
+  opacity: 1 !important;
+}
+
+.search-transition-leave.search-transition-leave-active {
+  opacity: 0.01 !important;
+  transition: opacity .2s linear;
+}
+
+
+
 
 /*.mp-green {
   color: #29d58f

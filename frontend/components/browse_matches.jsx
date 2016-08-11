@@ -4,11 +4,12 @@ const SessionStore = require('../stores/session_store');
 const SearchActions = require('../actions/search_actions');
 const ProfileSearchBox = require('./profile/profile_search_box');
 const LikeActions = require('../actions/like_actions');
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const BrowseMatches = React.createClass({
 
   getInitialState () {
-    return({ matches: [], distance: 2, orderBy: 'none' });
+    return({ matches: [], distance: 2, orderBy: 'none', elements: 0});
   },
 
   componentDidMount() {
@@ -22,6 +23,9 @@ const BrowseMatches = React.createClass({
 
   updateMatches() {
     this.setState({matches: SearchStore.all()});
+    if (this.state.matches.length > 0) {
+      this.elementsToRender();
+    }
   },
 
   distanceChange(e) {
@@ -43,6 +47,7 @@ const BrowseMatches = React.createClass({
 
   startSearch(e) {
     e.preventDefault();
+    this.setState({elements: 0});
     const currentUser = SessionStore.currentUser();
     const userLocation = {lat: currentUser.lat, lng: currentUser.lng};
     // const orderBy = {
@@ -59,6 +64,24 @@ const BrowseMatches = React.createClass({
     });
   },
 
+  elementsToRender() {
+    const currThis = this;
+
+    this.elementLoadInterval = window.setInterval(() => {
+      const newElements = currThis.state.elements + 1;
+
+      if (currThis.state.matches.length <= newElements) {
+        currThis.clearRenderingInterval();
+      }
+
+      currThis.setState({elements: newElements});
+    }, 240);
+  },
+
+  clearRenderingInterval() {
+    window.clearInterval(this.elementLoadInterval);
+  },
+
   render () {
 
     const distArray = [2,5,10,20,50];
@@ -67,19 +90,34 @@ const BrowseMatches = React.createClass({
       return (<option value={dist} key={i}>{dist} miles</option>);
     });
 
-    const matchesDisplay = this.state.matches.map((match, idx) => {
-      return (
+    // const matchesDisplay = this.state.matches.map((match, idx) => {
+    //   return (
+    //     <ProfileSearchBox
+    //       key={idx}
+    //       user={match}
+    //     />
+    //   );
+    // });
+
+
+    let matchesDisplay = [];
+
+    for (var i = 0; i < this.state.elements; i++) {
+      matchesDisplay[i] = (
         <ProfileSearchBox
-          key={idx}
-          user={match}
-        />
+            key={i}
+            user={this.state.matches[i]}
+          />
       );
-    });
+    }
 
     const orderOptions = ['','Surprise Me!','Match Percentage'].map((orderOpt, i) => {
       return (<option value={orderOpt} key={i}>{orderOpt}</option>);
     });
 
+    const matchContainerHeightStyle = {
+      maxHeight: `${(this.state.elements) * 200}px`
+    };
 
     return (
       <div className="search-container center-container">
@@ -107,8 +145,14 @@ const BrowseMatches = React.createClass({
             />
           </form>
         </div>
-        <div className="matches-container">
-          {matchesDisplay}
+        <div
+          className="matches-container clearfix"
+          style={matchContainerHeightStyle}>
+          <ReactCSSTransitionGroup transitionName="search-transition"
+            transitionEnterTimeout={2000}
+            transitionLeaveTimeout={400}>
+            {matchesDisplay}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );
