@@ -334,10 +334,10 @@ class User < ActiveRecord::Base
 
     # debugger
 
-    user_total_weight = 0
-    match_total_weight = 0
-    user_weighted_sum = 0
-    match_weighted_sum = 0
+    user_total_weight = 0.01
+    match_total_weight = 0.01
+    user_weighted_sum = 0.00
+    match_weighted_sum = 0.00
 
     match_weight_arr.each do |match_obj|
       user_total_weight += match_obj[:user][:weight]

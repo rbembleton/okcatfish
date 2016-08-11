@@ -196,3 +196,34 @@
   float: right;
 
 }
+
+.select-user-page {
+  display: block;
+  border-bottom: 2px solid #edf0f5;
+  margin-bottom: 30px;
+}
+
+.select-user-page ul {
+  margin-left: 5px;
+}
+
+.select-user-page li {
+  display: inline-block;
+  float: left;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin: 0px 10px;
+}
+
+.select-user-page li:hover {
+  box-shadow: 0px 3px #4d7de9;
+  cursor: pointer;
+
+  /*box-shadow: 0px 6px 4px -4px #3260c7;*/
+}
+
+.selected-user-page {
+  box-shadow: 0px 3px #3260c7;
+
+  /*box-shadow: 0px 6px 4px -4px #3260c7;*/
+}

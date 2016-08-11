@@ -20,7 +20,17 @@ class Api::SearchController < ApplicationController
 
     if @users
       @match_percentage_hash = User.find(search_params[:user_id]).calculate_matches(@users)
-      render :index
+
+      if search_params[:order_by] == 'match'
+        @ordered_keys = @match_percentage_hash.sort_by{ |k,v| v }.reverse
+        render :sorted_index
+      elsif search_params[:order_by] == 'surprise'
+        @ordered_keys = @match_percentage_hash.sort_by{ |k,v| v }.shuffle
+        render :sorted_index
+      else
+        render :index
+      end
+
     else
       render json: "No matches found!"
     end
@@ -36,7 +46,7 @@ class Api::SearchController < ApplicationController
       {location: [:lat, :lng]},
       :looking_for,
       :orientation,
-      :match_percentage
+      :order_by
     )
   end
 

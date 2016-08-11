@@ -39,7 +39,8 @@ const router = (
       <Route path="home" component={Landing} onEnter={_ensureLoggedIn}>
         <Route path="user" component={UserProfile}/>
         <Route path="browse" component={BrowseMatches}/>
-        <Route path="match/:userId" component={MatchProfile}/>
+        <Route path="match/:userId" component={MatchProfile}>
+        </Route>
         <Route path="messages" component={MessagesMain}>
           <Route path="inbox" component={Inbox}/>
           <Route path=":threadId" component={ThreadShow}/>
@@ -49,6 +50,8 @@ const router = (
   </Router>
 );
 
+// <Route path="about" component={MatchAbout}/>
+// <Route path="questions" component={MatchQuestions}/>
 
 document.addEventListener("DOMContentLoaded", () => {
   if(window.currentUser) {SessionActions.receiveCurrentUser(window.currentUser);}

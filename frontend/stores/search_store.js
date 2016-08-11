@@ -3,20 +3,24 @@ const Store = require('flux/utils').Store;
 const AppDispatcher = require('../dispatcher/dispatcher');
 const SearchConstants = require('../constants/search_constants');
 
-let _matches = {};
+let _matches = [];
 const SearchStore = new Store(AppDispatcher);
 
 function resetMatches(users) {
-  _matches = {};
-  users.forEach((user) => {
-    _matches[user.id] = user;
-  });
+  _matches = users;
+  // users.forEach((user) => {
+  //   _matches[user.id] = user;
+  // });
 }
 
 SearchStore.all = function () {
-  return Object.keys(_matches).map((userId) => {
-    return Object.assign({}, _matches[userId]);
+  return _matches.map((user) => {
+    return Object.assign({}, user);
   });
+
+  // return Object.keys(_matches).map((userId) => {
+  //   return Object.assign({}, _matches[userId]);
+  // });
 };
 
 SearchStore.__onDispatch = function (payload) {

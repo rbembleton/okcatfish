@@ -4,7 +4,7 @@ const React = require('react');
 const colorsArray = [
   [36, 190, 80], //green
   // [38, 98, 182], //blue
-  [219, 185, 46], //yellow
+  [230, 207, 102], //yellow
   [227, 140, 82], //orange
   [233, 61, 89], //red
 ];
@@ -26,12 +26,12 @@ const MatchPercentage = React.createClass({
       ];
     } else if (percent > 55) { return colorsArray[1]; }
     else if (percent > 40) {
-      amtTop = (percent - 40)/13;
-      amtBot = (55 - percent)/9;
+      amtTop = (percent - 40)/15;
+      amtBot = (55 - percent)/15;
       return [
-        parseInt(colorsArray[2][0]*amtBot),
+        parseInt(colorsArray[2][0]+2),
         parseInt(colorsArray[1][1]*amtTop + colorsArray[2][1]*amtBot),
-        parseInt(colorsArray[1][2]*amtTop + colorsArray[2][2]*amtBot)
+        parseInt(colorsArray[1][2]-(percent-40)*2)
       ];
     } else if (percent > 30) { return colorsArray[2]; }
     else if (percent > 20) {

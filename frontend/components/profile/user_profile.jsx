@@ -4,64 +4,54 @@ const SessionActions = require('../../actions/session_actions');
 const MessagesActions = require('../../actions/messages_actions');
 const ProfileConstants = require('../../constants/profile_constants');
 const UserProfileText = require('./user_profile_text');
-const LookingFor = require('./looking_for');
 const ProfileHeader = require('./profile_header');
-const NewPhotoForm = require('../photos/new_photo_form');
-const PhotosStore = require('../../stores/photos_store');
-const PhotoCarousel = require('../photos/photo_carousel');
-const ProfileActions = require('../../actions/profile_actions');
-const UserResponses = require('../questions/user_responses');
-const AnswerQuestions = require('../questions/answer_questions');
+const UserPhotos = require('./user_photos');
+const UserAbout = require('./user_about');
+const UserQuestions = require('./user_questions');
 
 const UserProfile = React.createClass({
 
   getInitialState() {
-    return({photos: []});
+    return({ whichChild: 'about' });
   },
 
-  componentDidMount() {
-    MessagesActions.getAllThreads(SessionStore.currentUser().id); // optimize thread loading
-    this.photoListener = PhotosStore.addListener(this.updatePhotos);
-    ProfileActions.getUserPhotos(SessionStore.currentUser().id);
-  },
-
-  componentWillUnmount() {
-    this.photoListener.remove();
-  },
-
-  updatePhotos() {
-    this.setState({photos: PhotosStore.all()});
+  updateChild(e) {
+    this.setState({whichChild: e.target.id});
   },
 
   render () {
     let currentUser = SessionStore.currentUser() || {};
+    const currChild = (
+      this.state.whichChild === 'about' ?
+        <UserAbout /> :
+        (
+          this.state.whichChild === 'photos' ?
+            <UserPhotos /> :
+            <UserQuestions />
+        )
+    );
 
-    const profileTexts = Object.keys(ProfileConstants.PROFILE_TEXTS).map((el, i) => {
-      return (
-        <UserProfileText
-          key={i}
-          textType={el}
-          text={currentUser.profile_text[el]}
-          id={currentUser.profile_text.id}
-        />
-      );
-    });
 
     return (
       <div className="profile-container center-container">
         <ProfileHeader user={currentUser}/>
-          <PhotoCarousel
-            photos={this.state.photos}
-          />
-        <NewPhotoForm />
-        <div className="profile-main">
-          <div className="profile-text">
-            {profileTexts}
-          </div>
-          <LookingFor user={currentUser}/>
+        <div className="select-user-page clearfix">
+          <ul>
+            <li
+              id='about'
+              className={this.state.whichChild === 'about' ? "selected-user-page" : ""}
+              onClick={this.updateChild}>About</li>
+            <li
+              id='photos'
+              className={this.state.whichChild === 'photos' ? "selected-user-page" : ""}
+              onClick={this.updateChild}>Photos</li>
+            <li
+              id='questions'
+              className={this.state.whichChild === 'questions' ? "selected-user-page" : ""}
+              onClick={this.updateChild}>Questions</li>
+          </ul>
         </div>
-        <AnswerQuestions />
-        <UserResponses userId={currentUser.id}/>
+        {currChild}
       </div>
     );
 
