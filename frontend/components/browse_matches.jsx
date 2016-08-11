@@ -19,6 +19,7 @@ const BrowseMatches = React.createClass({
 
   componentWillUnmount() {
     this.searchListener.remove();
+    this.clearRenderingInterval();
   },
 
   updateMatches() {
@@ -37,7 +38,8 @@ const BrowseMatches = React.createClass({
     e.preventDefault();
     const parseHash = {
       'Surprise Me!': 'surprise',
-      'Match Percentage': 'match'
+      'Match Percentage': 'match',
+      'Username': 'username'
     };
 
 
@@ -111,12 +113,12 @@ const BrowseMatches = React.createClass({
       );
     }
 
-    const orderOptions = ['','Surprise Me!','Match Percentage'].map((orderOpt, i) => {
+    const orderOptions = ['','Surprise Me!','Match Percentage','Username'].map((orderOpt, i) => {
       return (<option value={orderOpt} key={i}>{orderOpt}</option>);
     });
 
     const matchContainerHeightStyle = {
-      maxHeight: `${(this.state.elements) * 200}px`
+      maxHeight: `${(this.state.elements) * 300}px`
     };
 
     return (
@@ -150,7 +152,7 @@ const BrowseMatches = React.createClass({
           style={matchContainerHeightStyle}>
           <ReactCSSTransitionGroup transitionName="search-transition"
             transitionEnterTimeout={2000}
-            transitionLeaveTimeout={400}>
+            transitionLeaveTimeout={600}>
             {matchesDisplay}
           </ReactCSSTransitionGroup>
         </div>

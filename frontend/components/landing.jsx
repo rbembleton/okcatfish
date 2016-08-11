@@ -6,6 +6,7 @@ const MessagesStore = require('../stores/messages_store');
 const MessagesActions = require('../actions/messages_actions');
 const Pusher = require('pusher-js');
 const InboxBadge = require('./messages/inbox_badge');
+const ChatPane = require('./messages/chat_pane');
 
 const Landing = React.createClass({
 
@@ -99,6 +100,9 @@ const Landing = React.createClass({
         <main className="logged-in-main">
           {this.props.children}
         </main>
+        <footer>
+          <ChatPane />
+        </footer>
       </div>
     );
   }

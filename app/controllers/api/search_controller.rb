@@ -27,6 +27,9 @@ class Api::SearchController < ApplicationController
       elsif search_params[:order_by] == 'surprise'
         @ordered_keys = @match_percentage_hash.sort_by{ |k,v| v }.shuffle
         render :sorted_index
+      elsif search_params[:order_by] == 'username'
+        @ordered_keys = @match_percentage_hash.sort_by{ |k,v| User.find(k).username }
+        render :sorted_index
       else
         render :index
       end

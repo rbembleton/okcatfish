@@ -105,12 +105,12 @@
   width: 800px;
   display: block;
   justify-content: space-around;
-  transition: all 2s linear;
-  -webkit-transition: max-height 2s;
-  -moz-transition: max-height 2s;
-  -ms-transition: max-height 2s;
-  -o-transition: max-height 2s;
-  transition: max-height 2s;
+  transition: all 1.2s linear;
+  -webkit-transition: max-height 1.2s;
+  -moz-transition: max-height 1.2s;
+  -ms-transition: max-height 1.2s;
+  -o-transition: max-height 1.2s;
+  transition: max-height 1.2s;
   overflow: hidden;
   max-height: 10000px;
   text-align: center;
