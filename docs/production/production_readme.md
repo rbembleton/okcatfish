@@ -293,9 +293,9 @@ function percentageColor(percent) {
 
 ### Messaging
 
-On the backend messaging is handled by the `message_threads`, `messages`, and `thread_user_links` tables. These three interact seamlessly to allow the controller to send messages and not end up with two `MessageThreads` with the same pair of users. This is through a custom send method on the `MessageThread` class which automatically checks if their is currently a thread between two users and will either add a new message to the thread or create a new thread and add the new message to the thread, whichever is appropriate.
+On the backend messaging is handled by the `message_threads`, `messages`, and `thread_user_links` tables. These three interact seamlessly to allow the controller to send messages and not end up with two `MessageThreads` with the same pair of users. This is through a custom send method on the `MessageThread` class which automatically checks if there is currently a thread between two users and will either add a new message to the thread or create a new thread and then add the message to the new thread, whichever is appropriate.
 
-Here are the custom `MessageThread`factory method as well as the custom SQL queries that it relies on to accomplish this:
+Here is the custom `MessageThread`factory method as well as the custom SQL queries that it relies on to accomplish this:
 
 ```ruby
 def self.new_from_user_ids(user1_id, user2_id)
