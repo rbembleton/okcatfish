@@ -8,6 +8,11 @@ OKCatfish is a full-stack, single-paged web application based on OKCupid with a 
 
 ## Features & Implementation
 
+### Entry Page
+
+Entry Page:
+![entry page](entry.png)
+
 <!-- ### Single-Page App
 
 FresherNote is truly a single-page; all content is delivered on one static page.  The root page listens to a `SessionStore` and renders content based on a call to `SessionStore.currentUser()`.  Sensitive information is kept out of the frontend of the app by making an API call to `SessionsController#get_user`.
