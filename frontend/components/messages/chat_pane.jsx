@@ -16,11 +16,11 @@ const ChatPane = React.createClass({
   handleMailClick (e) {
     e.preventDefault();
     if (this.state.thread.id) {
-      const newShowStatus = this.state.showStatus === 'minimized' ?
-        'display' :
-        'minimized';
-
-      this.setState({ showStatus: newShowStatus });
+      if (this.state.showStatus === 'minimized') {
+        this.setState({ showStatus: 'display' });
+      } else {
+        this.setState({ showStatus: 'minimized', open: false });
+      }
     }
   },
 

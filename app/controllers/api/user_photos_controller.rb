@@ -35,9 +35,43 @@ class Api::UserPhotosController < ApplicationController
   end
 
 
+
+  def update
+    debugger
+    @photo = User
+      .find(photo_params[:user_id])
+      .set_profile_pic({
+        type: 'user',
+        id: photo_params[:photo_id]
+      });
+
+    if @photo
+      @photos = User.find(photo_params[:user_id]).photos
+      render :index
+    else
+      render json: @photo.errors.full_messages
+    end
+  end
+
+
+
+
+  def destroy
+    @photo = User.find(photo_params[:user_id]).remove_pic(:photo_id)
+
+    if @photo
+      @photos = User.find(photo_params[:user_id]).photos
+      render :index
+    else
+      render json: @photo.errors.full_messages
+    end
+
+
+  end
+
   private
 
   def photo_params
-    params.require(:user).permit(:image, :user_id, :id)
+    params.require(:user).permit(:image, :user_id, :photo_id)
   end
 end

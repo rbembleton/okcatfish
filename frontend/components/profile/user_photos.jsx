@@ -4,6 +4,7 @@ const SessionStore = require('../../stores/session_store');
 const PhotoCarousel = require('../photos/photo_carousel');
 const NewPhotoForm = require('../photos/new_photo_form');
 const ProfileActions = require('../../actions/profile_actions');
+const PhotoEdit = require('../photos/photo_edit');
 
 
 const UserPhotos = React.createClass({
@@ -32,6 +33,7 @@ const UserPhotos = React.createClass({
       <div className="profile-main">
         <PhotoCarousel photos={this.state.photos}/>
         <NewPhotoForm />
+        <PhotoEdit photos={this.state.photos}/>
       </div>
     );
 

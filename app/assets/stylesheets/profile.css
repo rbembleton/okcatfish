@@ -320,3 +320,41 @@
 
   /*box-shadow: 0px 6px 4px -4px #3260c7;*/
 }
+
+.edit-photo-container {
+  z-index: 1;
+}
+
+.user-edit-photos {
+  margin: 12px auto 44px auto;
+  display: block;
+  position: relative;
+  width: 700px;
+}
+
+.user-edit-photos img {
+  box-shadow: 1px 1px 16px -2px #343434;
+}
+
+.photo-edit-buttons {
+  position: absolute;
+  width: 208px;
+  display: block;
+  margin: auto;
+  z-index: 2;
+  border-radius: 0px 0px 4px 0px;
+  background-color: rgba(0, 0, 0, 0.48);
+}
+
+.photo-edit-buttons button {
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.51);
+}
+
+.photo-edit-buttons button:hover {
+  color: #21ffa0;
+}

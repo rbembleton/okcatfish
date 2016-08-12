@@ -11,11 +11,14 @@ end
 
 json.other_user do
   json.(other_user, :id, :username, :loc_desc, :gender, :age)
-  json.prof_pic do
-    if other_user.prof_pic
-      json.url other_user.prof_pic.url
-    else
-      json.url asset_path(((other_user.id % 2 == 0) ? "cat_" : "fish_") + (other_user.id % 5 + 1).to_s + ".jpg")
-    end
-  end
+  @user = other_user
+  json.partial! 'api/users/profpic', user: @user
 end
+
+# json.prof_pic do
+#   if user.prof_pic
+#     json.url user.prof_pic.url
+#   else
+#     json.url asset_path(((user.id % 2 == 0) ? "cat_" : "fish_") + (user.id % 5 + 1).to_s + ".jpg")
+#   end
+# end

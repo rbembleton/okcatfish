@@ -18,6 +18,14 @@ const ProfileActions = {
     ProfileApiUtil.addUserPhoto(data, ProfileActions.updateUserPhotos);
   },
 
+  removeUserPhoto(data) {
+    ProfileApiUtil.removeUserPhoto(data, ProfileActions.updateUserPhotos);
+  },
+
+  updateProfilePic(data) {
+    ProfileApiUtil.updateProfilePic(data, ProfileActions.updateUserPhotos);
+  },
+
   getUserPhotos(id) {
     ProfileApiUtil.fetchUserPhotos(id, ProfileActions.updateUserPhotos);
   },

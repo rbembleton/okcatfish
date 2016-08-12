@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809162809) do
+ActiveRecord::Schema.define(version: 20160812021730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20160809162809) do
     t.integer  "location_id",     null: false
     t.float    "lat",             null: false
     t.float    "lng",             null: false
+    t.string   "profile_photo"
   end
 
   add_index "users", ["gender"], name: "index_users_on_gender", using: :btree

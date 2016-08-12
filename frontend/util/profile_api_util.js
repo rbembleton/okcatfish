@@ -24,6 +24,28 @@ module.exports = {
     });
   },
 
+  removeUserPhoto (data, successCallback) {
+    $.ajax({
+      method: "DELETE",
+      url: `api/user_photos/0`, //dummy
+      data: {user: data},
+      success(resp) {
+        successCallback(resp);
+      }
+    });
+  },
+
+  updateProfilePic (data, successCallback) {
+    $.ajax({
+      method: "PATCH",
+      url: `api/user_photos/0`, //dummy
+      data: {user: data},
+      success(resp) {
+        successCallback(resp);
+      }
+    });
+  },
+
   fetchUserPhotos (id, successCallback) {
     $.ajax({
       method: "GET",

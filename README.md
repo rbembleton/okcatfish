@@ -4,13 +4,17 @@
 
 [heroku]: http://okcatfish.herokuapp.com
 
+[Production README][production_readme]
+
+[production_readme](production/production_readme.md)
+
 ## Minimum Viable Product
 
 OKCatfish is a web application inspired by OKCupid that will be built using Ruby on Rails and React.js. By the end of Week 9, this app will, at the very least, satisfy the following criteria:
 
 - [x] Hosting on Heroku
 - [x] New user creation, login, and demo login
-- [ ] A production README, replacing this README
+- [x] A production README, replacing this README
 - [x] Profile CRUD, Match Search by location and "looking for"
   - [x] Smooth, bug-free navigation
   - [ ] "Celebrity" photo repositories
@@ -77,7 +81,7 @@ User can view and search for others profiles. Profiles have text, details, looki
   - [x] `ProfilePhotoAlbumShow`
   - [x] `UserProfileShow`
   - [x] `UserProfileEdit`
-  - [ ] `UserProfilePhotoAlbumShow`
+  - [x] `UserProfilePhotoAlbumShow`
   - [ ] `UserProfilePhotoAlbumEdit`
   - [x] `ProfileSearch`
 - [x] save Profile Information to the DB when the user saves
@@ -119,9 +123,9 @@ User can view and search for others profiles. Profiles have text, details, looki
 **objective:** Calculate and display match percentages based on Questions, add weight to questions.
 
 - [x] calculate match percentages, add weight to `user responses`
-- [ ] add `MatchPercentage` store, updating whenever new questions are answered
+- [x] add `MatchPercentage` store, updating whenever new questions are answered
 - [x] add match percentages to profile search
-- [ ] update CSS
+- [x] update CSS
 
 
 ### Phase 6: - Infinite scroll for Match Search (1 day, W2 F 6pm)
@@ -134,9 +138,9 @@ User can view and search for others profiles. Profiles have text, details, looki
 - [ ] Ensure we have enough seeded profiles to demo infinite scroll
 
 ### Bonus Features (TBD)
-- [ ] Search for users based on username
+- [x] Search for users based on username
 - [ ] Block or Hide users
-- [ ] Integrate messaging with chat
+- [x] Integrate messaging with chat
 - [ ] Build up repositories of photos
 
 [phase-one]: docs/phases/phase1.md

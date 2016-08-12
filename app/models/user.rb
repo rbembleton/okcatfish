@@ -16,6 +16,7 @@
 #  location_id     :integer          not null
 #  lat             :float            not null
 #  lng             :float            not null
+#  profile_photo   :string
 #
 
 class User < ActiveRecord::Base
@@ -239,6 +240,16 @@ class User < ActiveRecord::Base
   end
 
   def prof_pic
+    if self.profile_photo
+      pp_arr = self.profile_photo.split('_')
+
+      if pp[0] == 'user'
+        @photo = UserPhoto.find(pp[1])
+      end
+
+      return @photo
+    end
+    
     self.photos.sample #|| image_url "empty_profile.png"
   end
 
@@ -246,6 +257,12 @@ class User < ActiveRecord::Base
     up = UserPhoto.new(user_id: self.id)
     up.image = data
     up.save! if up.image.url != "empty_profile.png"
+  end
+
+  def set_profile_pic(options)
+    ## NOTE options = {type: 'user' || 'repo', id: integer, remove: boolean}
+    return self.update!({ profile_photo: nil }) if options.remove
+    self.update!(profile_photo: options.type + "_" + options.id.to_s)
   end
 
   def remove_pic(up_id)

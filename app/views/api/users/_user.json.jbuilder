@@ -1,7 +1,6 @@
 json.(user, :id, :username)
 
 
-
 json.(user,
   :location,
   :age,
@@ -18,7 +17,6 @@ json.(user,
 # json.(user, prof_pic: do
 #   {url: (image_url 'empty_profile.png')}
 # end)
-
 
 json.prof_pic do
   if user.prof_pic
