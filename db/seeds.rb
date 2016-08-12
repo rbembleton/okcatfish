@@ -115,7 +115,7 @@ zip_codes = (10001..10014).to_a + (10016..10041).to_a
 go_combos = {"male" => ["straight", "gay", "bisexual"],
   "female" => ["straight", "lesbian", "bisexual"]};
 
-100.times do
+40.times do
   rand(2) == 1 ? gend = "male" : gend = "female"
   ori = go_combos[gend][rand(3)];
 
@@ -156,7 +156,7 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     mess1.update!(created_at: most_recent, updated_at: most_recent);
 
 
-    (rand(12)+1).times do
+    (rand(8)+1).times do
       mess2 = Message.create!({
         body: Faker::Hipster.sentence,
         author_id: [u1.id, demo.id, demo.id].sample,
