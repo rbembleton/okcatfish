@@ -115,7 +115,7 @@ zip_codes = (10001..10014).to_a + (10016..10041).to_a
 go_combos = {"male" => ["straight", "gay", "bisexual"],
   "female" => ["straight", "lesbian", "bisexual"]};
 
-40.times do
+120.times do
   rand(2) == 1 ? gend = "male" : gend = "female"
   ori = go_combos[gend][rand(3)];
 
