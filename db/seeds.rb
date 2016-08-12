@@ -51,6 +51,174 @@ rb.profile_text.update!({
   msg_me_if: Faker::Hipster.paragraph,
 })
 
+# --------------------------------------- QUESTIONS
+
+q_arr = []
+
+    # ======= Random
+#
+# (1..30).to_a.map do |idx|
+#   q = Question.create!(
+#     body: (Faker::Lorem.sentence[0..-2] + "?" ),
+#     order: idx
+#   )
+#
+#   (1..(rand(4)+2)).to_a.map do |idx2|
+#     a = Answer.create!(
+#       body: Faker::Lorem.sentence,
+#       order: idx2,
+#       question_id: q.id
+#     )
+#   end
+#
+# end
+
+    # ======= CSV file instead
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'match_questions.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each_with_index do |question, q_idx|
+  next if question['question'] == nil
+  q = Question.create!(
+    body: question['question'],
+    order: (q_idx + 1)
+  )
+  add_to_q_arr = {question: q, answers: []}
+
+  answers = [
+    question['answer-1'],
+    question['answer-2'],
+    question['answer-3'],
+    question['answer-4'],
+    question['answer-5']]
+
+  answers.each_with_index do |answer, a_idx|
+    next if answer == nil
+    a = Answer.create!(
+      body: answer,
+      order: (a_idx + 1),
+      question_id: q.id
+    )
+    add_to_q_arr[:answers].push(a)
+  end
+
+  q_arr.push(add_to_q_arr)
+end
+
+
+
+
+
+# ----------------------------------------- GENERATE FAKE USERS
+
+zip_codes = (10001..10014).to_a + (10016..10041).to_a
+go_combos = {"male" => ["straight", "gay", "bisexual"],
+  "female" => ["straight", "lesbian", "bisexual"]};
+
+100.times do
+  rand(2) == 1 ? gend = "male" : gend = "female"
+  ori = go_combos[gend][rand(3)];
+
+  uname = Faker::Internet.user_name
+  while uname.length < 4 || uname.length > 16 || User.exists?(username: uname) do
+    uname = Faker::Internet.user_name
+  end
+
+  u1 = User.create!({
+    username: uname,
+    password: "okcatfish",
+    birthdate: Faker::Date.between(18.years.ago, 40.years.ago),
+    zip: zip_codes[rand(39)],
+    orientation: ori,
+    gender: gend,
+  })
+
+  u1.profile_text.update!({
+    about: Faker::Hipster.paragraph,
+    doing: Faker::Hipster.paragraph,
+    faves: "Book: #{Faker::Book.title}, Beer: #{Faker::Beer.name}",
+    things: Faker::Hipster.words(3).join(", "),
+    think: Faker::Hipster.paragraph,
+    sat_night: Faker::Hipster.paragraph,
+    msg_me_if: Faker::Hipster.paragraph,
+  })
+
+  # POPULATE FAKE MESSAGES
+  if rand(3) == 0
+    mt = MessageThread.new_from_user_ids(u1.id, demo.id)
+    mess1 = Message.create!({
+      body: Faker::Hipster.sentence,
+      author_id: [u1.id, demo.id, demo.id].sample,
+      thread_id: mt.id
+    })
+
+    most_recent = Faker::Time.backward(14, :all)
+    mess1.update!(created_at: most_recent, updated_at: most_recent);
+
+
+    (rand(12)+1).times do
+      mess2 = Message.create!({
+        body: Faker::Hipster.sentence,
+        author_id: [u1.id, demo.id, demo.id].sample,
+        thread_id: mt.id
+      })
+
+      this_time = Faker::Time.backward(14, :all)
+      mess2.update!(created_at: this_time, updated_at: this_time);
+
+      if this_time > most_recent
+        most_recent = this_time;
+      end
+
+    end
+
+    mt.update!(updated_at: most_recent);
+
+    if rand(2) == 0
+      Like.from_to_ids_create!(u1.id, demo.id)
+    end
+
+    if rand(5) == 0
+      Like.from_to_ids_create!(demo.id, u1.id)
+    end
+
+  end
+
+  # POPULATE FAKE ANSWERS
+
+  q_arr.each do |q_obj|
+    u_answer_id1 = q_obj[:answers].sample.id
+    ures = UserResponse.create!(
+      answer_id: u_answer_id1,
+      user_id: u1.id,
+      weight: (((0..100).to_a.sample)/100.00),
+      explanation: Faker::Hipster.sentence
+    )
+    u_answer_id2 = q_obj[:answers].sample.id
+    while u_answer_id2 == u_answer_id1
+      u_answer_id2 = q_obj[:answers].sample.id
+    end
+    ures.add_match_responses([u_answer_id1, u_answer_id2 ])
+  end
+
+end
+
+MessageThread.where("updated_at < ?", 3.days.ago).each do |mt|
+  mt.messages.update_all(is_read: true)
+end
+
+# MessageThread.where("updated_at >= ?", 3.days.ago).each do |mt|
+#   first_message_author_id = mt.most_recent_message.author_id
+#   keep_going = true
+#   mt.messages.each do |message|
+#     next if keep_going && message.author_id == first_message_author_id
+#     keep_going = false
+#     message.update!(is_read: true)
+#   end
+# end
+
+
+
 # ---------------------------------------------------
 
 
@@ -99,39 +267,6 @@ prp3_3 = PhotoRepoPic.create!({
     repo_id: pr3.id
   })
 
-
-  rp_arr = []
-
-  csv_text = File.read(Rails.root.join('lib', 'seeds', 'repo_urls.csv'))
-  csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-  csv.each do |repo|
-    next if repo['label'] == nil
-      rp = PhotoRepo.create!(label: repo['label'])
-
-    urls = [
-      repo['url1'],
-      repo['url2'],
-      repo['url3'],
-      repo['url4'],
-      repo['url5']]
-
-    add_to_rp_arr = {repo: rp, pic: []}
-
-    urls.each do |url|
-      next if url == nil
-      pic = PhotoRepoPic.create!(
-        url: url,
-        repo_id: rp.id
-      )
-      add_to_rp_arr[:pic].push(pic)
-    end
-
-    rp_arr.push(add_to_rp_arr)
-  end
-
-
-
-
 # ---------------------------------------
 
 pal1 = PhotoAlbumLink.create!({
@@ -147,207 +282,6 @@ pal2 = PhotoAlbumLink.create!({
 UserPhoto.where(user_id: demo.id).destroy_all
 
 # ---------------------------------------
-
-
-
-
-# --------------------------------------- QUESTIONS
-
-
-
-    # ======= Random
-#
-# (1..30).to_a.map do |idx|
-#   q = Question.create!(
-#     body: (Faker::Lorem.sentence[0..-2] + "?" ),
-#     order: idx
-#   )
-#
-#   (1..(rand(4)+2)).to_a.map do |idx2|
-#     a = Answer.create!(
-#       body: Faker::Lorem.sentence,
-#       order: idx2,
-#       question_id: q.id
-#     )
-#   end
-#
-# end
-
-    # ======= CSV file instead
-
-q_arr = []
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'match_questions.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each_with_index do |question, q_idx|
-  next if question['question'] == nil
-  q = Question.create!(
-    body: question['question'],
-    order: (q_idx + 1)
-  )
-  add_to_q_arr = {question: q, answers: []}
-
-  answers = [
-    question['answer-1'],
-    question['answer-2'],
-    question['answer-3'],
-    question['answer-4'],
-    question['answer-5']]
-
-  answers.each_with_index do |answer, a_idx|
-    next if answer == nil
-    a = Answer.create!(
-      body: answer,
-      order: (a_idx + 1),
-      question_id: q.id
-    )
-    add_to_q_arr[:answers].push(a)
-  end
-
-  q_arr.push(add_to_q_arr)
-end
-
-
-
-# ----------------------------------------- GENERATE FAKE USERS
-
-zip_codes = (10001..10014).to_a + (10016..10041).to_a
-go_combos = {"male" => ["straight", "gay", "bisexual"],
-  "female" => ["straight", "lesbian", "bisexual"]};
-
-50.times do
-  rand(2) == 1 ? gend = "male" : gend = "female"
-  ori = go_combos[gend][rand(3)];
-
-  uname = Faker::Internet.user_name
-  while uname.length < 4 || uname.length > 16 || User.exists?(username: uname) do
-    uname = Faker::Internet.user_name
-  end
-
-  u1 = User.create!({
-    username: uname,
-    password: "okcatfish",
-    birthdate: Faker::Date.between(18.years.ago, 40.years.ago),
-    zip: zip_codes[rand(39)],
-    orientation: ori,
-    gender: gend,
-  })
-
-  u1.profile_text.update!({
-    about: Faker::Hipster.paragraph,
-    doing: Faker::Hipster.paragraph,
-    faves: "Book: #{Faker::Book.title}, Beer: #{Faker::Beer.name}",
-    things: Faker::Hipster.words(3).join(", "),
-    think: Faker::Hipster.paragraph,
-    sat_night: Faker::Hipster.paragraph,
-    msg_me_if: Faker::Hipster.paragraph,
-  })
-
-  # POPULATE FAKE MESSAGES
-  if rand(3) == 0
-    mt = MessageThread.new_from_user_ids(u1.id, demo.id)
-    mess1 = Message.create!({
-      body: Faker::Hipster.sentence,
-      author_id: [u1.id, demo.id, demo.id].sample,
-      thread_id: mt.id
-    })
-
-    most_recent = Faker::Time.backward(14, :all)
-    mess1.update!(created_at: most_recent, updated_at: most_recent);
-
-
-    (rand(6)+1).times do
-      mess2 = Message.create!({
-        body: Faker::Hipster.sentence,
-        author_id: [u1.id, demo.id, demo.id].sample,
-        thread_id: mt.id
-      })
-
-      this_time = Faker::Time.backward(14, :all)
-      mess2.update!(created_at: this_time, updated_at: this_time);
-
-      if this_time > most_recent
-        most_recent = this_time;
-      end
-
-    end
-
-    mt.update!(updated_at: most_recent);
-
-    if rand(2) == 0
-      Like.from_to_ids_create!(u1.id, demo.id)
-    end
-
-    if rand(5) == 0
-      Like.from_to_ids_create!(demo.id, u1.id)
-    end
-
-  end
-
-  # POPULATE FAKE ANSWERS
-
-  q_arr.each do |q_obj|
-    u_answer_id1 = q_obj[:answers].sample.id
-    ures = UserResponse.create!(
-      answer_id: u_answer_id1,
-      user_id: u1.id,
-      weight: (((0..100).to_a.sample)/100.00),
-      explanation: Faker::Hipster.sentence
-    )
-    u_answer_id2 = q_obj[:answers].sample.id
-    while u_answer_id2 == u_answer_id1
-      u_answer_id2 = q_obj[:answers].sample.id
-    end
-    ures.add_match_responses([u_answer_id1, u_answer_id2 ])
-  end
-
-
-  # ADD REPO PICS
-  # if rand(5) == 0
-  #   pr = rp_arr.keys.sample
-  #
-  #   prp1 = pr.pics.first
-  #   prp2 = pr.pics.second
-  #
-  #   pal1 = PhotoAlbumLink.create!({
-  #       user_id: u1.id,
-  #       photo_repo_pic_id: prp1.id
-  #     })
-  #
-  #   pal2 = PhotoAlbumLink.create!({
-  #       user_id: u1.id,
-  #       photo_repo_pic_id: prp2.id
-  #     })
-  #
-  #     if rand(3) == 0
-  #       pal3 = PhotoAlbumLink.create!({
-  #           user_id: u1.id,
-  #           photo_repo_pic_id: pr.pics.third.id
-  #         })
-  #     end
-  #
-  #   # u1.set_profile_pic(type: 'repo', id: prp1.id)
-  # end
-
-end
-
-MessageThread.where("updated_at < ?", 3.days.ago).each do |mt|
-  mt.messages.update_all(is_read: true)
-end
-
-# MessageThread.where("updated_at >= ?", 3.days.ago).each do |mt|
-#   first_message_author_id = mt.most_recent_message.author_id
-#   keep_going = true
-#   mt.messages.each do |message|
-#     next if keep_going && message.author_id == first_message_author_id
-#     keep_going = false
-#     message.update!(is_read: true)
-#   end
-# end
-
-
-
-
 
 demo.profile_text.update!({
   about: "I'm just a small town girl, living in a lonely world.
