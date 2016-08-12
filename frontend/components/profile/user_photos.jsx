@@ -5,6 +5,7 @@ const PhotoCarousel = require('../photos/photo_carousel');
 const NewPhotoForm = require('../photos/new_photo_form');
 const ProfileActions = require('../../actions/profile_actions');
 const PhotoEdit = require('../photos/photo_edit');
+const PhotoRepos = require('../photos/photo_repos');
 
 
 const UserPhotos = React.createClass({
@@ -33,6 +34,7 @@ const UserPhotos = React.createClass({
       <div className="profile-main">
         <PhotoCarousel photos={this.state.photos}/>
         <NewPhotoForm />
+        <PhotoRepos />
         <PhotoEdit photos={this.state.photos}/>
       </div>
     );

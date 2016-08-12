@@ -1,0 +1,4 @@
+module.exports = {
+  GET_PHOTO_REPOS: "GET_PHOTO_REPOS",
+  GET_PHOTO_REPO: "GET_PHOTO_REPO",
+};

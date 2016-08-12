@@ -24,6 +24,18 @@ module.exports = {
     });
   },
 
+  addRepoPicLink (data, successCallback) {
+    $.ajax({
+      method: "POST",
+      url: `api/photo_album_links`,
+      data: {photo: data},
+      success(resp) {
+        successCallback(resp);
+      }
+    });
+  },
+
+
   removeUserPhoto (data, successCallback) {
     $.ajax({
       method: "DELETE",

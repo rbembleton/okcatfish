@@ -37,11 +37,10 @@ class Api::UserPhotosController < ApplicationController
 
 
   def update
-    debugger
     @photo = User
       .find(photo_params[:user_id])
       .set_profile_pic({
-        type: 'user',
+        type: photo_params[:photo_type],
         id: photo_params[:photo_id]
       });
 
@@ -57,7 +56,10 @@ class Api::UserPhotosController < ApplicationController
 
 
   def destroy
-    @photo = User.find(photo_params[:user_id]).remove_pic(:photo_id)
+    @photo = User.find(photo_params[:user_id])
+      .remove_pic(
+        photo_params[:photo_id],
+        photo_params[:photo_type])
 
     if @photo
       @photos = User.find(photo_params[:user_id]).photos
@@ -72,6 +74,6 @@ class Api::UserPhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:user).permit(:image, :user_id, :photo_id)
+    params.require(:user).permit(:image, :user_id, :photo_id, :photo_type, :repo_pic_id)
   end
 end

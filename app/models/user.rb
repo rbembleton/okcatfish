@@ -235,22 +235,29 @@ class User < ActiveRecord::Base
 ## PROFILE PHOTOS
 
   def photos
-    self.user_photos.to_a.map { |photo| photo.image } +
-    self.repo_photos.to_a
+    # self.user_photos.to_a.map { |photo| photo.image } +
+    # self.repo_photos.to_a
+    self.user_photos.to_a + self.repo_photos.to_a
   end
 
   def prof_pic
     if self.profile_photo
       pp_arr = self.profile_photo.split('_')
 
-      if pp[0] == 'user'
-        @photo = UserPhoto.find(pp[1])
+      if pp_arr[0] == 'user'
+        @photo = UserPhoto.find(pp_arr[1])
+      else
+        @photo = PhotoAlbumLink.find(pp_arr[1]).photo_repo_pic
       end
 
       return @photo
     end
-    
+
     self.photos.sample #|| image_url "empty_profile.png"
+  end
+
+  def add_repo_pic(repo_pic_id)
+    rp = PhotoAlbumLink.create!(user_id: self.id, photo_repo_pic_id: repo_pic_id)
   end
 
   def add_pic(data)
@@ -260,14 +267,20 @@ class User < ActiveRecord::Base
   end
 
   def set_profile_pic(options)
-    ## NOTE options = {type: 'user' || 'repo', id: integer, remove: boolean}
-    return self.update!({ profile_photo: nil }) if options.remove
-    self.update!(profile_photo: options.type + "_" + options.id.to_s)
+    ## NOTE options = {type: 'user' || 'repo' || 'default', id: integer, remove: boolean}
+    return if options[:type] == 'default'
+    return self.update!({ profile_photo: nil }) if options[:remove]
+    self.update!(profile_photo: options[:type] + "_" + options[:id].to_s)
   end
 
-  def remove_pic(up_id)
-    up = UserPhoto.find(up_id)
-    up.delete! if up.user_id = self.id
+  def remove_pic(photo_id, photo_type)
+    return if photo_type == 'default'
+    if photo_type == 'user'
+      pic_to_remove = UserPhoto.find(photo_id)
+    else
+      pic_to_remove = PhotoAlbumLink.find(photo_id)
+    end
+    pic_to_remove.destroy if pic_to_remove.user_id = self.id
   end
 
 

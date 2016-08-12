@@ -18,6 +18,10 @@ const ProfileActions = {
     ProfileApiUtil.addUserPhoto(data, ProfileActions.updateUserPhotos);
   },
 
+  addRepoPicLink(data) {
+    ProfileApiUtil.addRepoPicLink(data, ProfileActions.updateUserPhotos);
+  },
+
   removeUserPhoto(data) {
     ProfileApiUtil.removeUserPhoto(data, ProfileActions.updateUserPhotos);
   },
@@ -35,7 +39,9 @@ const ProfileActions = {
       actionType: ProfileConstants.UPDATE_USER_PHOTOS,
       photos: resp
     });
-  }
+  },
+
+
 
 
 };
