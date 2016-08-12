@@ -350,6 +350,7 @@ Likes are fairly straightforwardly implemented on the backend, with a `likes` jo
 On the front end, likes are toggled with a component `LikeToggle` which is employed in both the `BrowseMatches` and `MatchProfile` components.
 
 `LikeToggle` in action:
+
 ![Likes screenshot](likes.png)
 
 
