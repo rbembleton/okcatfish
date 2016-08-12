@@ -22,11 +22,17 @@ function resetThread(thread) {
 }
 
 function addMessage(message) {
-  if (_thread.id !== message.thread_id)
-    { _thread = _threads[message.thread_id];}
+  if (_thread.id && _thread.id !== message.thread_id) {
+    _thread = _threads[message.thread_id];
+  } else if (_thread.id === undefined) {
+    _thread = message.thread;
+  }
 
-  if (_thread.messages)
-    {_thread.messages.push(message);}
+  if (_thread.messages) {
+    _thread.messages.push(message);
+  } else {
+    _thread.messages = [message];
+  }
 }
 
 MessagesStore.numberOfNotifications = function (userId) {

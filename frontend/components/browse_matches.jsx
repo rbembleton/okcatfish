@@ -69,7 +69,7 @@ const BrowseMatches = React.createClass({
   elementsToRender() {
     const currThis = this;
 
-    this.elementLoadInterval = window.setInterval(() => {
+    this.elementLoadInterval = setInterval(() => {
       const newElements = currThis.state.elements + 1;
 
       if (currThis.state.matches.length <= newElements) {
@@ -81,7 +81,7 @@ const BrowseMatches = React.createClass({
   },
 
   clearRenderingInterval() {
-    window.clearInterval(this.elementLoadInterval);
+    clearInterval(this.elementLoadInterval);
   },
 
   render () {
