@@ -4,9 +4,7 @@
 
 [heroku]: http://okcatfish.herokuapp.com
 
-[Production README][production_readme]
-
-[production_readme](production/production_readme.md)
+[Production README]: docs/production/production_readme.md
 
 ## Minimum Viable Product
 
