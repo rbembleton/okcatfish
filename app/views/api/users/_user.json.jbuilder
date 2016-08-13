@@ -20,8 +20,8 @@ json.(user,
 
 json.prof_pic do
   if user.prof_pic
-    if user.prof_pic.class == PhotoRepoPic
-      json.url user.prof_pic.url
+    if user.prof_pic.class == PhotoAlbumLink
+      json.url user.prof_pic.photo_repo_pic.url
     else
       json.url user.prof_pic.image.url
     end

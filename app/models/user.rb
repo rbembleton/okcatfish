@@ -237,7 +237,7 @@ class User < ActiveRecord::Base
   def photos
     # self.user_photos.to_a.map { |photo| photo.image } +
     # self.repo_photos.to_a
-    self.user_photos.to_a + self.repo_photos.to_a
+    self.user_photos.to_a + self.photo_album_links.includes(:photo_repo_pic).to_a
   end
 
   def prof_pic
@@ -245,12 +245,19 @@ class User < ActiveRecord::Base
       pp_arr = self.profile_photo.split('_')
 
       if pp_arr[0] == 'user'
-        @photo = UserPhoto.find(pp_arr[1])
+        if UserPhoto.exists?(pp_arr[1])
+          return UserPhoto.exists?(pp_arr[1])
+        else
+          self.profile_photo = nil
+          return
+        end
       else
-        @photo = PhotoAlbumLink.find(pp_arr[1]).photo_repo_pic
+        if PhotoAlbumLink.exists?(pp_arr[1])
+          return PhotoAlbumLink.find(pp_arr[1])
+        else
+          self.profile_photo = nil
+        end
       end
-
-      return @photo
     end
 
     self.photos.sample #|| image_url "empty_profile.png"

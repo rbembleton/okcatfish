@@ -8,18 +8,18 @@
 require 'csv' # for csv parsing
 
 
-User.delete_all
-PhotoAlbumLink.delete_all
-PhotoRepoPic.delete_all
-PhotoRepo.delete_all
-MessageThread.delete_all
-Message.delete_all
-ThreadUserLink.delete_all
-Like.delete_all
-Question.delete_all
-Answer.delete_all
-UserResponse.delete_all
-UserMatchResponse.delete_all
+PhotoAlbumLink.destroy_all
+PhotoRepoPic.destroy_all
+PhotoRepo.destroy_all
+Message.destroy_all
+MessageThread.destroy_all
+ThreadUserLink.destroy_all
+Like.destroy_all
+UserMatchResponse.destroy_all
+UserResponse.destroy_all
+Answer.destroy_all
+Question.destroy_all
+User.destroy_all
 
 demo = User.create!({
   username: "pro_catfisher",
@@ -50,6 +50,36 @@ rb.profile_text.update!({
   sat_night: Faker::Hipster.paragraph,
   msg_me_if: Faker::Hipster.paragraph,
 })
+
+rp_arr = []
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'repo_urls.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |repo|
+  next if repo['label'] == nil
+    rp = PhotoRepo.create!(label: repo['label'])
+
+  urls = [
+    repo['url1'],
+    repo['url2'],
+    repo['url3'],
+    repo['url4'],
+    repo['url5']]
+
+  add_to_rp_arr = {repo: rp, pics: []}
+
+  urls.each do |url|
+    next if url == nil
+    pic = PhotoRepoPic.create!(
+      url: url,
+      repo_id: rp.id
+    )
+    add_to_rp_arr[:pics].push(pic)
+  end
+
+  rp_arr.push(add_to_rp_arr)
+end
+
 
 # --------------------------------------- QUESTIONS
 
@@ -201,6 +231,37 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     ures.add_match_responses([u_answer_id1, u_answer_id2 ])
   end
 
+
+  # ADD REPO PICS
+  unless rand(6) == 0
+    pr = rp_arr.sample
+
+    prp1 = pr[:pics].first
+    prp2 = pr[:pics].second
+
+
+    pal1 = PhotoAlbumLink.create!({
+        user_id: u1.id,
+        photo_repo_pic_id: prp1.id
+      })
+
+    pal2 = PhotoAlbumLink.create!({
+        user_id: u1.id,
+        photo_repo_pic_id: prp2.id
+      })
+
+    pal_arr = [pal1, pal2]
+
+    if rand(3) == 0
+      pal3 = PhotoAlbumLink.create!({
+          user_id: u1.id,
+          photo_repo_pic_id: pr[:pics].third.id
+        })
+      pal_arr.push(pal3)
+    end
+
+    u1.set_profile_pic(type: 'repo', id: pal_arr.sample.id)
+  end
 end
 
 MessageThread.where("updated_at < ?", 3.days.ago).each do |mt|
@@ -238,34 +299,34 @@ prp1_3 = PhotoRepoPic.create!({
     repo_id: pr1.id
   })
 
-pr2 = PhotoRepo.create!({ label: "John" })
-
-prp2_1 = PhotoRepoPic.create!({
-    url: "https://cdn1.lockerdome.com/uploads/cf51b07c35e96a827cf4c61cd9a0428f32c8f8e37df58ffbbe997a2cb1c0c9f8_large",
-    repo_id: pr2.id
-  })
-prp2_2 = PhotoRepoPic.create!({
-    url: "http://confitdent.com/wp-content/uploads/2013/06/john-cena-workout1.jpg",
-    repo_id: pr2.id
-  })
-prp2_3 = PhotoRepoPic.create!({
-    url: "http://i.huffpost.com/gen/1576336/images/o-JOHN-CENA-WWE-facebook.jpg",
-    repo_id: pr2.id
-  })
-
-pr3 = PhotoRepo.create!({ label: "Andy" })
-prp3_1 = PhotoRepoPic.create!({
-    url: "https://s-media-cache-ak0.pinimg.com/236x/f4/fa/a9/f4faa95158d5fc212a55028a67e2c04d.jpg",
-    repo_id: pr3.id
-  })
-prp3_2 = PhotoRepoPic.create!({
-    url: "http://cdn01.cdn.justjared.com/wp-content/uploads/headlines/2016/04/cooper-book.jpg",
-    repo_id: pr3.id
-  })
-prp3_3 = PhotoRepoPic.create!({
-    url: "https://s-media-cache-ak0.pinimg.com/236x/4b/31/0c/4b310cd0643a66b3aab7c59c7cb54add.jpg",
-    repo_id: pr3.id
-  })
+# pr2 = PhotoRepo.create!({ label: "John" })
+#
+# prp2_1 = PhotoRepoPic.create!({
+#     url: "https://cdn1.lockerdome.com/uploads/cf51b07c35e96a827cf4c61cd9a0428f32c8f8e37df58ffbbe997a2cb1c0c9f8_large",
+#     repo_id: pr2.id
+#   })
+# prp2_2 = PhotoRepoPic.create!({
+#     url: "http://confitdent.com/wp-content/uploads/2013/06/john-cena-workout1.jpg",
+#     repo_id: pr2.id
+#   })
+# prp2_3 = PhotoRepoPic.create!({
+#     url: "http://i.huffpost.com/gen/1576336/images/o-JOHN-CENA-WWE-facebook.jpg",
+#     repo_id: pr2.id
+#   })
+#
+# pr3 = PhotoRepo.create!({ label: "Andy" })
+# prp3_1 = PhotoRepoPic.create!({
+#     url: "https://s-media-cache-ak0.pinimg.com/236x/f4/fa/a9/f4faa95158d5fc212a55028a67e2c04d.jpg",
+#     repo_id: pr3.id
+#   })
+# prp3_2 = PhotoRepoPic.create!({
+#     url: "http://cdn01.cdn.justjared.com/wp-content/uploads/headlines/2016/04/cooper-book.jpg",
+#     repo_id: pr3.id
+#   })
+# prp3_3 = PhotoRepoPic.create!({
+#     url: "https://s-media-cache-ak0.pinimg.com/236x/4b/31/0c/4b310cd0643a66b3aab7c59c7cb54add.jpg",
+#     repo_id: pr3.id
+#   })
 
 # ---------------------------------------
 
