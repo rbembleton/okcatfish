@@ -1,16 +1,15 @@
 {
   "name": "okcatfish",
   "version": "1.0.0",
-  "description": "[Heroku link][heroku]",
+  "description": "[Heroku link][okcatfish.herokuapp.com]",
   "main": "index.js",
   "directories": {
     "doc": "docs",
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch",
-    "postinstall": "./node_modules/.bin/webpack"
+    "heroku-postbuild": "webpack --config webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
