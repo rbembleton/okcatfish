@@ -47,7 +47,6 @@ const Landing = React.createClass({
   },
 
   updateBadge () {
-    console.log(this.state.notifications);
     this.setState({ notifications: MessagesStore.numberOfNotifications(SessionStore.currentUser().id) });
   },
 

@@ -12,7 +12,6 @@ const MessagesMain = React.createClass({
   },
 
   render () {
-    // {this.props.children}
     return (
       <div className="messages-container center-container">
         {this.props.children}

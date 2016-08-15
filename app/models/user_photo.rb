@@ -20,13 +20,4 @@ class UserPhoto < ActiveRecord::Base
 
   belongs_to(:user)
 
-  # before_create :ensure_image
-
-  # def ensure_image
-  #   unless self.image.url != "empty_profile.png"
-  #     random_pic = ["cat_1.jpg", "cat_2.jpg", "cat_3.jpg", "cat_4.jpg", "cat_5.jpg"].sample
-  #     self.image = File.open("app/assets/images/#{random_pic}")
-  #   end
-  # end
-
 end

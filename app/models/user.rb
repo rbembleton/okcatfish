@@ -227,7 +227,6 @@ class User < ActiveRecord::Base
 
   def create_profile_text
     ProfileText.create!({ user_id: self.id })
-    # UserPhoto.create!({ user_id: self.id })
   end
 
 
@@ -235,8 +234,6 @@ class User < ActiveRecord::Base
 ## PROFILE PHOTOS
 
   def photos
-    # self.user_photos.to_a.map { |photo| photo.image } +
-    # self.repo_photos.to_a
     self.user_photos.to_a + self.photo_album_links.includes(:photo_repo_pic).to_a
   end
 
@@ -260,7 +257,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    self.photos.sample #|| image_url "empty_profile.png"
+    self.photos.sample
   end
 
   def add_repo_pic(repo_pic_id)
@@ -430,99 +427,6 @@ class User < ActiveRecord::Base
     (calc_percentage.round(2))
 
   end
-
-
-
-
-
-
-
-
-
-
-  ## MATCH PERCENTAGES -- O.G.
-
-  # def calculate_matches(matches)
-  #
-  #   ## cache and set up
-  #   cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
-  #   cached_user_questions = self.questions_answered
-  #   match_p_hash = {}
-  #
-  #
-  #   matches.each do |match|
-  #     match_p_hash[match.id] = calculate_single_match(match, cached_user_responses, cached_user_questions)
-  #   end
-  #
-  #   match_p_hash
-  #
-  # end
-  #
-  #
-  # def calculate_single_match(match, *cache)
-  #   match_weight_arr = []
-  #
-  #   if cache.length == 2
-  #     cached_user_responses = cache[0]
-  #     cached_user_questions = cache[1]
-  #   else
-  #     cached_user_responses = self.user_responses.includes(user_match_responses: {answer: [:question]})
-  #     cached_user_questions = self.questions_answered
-  #   end
-  #
-  #   cached_user_responses.each do |user_response|
-  #
-  #     ## if both user and match answered the same question,
-  #     ## add question to match_p_hash with an array of
-  #     ## weights and whether or not the other had include the response
-  #     ## in their user_match_responses
-  #
-  #     if match.questions_answered.exists?(user_response.question.id)
-  #       temp_match_response = match.questions_answered
-  #         .find(user_response.question.id)
-  #         .user_responses.find_by(user_id: match.id)
-  #
-  #       # debugger
-  #
-  #       does_match_accept_user = temp_match_response.user_match_responses.exists?(answer_id: user_response.answer_id)
-  #       does_user_accept_match = user_response.user_match_responses.exists?(answer_id: temp_match_response.answer_id)
-  #
-  #       user_arr = {
-  #         weight: user_response.weight,
-  #         presence_mod: (does_match_accept_user ? 1 : 0)
-  #       }
-  #       match_arr = {
-  #         weight: temp_match_response.weight,
-  #         presence_mod: (does_user_accept_match ? 1 : 0)
-  #       }
-  #
-  #       match_weight_arr.push( {user: user_arr, match: match_arr} )
-  #       # eg: {user: [.70, 1], match: [.5, 0]}
-  #     end
-  #
-  #   end
-  #
-  #   # debugger
-  #
-  #   user_total_weight = 0.01
-  #   match_total_weight = 0.01
-  #   user_weighted_sum = 0.00
-  #   match_weighted_sum = 0.00
-  #
-  #   match_weight_arr.each do |match_obj|
-  #     user_total_weight += match_obj[:user][:weight]
-  #     match_total_weight += match_obj[:match][:weight]
-  #     user_weighted_sum += (match_obj[:user][:weight] * match_obj[:user][:presence_mod])
-  #     match_weighted_sum += (match_obj[:match][:weight] * match_obj[:match][:presence_mod])
-  #   end
-  #
-  #   calc_percentage = ((user_weighted_sum / user_total_weight * 0.5) + (match_weighted_sum / match_total_weight * 0.5))
-  #
-  #   (calc_percentage.round(2))
-  #
-  # end
-
-
 
 
 end

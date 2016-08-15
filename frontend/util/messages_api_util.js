@@ -8,7 +8,6 @@ module.exports = {
         successCallback(resp);
       },
       error (resp) {
-        console.log(resp);
       }
     });
   },
@@ -21,7 +20,6 @@ module.exports = {
         successCallback(resp);
       },
       error (resp) {
-        console.log(resp);
       }
     });
   },
@@ -35,7 +33,6 @@ module.exports = {
         successCallback(resp);
       },
       error (resp) {
-        console.log(resp);
       }
     });
   },
@@ -48,7 +45,6 @@ module.exports = {
         successCallback(resp);
       },
       error (resp) {
-        console.log(resp);
       }
     });
   }

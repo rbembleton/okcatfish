@@ -13,10 +13,6 @@ json.(user,
   :lng,
   :loc_desc
 )
-#
-# json.(user, prof_pic: do
-#   {url: (image_url 'empty_profile.png')}
-# end)
 
 json.prof_pic do
   if user.prof_pic

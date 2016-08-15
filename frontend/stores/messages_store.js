@@ -14,7 +14,6 @@ function resetThreads(threads) {
     _threadsOrder.push(thread.id);
     _threads[thread.id] = thread;
   });
-  // _threads = threads;
 }
 
 function resetThread(thread) {

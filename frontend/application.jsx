@@ -50,8 +50,6 @@ const router = (
   </Router>
 );
 
-// <Route path="about" component={MatchAbout}/>
-// <Route path="questions" component={MatchQuestions}/>
 
 document.addEventListener("DOMContentLoaded", () => {
   if(window.currentUser) {SessionActions.receiveCurrentUser(window.currentUser);}

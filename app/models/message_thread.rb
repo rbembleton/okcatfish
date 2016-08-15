@@ -37,16 +37,6 @@ class MessageThread < ActiveRecord::Base
     foreign_key: :thread_id
   )
 
-  # has_one(
-  #   :most_recent_message,
-  #   -> { order(created_at: :desc).first },
-  #   through: :messages,
-  #   source:
-  # )
-
-  # class_name: "Message",
-  # primary_key: :id,
-  # foreign_key: :thread_id
   def self.new_from_user_ids(user1_id, user2_id)
     mt = MessageThread.create!()
     ThreadUserLink.create!(user_id: user1_id, thread_id: mt.id)
@@ -60,10 +50,6 @@ class MessageThread < ActiveRecord::Base
   end
 
   def self.find_by_two_user_ids(user1_id, user2_id)
-    # MessageThread.joins("JOIN thread_user_links AS links1 ON message_threads.id = links1.thread_id").
-    #   joins("JOIN thread_user_links AS links2 ON links2.thread_id = links1.thread_id").
-    #   where("(links1.user_id = ? AND links2.user_id = ?)",
-    #     user1_id, user2_id).first
     MessageThread.joins("JOIN thread_user_links AS links1 ON message_threads.id = links1.thread_id").
       joins("JOIN thread_user_links AS links2 ON links2.thread_id = links1.thread_id").
       find_by("(links1.user_id = ? AND links2.user_id = ?)",
@@ -87,14 +73,12 @@ class MessageThread < ActiveRecord::Base
   end
 
 
-  # def most_recent_message
-  #   messages.order(created_at: :desc).first
-  # end
+  def most_recent_message
+    messages.order(created_at: :desc).first
+  end
 
 
   def new_message(options)
-    # return nil unless options[:author_id] == users.first.id ||
-    #   options[:author_id] == users.last.id
     self.updated_at = Time.now
     self.save!
 

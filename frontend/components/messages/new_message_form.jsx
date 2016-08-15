@@ -2,8 +2,6 @@ const React = require('react');
 const SessionStore = require('../../stores/session_store');
 const MessagesStore = require('../../stores/messages_store');
 const MessagesActions = require('../../actions/messages_actions');
-const ReactQuill = require('react-quill');
-
 
 const NewMessageForm = React.createClass({
 
@@ -35,22 +33,6 @@ const NewMessageForm = React.createClass({
   },
 
   render () {
-    // <div contentEditable="true"
-    //   className="new-message-text"
-    //   placeholder="...message"
-    //   name="body"
-    //   onInput={this.bodyChange}
-    //   />
-
-    // <ReactQuill
-    //   className="new-message-text"
-    //   styles={false}
-    //   placeholder="...message"
-    //   value={this.state.body}
-    //   name="body"
-    //   onChange={this.bodyChange}
-    //   />
-
 
     return (
         <form onSubmit={this.handleSubmit}>

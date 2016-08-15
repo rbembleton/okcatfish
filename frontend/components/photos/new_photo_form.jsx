@@ -1,20 +1,11 @@
 const React = require('react');
 const SessionStore = require('../../stores/session_store');
 const ProfileActions = require('../../actions/profile_actions');
-// const hashHistory = require('react-router').hashHistory;
 
 const NewPhotoForm = React.createClass({
 
   getInitialState () {
     return ({ imageFile: null, imageUrl: "" });
-  },
-
-  componentDidMount () {
-
-  },
-
-  componentWillUnmount () {
-
   },
 
 

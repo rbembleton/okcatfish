@@ -41,7 +41,6 @@ function updateNextQuestion () {
 
 QuestionsStore.nextQuestion = function () {
   if (!_currentQuestion.id) {
-    console.log(_currentQuestion);
     _currentQuestion = _questionsQueue.shift() || {};
   }
 
@@ -63,7 +62,6 @@ QuestionsStore.userResponses = function (userId) {
 
 
 QuestionsStore.__onDispatch = function (payload) {
-  console.log(payload.actionType);
   switch (payload.actionType) {
     case QuestionsConstants.RECEIVE_SINGLE_RESPONSE:
       updateSingleResponse(payload.response);

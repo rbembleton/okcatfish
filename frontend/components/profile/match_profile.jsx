@@ -46,7 +46,6 @@ const MatchProfile = React.createClass({
   },
 
   handleScroll(e) {
-    // console.log(e.srcElement.body.scrollTop);
     const currScroll = e.srcElement.body.scrollTop;
 
     if (currScroll >= 300) {

@@ -3,7 +3,6 @@ const React = require('react');
 
 const colorsArray = [
   [36, 190, 80], //green
-  // [38, 98, 182], //blue
   [230, 207, 102], //yellow
   [227, 140, 82], //orange
   [233, 61, 89], //red
@@ -48,19 +47,12 @@ const MatchPercentage = React.createClass({
   render () {
 
     let matchPercentageClass = "search-match-percentage ";
-    // if (this.props.matchPercentage >= 0.80) { matchPercentageClass += "mp-green"; }
-    // else if (this.props.matchPercentage >= 0.60) { matchPercentageClass += "mp-blue"; }
-    // else if (this.props.matchPercentage >= 0.40) { matchPercentageClass += "mp-yellow"; }
-    // else if (this.props.matchPercentage >= 0.20) { matchPercentageClass += "mp-orange"; }
-    // else if (this.props.matchPercentage >= 0.00) { matchPercentageClass += "mp-red"; }
-    //
 
     const percentageColor = {
       color: ("rgb(" +
         `${this.percentageColor(Math.round(this.props.matchPercentage * 100))}` +
         ")")
     };
-    // debugger
 
 
     return (

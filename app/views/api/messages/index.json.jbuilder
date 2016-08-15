@@ -17,11 +17,3 @@ json.array!(@threads) do |message_thread|
     json.partial! 'api/users/profpic', user: @user
   end
 end
-
-# json.prof_pic do
-#   if other_user.prof_pic
-#     json.url other_user.prof_pic.url
-#   else
-#     json.url asset_path(((other_user.id % 2 == 0) ? "cat_" : "fish_") + (other_user.id % 5 + 1).to_s + ".jpg")
-#   end
-# end
