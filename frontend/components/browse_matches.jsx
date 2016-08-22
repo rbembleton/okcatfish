@@ -72,7 +72,7 @@ const BrowseMatches = React.createClass({
     this.elementLoadInterval = setInterval(() => {
       const newElements = currThis.state.elements + 1;
 
-      if (currThis.state.matches.length <= newElements) {
+      if (currThis.state.matches.length <= newElements || !currThis.state.matches[newElements - 1]) {
         currThis.clearRenderingInterval();
       }
 
@@ -105,7 +105,7 @@ const BrowseMatches = React.createClass({
     let matchesDisplay = [];
 
     for (var i = 0; i < this.state.elements; i++) {
-      if (!this.state.matches[i]) return; // ensures blank profiles aren't added 
+      // if (!this.state.matches[i]) return; // ensures blank profiles aren't added
       matchesDisplay[i] = (
         <ProfileSearchBox
             key={i}
