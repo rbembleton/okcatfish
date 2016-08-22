@@ -25,6 +25,7 @@ const BrowseMatches = React.createClass({
   updateMatches() {
     this.setState({matches: SearchStore.all()});
     if (this.state.matches.length > 0) {
+      this.clearRenderingInterval();
       this.elementsToRender();
     }
   },
@@ -104,8 +105,7 @@ const BrowseMatches = React.createClass({
 
     let matchesDisplay = [];
 
-    for (var i = 0; i < this.state.elements; i++) {
-      // if (!this.state.matches[i]) return; // ensures blank profiles aren't added
+    for (var i = 0; (i < this.state.elements && this.state.matches[i]); i++) {
       matchesDisplay[i] = (
         <ProfileSearchBox
             key={i}
