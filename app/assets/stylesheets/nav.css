@@ -78,6 +78,7 @@
   background-color: #104DA1;
   border: .5px solid;
   border-color: #6391f3;
+  cursor: pointer;
 }
 
 .display-inbox-badge {

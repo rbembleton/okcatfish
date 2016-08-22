@@ -105,6 +105,7 @@ const BrowseMatches = React.createClass({
     let matchesDisplay = [];
 
     for (var i = 0; i < this.state.elements; i++) {
+      if (!this.state.matches[i]) return; // ensures blank profiles aren't added 
       matchesDisplay[i] = (
         <ProfileSearchBox
             key={i}

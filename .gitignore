@@ -16,6 +16,7 @@
 bundle.js
 bundle.js.map
 node_modules/
+.byebug_history
 
 # Ignore application configuration
 /config/application.yml

@@ -9,6 +9,10 @@
   display: block
 }
 
+.user-q-response>label input {
+  margin-right: 8px;
+}
+
 .match-q-responses {
   width: 320px;
   padding: 20px;
@@ -18,6 +22,9 @@
 
 .match-q-responses>label {
   display: block
+}
+.match-q-responses>label input {
+  margin-right: 8px;
 }
 
 .answer-question-form {
@@ -39,9 +46,11 @@
 }
 
 .answer-explanation>textarea {
+  margin-top: 5px;
   height: 100px;
   width: 400px;
   display: block;
+  padding: 10px;
 }
 
 .answer-question-button {
@@ -71,6 +80,17 @@
   margin-bottom: 5px;
 }
 
+.answer-weight-percentage {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 40px;
+  text-align: center;
+}
+
+.text-above-responses {
+ margin-bottom: 8px;
+}
 
 input[type=range] {
     /*removes default webkit styles*/
@@ -92,11 +112,11 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     background: #29d58f;
-    margin-top: -4px;
+    margin-top: -6px;
 }
 input[type=range]:focus {
     outline: none;

@@ -127,19 +127,21 @@ const AnswerQuestions = React.createClass({
 
            <div className="user-match-q-cont clearfix">
              <div className="user-q-response">
-                Your choice:
+                <div className="text-above-responses">Your choice:</div>
                 {dispUserAnswerOptions}
              </div>
 
              <div className="match-q-responses">
-               Options for your potential match:
+               <div className="text-above-responses">Options for your potential match:</div>
                {dispMatchAnswerOptions}
              </div>
            </div>
 
            <div className="answer-weight">
              How imporant is this question to you?
-             {" " + (parseInt(currentThis.state.weight * 100)) + "% "}
+             <div className="answer-weight-percentage">
+               {" " + (parseInt(currentThis.state.weight * 100)) + "% "}
+            </div>
              <input
                className="answer-weight-slider"
                type="range"
