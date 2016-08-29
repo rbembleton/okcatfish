@@ -2,7 +2,7 @@
 
 [OKCatfish LIVE][heroku]
 
-[heroku]: http://okcatfish.herokuapp.com
+[heroku]: http://www.okcatfish.xyz
 
 OKCatfish is a full-stack, single-paged web application based on OKCupid with a fun take on the popular dating website, inspired by the MTV series "Catfish." OKCatfish uses Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Flux framework on the frontend.
 
