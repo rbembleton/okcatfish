@@ -287,15 +287,15 @@ end
 pr1 = PhotoRepo.create!({ label: "Ariana" })
 
 prp1_1 = PhotoRepoPic.create!({
-    url: "http://sev.h-cdn.co/assets/cm/15/09/54eec5bf13937_-_sev-ariana-head-tilt-lgn.jpg",
+    url: "https://s3.amazonaws.com/okcatfish-pro/repo_photos/ariana1.jpg",
     repo_id: pr1.id
   })
 prp1_2 = PhotoRepoPic.create!({
-    url: "http://i3.mirror.co.uk/incoming/article4184479.ece/ALTERNATES/s615/Ariana-Grande.png",
+    url: "https://s3.amazonaws.com/okcatfish-pro/repo_photos/ariana2.png",
     repo_id: pr1.id
   })
 prp1_3 = PhotoRepoPic.create!({
-    url: "https://s-media-cache-ak0.pinimg.com/236x/90/ba/4f/90ba4f76a4a72840de0b3c74f7f45f96.jpg",
+    url: "https://s3.amazonaws.com/okcatfish-pro/repo_photos/ariana3.jpg",
     repo_id: pr1.id
   })
 
