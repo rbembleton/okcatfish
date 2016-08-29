@@ -299,35 +299,6 @@ prp1_3 = PhotoRepoPic.create!({
     repo_id: pr1.id
   })
 
-# pr2 = PhotoRepo.create!({ label: "John" })
-#
-# prp2_1 = PhotoRepoPic.create!({
-#     url: "https://cdn1.lockerdome.com/uploads/cf51b07c35e96a827cf4c61cd9a0428f32c8f8e37df58ffbbe997a2cb1c0c9f8_large",
-#     repo_id: pr2.id
-#   })
-# prp2_2 = PhotoRepoPic.create!({
-#     url: "http://confitdent.com/wp-content/uploads/2013/06/john-cena-workout1.jpg",
-#     repo_id: pr2.id
-#   })
-# prp2_3 = PhotoRepoPic.create!({
-#     url: "http://i.huffpost.com/gen/1576336/images/o-JOHN-CENA-WWE-facebook.jpg",
-#     repo_id: pr2.id
-#   })
-#
-# pr3 = PhotoRepo.create!({ label: "Andy" })
-# prp3_1 = PhotoRepoPic.create!({
-#     url: "https://s-media-cache-ak0.pinimg.com/236x/f4/fa/a9/f4faa95158d5fc212a55028a67e2c04d.jpg",
-#     repo_id: pr3.id
-#   })
-# prp3_2 = PhotoRepoPic.create!({
-#     url: "http://cdn01.cdn.justjared.com/wp-content/uploads/headlines/2016/04/cooper-book.jpg",
-#     repo_id: pr3.id
-#   })
-# prp3_3 = PhotoRepoPic.create!({
-#     url: "https://s-media-cache-ak0.pinimg.com/236x/4b/31/0c/4b310cd0643a66b3aab7c59c7cb54add.jpg",
-#     repo_id: pr3.id
-#   })
-
 # ---------------------------------------
 
 pal1 = PhotoAlbumLink.create!({
@@ -345,7 +316,11 @@ UserPhoto.where(user_id: demo.id).destroy_all
 # ---------------------------------------
 
 demo.profile_text.update!({
-  about: "I'm just a small town girl, living in a lonely world.
-    Head in the clouds, got no weight on my shoulders.",
-  doing: "Working in a factory outside of NYC making horseshoes."
+  about: "Gosh I'm so bad at writing these things. Teehee. ;) I'm just a nice girl who's trying to find love. Libra!",
+  doing: "I work at a Duane Reade in NYC. I love my job and my coworkers and can't wait to meet a nice guy or gurllll that sparks my interest",
+  faves: "Ben n Jerrys, Vodka and Chocolate!",
+  things: "I could never live without my friends and family. And my iPhone. And my dog, Mike Hat!",
+  think: "How many licks DOES it take to get to the center of a tootsie pop?!?!",
+  sat_night: "I'm probably drinking vodka with my friends. Or Netflix and Chilling!",
+  msg_me_if: "Ummm I'm pretty baller ;) so just like message me."
 })
