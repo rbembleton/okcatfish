@@ -10,6 +10,7 @@
 }
 
 .sign-up-image {
+  background-color: rgb(16,77,161);
   position: absolute;
   z-index: -1;
   height: 610px;
