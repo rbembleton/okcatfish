@@ -141,7 +141,29 @@ end
 
 # ----------------------------------------- GENERATE FAKE USERS
 
-zip_codes = (10001..10014).to_a + (10016..10041).to_a
+zip_codes = (10001..10014).to_a + (10016..10038).to_a + [
+  10549,
+  10708,
+  11530,
+  11596,
+  11001,
+  11580,
+  10028,
+  10128,
+  16801,
+  95032,
+  19128,
+  18103,
+  19904,
+  17339,
+  19506,
+  21202,
+  10451
+]
+
+
+
+
 go_combos = {"male" => ["straight", "gay", "bisexual"],
   "female" => ["straight", "lesbian", "bisexual"]};
 
@@ -158,7 +180,7 @@ go_combos = {"male" => ["straight", "gay", "bisexual"],
     username: uname,
     password: "okcatfish",
     birthdate: Faker::Date.between(18.years.ago, 40.years.ago),
-    zip: zip_codes[rand(39)],
+    zip: zip_codes[rand(zip_codes.length)],
     orientation: ori,
     gender: gend,
   })

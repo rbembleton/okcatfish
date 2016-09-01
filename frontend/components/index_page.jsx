@@ -42,9 +42,17 @@ const IndexPage = React.createClass({
 
 
   render () {
+    // <div style={{
+    //     backgroundImage: `url("${window.okcbkg}")`,
+    //     backgroundSize: `cover`,
+    //     backgroundPositionY: `-585px`,
+    //     backgroundRepeat: `no-repeat`,}}>
 
     return (
       <div>
+        <div className="sign-up-image">
+          <img src={window.okcbkg}></img>
+        </div>
         <div className="sign-up-bkg">
           <div className="sign-up-header">
             <div className="header-login">

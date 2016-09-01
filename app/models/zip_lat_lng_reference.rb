@@ -41,9 +41,8 @@ class ZipLatLngReference < ActiveRecord::Base
 
     response = RestClient.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{zip}&sensor=true")
     body_json = (JSON.parse response.body)["results"][0]
-
-    description = self.get_locality(body_json["address_components"])
-    description += ", " + self.get_state(body_json["address_components"])
+    description = ZipLatLngReference.get_locality(body_json["address_components"])
+    description += ", " + ZipLatLngReference.get_state(body_json["address_components"])
     lat = body_json["geometry"]["location"]["lat"]
     lng = body_json["geometry"]["location"]["lng"]
 
